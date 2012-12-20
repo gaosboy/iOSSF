@@ -73,15 +73,16 @@
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
             cell.backgroundColor = [UIColor whiteColor];
+            
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.textLabel.text = @"Loading ...";
+            cell.textLabel.numberOfLines = 1;
+            cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+            [cell.imageView removeAllSubviews];
+            cell.imageView.image = nil;
+            cell.detailTextLabel.text = @"";
         }
         
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.textLabel.text = @"Loading ...";
-        cell.textLabel.numberOfLines = 1;
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0f];
-        [cell.imageView removeAllSubviews];
-        cell.imageView.image = nil;
-        cell.detailTextLabel.text = @"";
         
         if (! self.loading && self.hasMore) {
             self.page ++;
