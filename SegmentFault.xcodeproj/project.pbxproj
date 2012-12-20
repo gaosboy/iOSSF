@@ -23,6 +23,8 @@
 		D77CE22516611B8B00F1BC9E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D77CE22316611B8B00F1BC9E /* InfoPlist.strings */; };
 		D77CE22716611B8B00F1BC9E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D77CE22616611B8B00F1BC9E /* main.m */; };
 		D77CE22B16611B8B00F1BC9E /* SFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D77CE22A16611B8B00F1BC9E /* SFAppDelegate.m */; };
+		D797EA001683729300D30894 /* slide_navigator_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = D797E9FE1683729300D30894 /* slide_navigator_shadow.png */; };
+		D797EA011683729300D30894 /* slide_navigator_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D797E9FF1683729300D30894 /* slide_navigator_shadow@2x.png */; };
 		D79826CC1663A33900054585 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D79826CB1663A33900054585 /* CFNetwork.framework */; };
 		D79826CE1663A37400054585 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D79826CD1663A37400054585 /* SystemConfiguration.framework */; };
 		D79826D01663A37C00054585 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D79826CF1663A37C00054585 /* MobileCoreServices.framework */; };
@@ -116,6 +118,8 @@
 		D77CE22816611B8B00F1BC9E /* SegmentFault-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SegmentFault-Prefix.pch"; sourceTree = "<group>"; };
 		D77CE22916611B8B00F1BC9E /* SFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFAppDelegate.h; sourceTree = "<group>"; };
 		D77CE22A16611B8B00F1BC9E /* SFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFAppDelegate.m; sourceTree = "<group>"; };
+		D797E9FE1683729300D30894 /* slide_navigator_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slide_navigator_shadow.png; sourceTree = "<group>"; };
+		D797E9FF1683729300D30894 /* slide_navigator_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slide_navigator_shadow@2x.png"; sourceTree = "<group>"; };
 		D79826CB1663A33900054585 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D79826CD1663A37400054585 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D79826CF1663A37C00054585 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -471,6 +475,8 @@
 		D7DDB30E1675A050009DD198 /* nav */ = {
 			isa = PBXGroup;
 			children = (
+				D797E9FE1683729300D30894 /* slide_navigator_shadow.png */,
+				D797E9FF1683729300D30894 /* slide_navigator_shadow@2x.png */,
 				D7DDB30F1675A050009DD198 /* back_button_background.png */,
 				D7DDB3101675A050009DD198 /* back_button_background@2x.png */,
 				D7DDB3111675A050009DD198 /* back_button_pressed_background.png */,
@@ -593,6 +599,8 @@
 				D73F55AC167886CC00F15949 /* goBackItem@2x.png in Resources */,
 				D73F55AD167886CC00F15949 /* goForwardItem.png in Resources */,
 				D73F55AE167886CC00F15949 /* goForwardItem@2x.png in Resources */,
+				D797EA001683729300D30894 /* slide_navigator_shadow.png in Resources */,
+				D797EA011683729300D30894 /* slide_navigator_shadow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

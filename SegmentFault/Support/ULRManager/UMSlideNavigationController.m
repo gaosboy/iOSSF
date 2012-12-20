@@ -59,13 +59,11 @@
 
     self.navItem = [[UINavigationItem alloc] initWithTitle:@""];
     self.contentView = [[UIView alloc] initWithFrame:self.view.bounds];
-#warning 是否真的要加阴影，如果是贴图吧^_^
-    //TODO: contentView阴影造成tableView滑动卡顿。
     
-//    self.contentView.layer.shadowOffset = CGSizeMake(-2.0f, 0.0f);
-//    self.contentView.layer.shadowColor = [UIColor blackColor].CGColor;
-//    self.contentView.layer.shadowOpacity = 0.3f;
-//    self.contentView.layer.shadowRadius = 10.0f;
+    UIImageView *shadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"slide_navigator_shadow.png"]];
+    shadow.height = self.contentView.height;
+    shadow.right = self.contentView.left;
+    [self.contentView addSubview:shadow];
 
     self.slideView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.width, self.view.height)
                                                   style:UITableViewStylePlain];
