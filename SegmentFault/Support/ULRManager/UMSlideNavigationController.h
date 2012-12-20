@@ -13,7 +13,6 @@
 @property (strong, nonatomic)   NSArray             *items;
 @property (strong, nonatomic)   UITableView         *slideView;
 @property (strong, nonatomic)   UINavigationItem    *navItem;
-
 @property (strong, nonatomic)   NSIndexPath         *currentIndex;
 
 - (id)initWithItems:(NSArray *)items;

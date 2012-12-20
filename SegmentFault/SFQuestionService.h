@@ -8,7 +8,9 @@
 
 @interface SFQuestionService : NSObject
 
-+ (void)getNewestQuestionListPage:(NSInteger)page delegate:(id)aDelegate;
-+ (NSArray *)getQuestionList:(NSString *)string;
++ (void)getNewestQuestionListPage:(NSInteger)page withBlock:(void (^)(NSArray *questions, NSError *error))block;
+
+@end
+ng;
 
 @end

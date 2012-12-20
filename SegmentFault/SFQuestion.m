@@ -7,34 +7,61 @@
 //
 
 #import "SFQuestion.h"
-#import "CNHttpReqeust.h"
+#import "AFJSONRequestOperation.h"
+
+@interface SFQuestionHttpClient ()
+
+@end
+
+@implementation SFQuestionHttpClient
+
++ (SFQuestionHttpClient *)sharedClient
+{
+    static SFQuestionHttpClient *_sharedClient = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedClient = [[SFQuestionHttpClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://segmentfault.com/"]];
+    });
+    
+    return _sharedClient;
+}
+
+- (id)initWithBaseURL:(NSURL *)url {
+    self = [super initWithBaseURL:url];
+    if (!self) {
+        return nil;
+    }
+    
+    [self registerHTTPOperationClass:[AFJSONRequestOperation class]];
+	[self setDefaultHeader:@"Accept" value:@"application/json"];
+    
+    return self;
+}
+
+@end
 
 @implementation SFQuestion
 
-+ (void)listQuestionByCondition:(NSString *)condition onPage:(NSInteger)page size:(NSInteger)size delegate:(id)aDelegate
++ (void)questionListByCondition:(NSString *)condition
+                         onPage:(NSInteger)page size:(NSInteger)size
+                      withBlock:(void (^)(NSArray *questions, NSError *error))block
 {
-    [CNHttpReqeust invoke:@"http://segmentfault.com/api/question"
-                   params:[NSDictionary dictionaryWithObjectsAndKeys:
-                           [NSString stringWithFormat:@"list%@", condition], @"do",
-                           [NSString stringWithFormat:@"%d", page], @"page",
-                           [NSString stringWithFormat:@"%d", size], @"size",
-                           nil]
-                 userInfo:nil
-                 delegate:aDelegate
-                onSuccess:@selector(requestFinished:)
-                onFailure:nil
-               onComplete:@selector(requestCompleted)];
-}
-
-+ (NSArray *)getListFromResponse:(NSString *)responseString
-{
-    NSDictionary *dict = [responseString JSONValue];
-    if (0 == [[dict objectForKey:@"status"] intValue]) {
-        return [[[responseString JSONValue] objectForKey:@"data"] objectForKey:@"items"];
-    }
-    else {
-        return nil;
-    }
+    // From Internet
+    [[SFQuestionHttpClient sharedClient] getPath:@"api/question" parameters:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                             [NSString stringWithFormat:@"list%@", condition], @"do",
+                                                                             [NSString stringWithFormat:@"%d", page], @"page",
+                                                                             [NSString stringWithFormat:@"%d", size], @"size",
+                                                                             nil]
+                                         success:^(AFHTTPRequestOperation *operation, id JSON) {
+                                             NSDictionary *data = [JSON valueForKeyPath:@"data"];
+                                             if (block) {
+                                                 block([data objectForKey:@"items"], nil);
+                                             }
+                                         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                             if (block) {
+                                                 block([NSArray array], error);
+                                             }
+                                         }];
 }
 
 @end

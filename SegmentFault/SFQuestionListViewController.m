@@ -72,7 +72,9 @@
         
         if (! self.loading && self.hasMore) {
             self.page ++;
-            [SFQuestionService getNewestQuestionListPage:self.page delegate:self];
+            [SFQuestionService getNewestQuestionListPage:self.page withBlock:^(NSArray *questions, NSError *error) {
+                [self appendQuestions:questions];
+            }];
             self.loading = YES;
         }
     }
@@ -126,33 +128,29 @@
     
     self.questionList = [NSMutableArray array];
     self.page = 1;
-    [SFQuestionService getNewestQuestionListPage:self.page delegate:self];
+    [SFQuestionService getNewestQuestionListPage:self.page withBlock:^(NSArray *questions, NSError *error) {
+        [self appendQuestions:questions];
+    }];
     self.loading = YES;
     self.hasMore = YES;
 }
 
-- (void)requestFinished:(NSString *)data
+- (void)appendQuestions:(NSArray *)questions
 {
-    NSArray *array = [SFQuestionService getQuestionList:data];
     self.hasMore = YES;
-    if (nil != array) {
-        if (30 > [array count]) {
+    if (nil != questions) {
+        if (30 > [questions count]) {
             self.hasMore = NO;
         }
         if (nil == self.questionList) {
-            self.questionList = [[NSMutableArray alloc] initWithArray:array];
+            self.questionList = [[NSMutableArray alloc] initWithArray:questions];
         }
         else {
-            [self.questionList addObjectsFromArray:array];
+            [self.questionList addObjectsFromArray:questions];
         }
     }
-
-    [self.tableView reloadData];
-}
-
-- (void)requestCompleted
-{
     self.loading = NO;
+    [self.tableView reloadData];
 }
 
 @end

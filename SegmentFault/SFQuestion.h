@@ -7,10 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AFHTTPClient.h"
+
+@interface SFQuestionHttpClient : AFHTTPClient
+
++ (SFQuestionHttpClient *)sharedClient;
+
+@end
 
 @interface SFQuestion : NSObject
 
-+ (void)listQuestionByCondition:(NSString *)condition onPage:(NSInteger)page size:(NSInteger)size delegate:(id)aDelegate;
-+ (NSArray *)getListFromResponse:(NSString *)responseString;
++ (void)questionListByCondition:(NSString *)condition
+                         onPage:(NSInteger)page size:(NSInteger)size
+                      withBlock:(void (^)(NSArray *questions, NSError *error))block;
 
 @end
