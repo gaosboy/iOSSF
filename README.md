@@ -3,6 +3,7 @@ URLManager
 
 SegmentFault为开发者提供高效的解决问题平台，网址是：http://segmentfault.com/ 或 http://sf.gg/。
 这个工程是SegmentFault的iOS开户端，完全开源。
+架构不断进化ing
 
 特点
 =============
