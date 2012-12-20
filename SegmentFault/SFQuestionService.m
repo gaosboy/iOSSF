@@ -18,9 +18,3 @@
 }
 
 @end
-ring
-{
-    return [SFQuestion getListFromResponse:string];
-}
-
-@end

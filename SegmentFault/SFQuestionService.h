@@ -11,6 +11,3 @@
 + (void)getNewestQuestionListPage:(NSInteger)page withBlock:(void (^)(NSArray *questions, NSError *error))block;
 
 @end
-ng;
-
-@end
