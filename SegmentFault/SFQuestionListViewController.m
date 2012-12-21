@@ -48,8 +48,6 @@
             
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
-            cell.imageView.image = [UIImage imageNamed:@"qlist_cell_pop.png"];
-            
             cell.textLabel.numberOfLines = 2;
             cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0f];
             
@@ -60,6 +58,13 @@
             answersLabel.textColor = [UIColor whiteColor];
             answersLabel.font = [UIFont boldSystemFontOfSize:16.0f];
             [cell.imageView addSubview:answersLabel];
+        }
+
+        if ([@"0" isEqualToString:[[self.questionList objectAtIndex:indexPath.row] objectForKey:@"answersWord"]]) {
+            cell.imageView.image = [UIImage imageNamed:@"qlist_cell_pop_unanswered.png"];
+        }
+        else {
+            cell.imageView.image = [UIImage imageNamed:@"qlist_cell_pop.png"];
         }
         
         __weak UILabel *answersLabel = (UILabel *)[cell.imageView viewWithTag:1000001];
