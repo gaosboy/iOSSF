@@ -1,0 +1,3 @@
+[submodule "SegmentFault/Support/SlimeRefresh"]
+	path = SegmentFault/Support/SlimeRefresh
+	url = https://github.com/dbsGen/SlimeRefresh.git
