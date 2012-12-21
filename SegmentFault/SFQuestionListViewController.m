@@ -27,48 +27,62 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"SegmentFaultQuestionListCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier;
     
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    if (indexPath.row < [self.questionList count]) {
+        CellIdentifier = @"SegmentFaultQuestionListCell";
+    }else {
+        CellIdentifier = @"SegmentFaultQuestionLoadingCell";
     }
     
-    cell.backgroundColor = [UIColor whiteColor];
-
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    
     if (indexPath.row < [self.questionList count]) {
-        cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"qlist_cell_selected_background.png"]];
-        
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        
-        cell.imageView.image = [UIImage imageNamed:@"qlist_cell_pop.png"];
-
-        UILabel *answersLabel = (UILabel *)[cell.imageView viewWithTag:1000001];
-        if (nil == answersLabel) {
-            answersLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 4.0f, 30.0f, 14.0f)];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+            
+            cell.backgroundColor = [UIColor whiteColor];
+            
+            cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"qlist_cell_selected_background.png"]];
+            
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
+            cell.imageView.image = [UIImage imageNamed:@"qlist_cell_pop.png"];
+            
+            cell.textLabel.numberOfLines = 2;
+            cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+            
+            UILabel *answersLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 4.0f, 30.0f, 14.0f)];
+            answersLabel.tag = 1000001;
+            answersLabel.backgroundColor = [UIColor clearColor];
+            answersLabel.textAlignment = NSTextAlignmentCenter;
+            answersLabel.textColor = [UIColor whiteColor];
+            answersLabel.font = [UIFont boldSystemFontOfSize:16.0f];
             [cell.imageView addSubview:answersLabel];
         }
-        answersLabel.tag = 1000001;
-        answersLabel.backgroundColor = [UIColor clearColor];
-        answersLabel.textAlignment = NSTextAlignmentCenter;
-        answersLabel.textColor = [UIColor whiteColor];
-        answersLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+        
+        __weak UILabel *answersLabel = (UILabel *)[cell.imageView viewWithTag:1000001];
         answersLabel.text = [[self.questionList objectAtIndex:indexPath.row] objectForKey:@"answersWord"];
-
+        
         cell.textLabel.text = [[self.questionList objectAtIndex:indexPath.row] objectForKey:@"title"];
-        cell.textLabel.numberOfLines = 2;
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0f];
-
+        
         cell.detailTextLabel.text = [[self.questionList objectAtIndex:indexPath.row] objectForKey:@"createdDate"];
     }
     else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.textLabel.text = @"Loading ...";
-        cell.textLabel.numberOfLines = 1;
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0f];
-        [cell.imageView removeAllSubviews];
-        cell.imageView.image = nil;
-        cell.detailTextLabel.text = @"";
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+            cell.backgroundColor = [UIColor whiteColor];
+            
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.textLabel.text = @"Loading ...";
+            cell.textLabel.numberOfLines = 1;
+            cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+            [cell.imageView removeAllSubviews];
+            cell.imageView.image = nil;
+            cell.detailTextLabel.text = @"";
+        }
+        
         
         if (! self.loading && self.hasMore) {
             self.page ++;
