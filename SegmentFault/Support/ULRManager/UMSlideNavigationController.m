@@ -28,6 +28,8 @@
 - (void)addPanRecognizer;
 - (void)slidePanAction:(UIPanGestureRecognizer *)recognizer;
 
+- (void)addShadowToContentView;
+
 @end
 
 @implementation UMSlideNavigationController
@@ -47,6 +49,11 @@
         return self;
     }
     return nil;
+}
+
+- (void)addShadowToContentView
+{
+    
 }
 
 - (void)addPanRecognizer
@@ -99,6 +106,8 @@
 - (void)switchCurrentView
 {
     [self.contentView removeAllSubviews];
+    self.slideView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.width, self.view.height)
+                                                  style:UITableViewStylePlain];
     UIViewController *currentVC = (UIViewController *)self.items[self.currentIndex.section][self.currentIndex.row];
     [self.contentView addSubview:currentVC.view];
     currentVC.view.top = -20.0f;
@@ -106,6 +115,12 @@
     [path moveToPoint:CGPointMake(self.contentView.left, 0.0f)];
     [path addLineToPoint:CGPointMake(0.0f, 0.0f)];
     [self moveContentViewTo:CGPointMake(0.0f, 0.0f) WithPath:path inDuration:ANIMATION_DURATION];
+    
+    // 每次切换会清空contentView，这里重新贴阴影
+    UIImageView *shadow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"slide_navigator_shadow.png"]];
+    shadow.height = self.contentView.height;
+    shadow.right = self.contentView.left;
+    [self.contentView addSubview:shadow];
 }
 
 - (void)slidePanAction:(UIPanGestureRecognizer *)recognizer
