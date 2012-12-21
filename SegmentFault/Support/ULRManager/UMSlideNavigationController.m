@@ -166,7 +166,6 @@
 
             }
         }
-        self.left = self.contentView.left;
     }
 }
 
@@ -200,6 +199,7 @@
     pathAnimation.path = path.CGPath;
     pathAnimation.calculationMode = kCAAnimationLinear;
     [self.contentView.layer addAnimation:pathAnimation forKey:[NSString stringWithFormat:@"%f", [NSDate timeIntervalSinceReferenceDate]]];
+    self.left = toPoint.x;
 }
 
 @end

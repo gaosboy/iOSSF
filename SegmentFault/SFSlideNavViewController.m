@@ -69,16 +69,15 @@
         selectedChevron.layer.shadowRadius= 0.0f;
         [selectedBg addSubview:selectedChevron];
         cell.selectedBackgroundView = selectedBg;
+        
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:18.0f];
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.textLabel.backgroundColor = [UIColor clearColor];
+        cell.textLabel.shadowColor = [UIColor blackColor];
+        cell.textLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
     }
     
-    [cell.contentView removeAllSubviews];
-    
-    cell.textLabel.font = [UIFont boldSystemFontOfSize:18.0f];
     cell.textLabel.text = [(UIViewController *)self.items[indexPath.section][indexPath.row] title];
-    cell.textLabel.textColor = [UIColor whiteColor];
-    cell.textLabel.backgroundColor = [UIColor clearColor];
-    cell.textLabel.shadowColor = [UIColor blackColor];
-    cell.textLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
 
     return cell;
 }

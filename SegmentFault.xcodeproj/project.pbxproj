@@ -455,8 +455,8 @@
 		D7DDB30616759C3C009DD198 /* Nav */ = {
 			isa = PBXGroup;
 			children = (
-				D79826DD1663AE5400054585 /* SFSlideNavViewController.m */,
 				D79826DC1663AE5300054585 /* SFSlideNavViewController.h */,
+				D79826DD1663AE5400054585 /* SFSlideNavViewController.m */,
 			);
 			name = Nav;
 			sourceTree = "<group>";
