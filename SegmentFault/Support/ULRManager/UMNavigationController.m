@@ -14,18 +14,30 @@
 
 @implementation UMNavigationController
 
-@synthesize config          = _config;
+@synthesize rootViewController = _rootViewController;
 
 #pragma mark - init
 
-- (id)initWithRootViewController:(UMViewController *)rootViewController
+- (id)initWithRootViewControllerURL:(NSURL *)url
 {
-    self = [super initWithRootViewController:rootViewController];
+    self = [super init];
     if (self) {
-        self.config = [[NSMutableDictionary alloc] init];
-        rootViewController.navigator = self;
+        UMViewController *rootVC = [self viewControllerForURL:url withQuery:nil];
+        self = [self initWithRootViewController:rootVC];
+        return self;
     }
-    return self;
+    return nil;
+}
+
+- (id)initWithRootViewController:(UMViewController *)aRootViewController
+{
+    self = [super initWithRootViewController:aRootViewController];
+    if (self) {
+        aRootViewController.navigator = self;
+        self.rootViewController = aRootViewController;
+        return self;
+    }
+    return nil;
 }
 
 #pragma mark - actions
@@ -36,7 +48,7 @@
     UMViewController * viewController = nil;
 
     if ([self URLAvailable:url]) {
-        Class class = NSClassFromString([self.config objectForKey:urlString]);
+        Class class = NSClassFromString([[UMNavigationController config] objectForKey:urlString]);
         
         if (nil == query) {
             viewController = (UMViewController *)[[class alloc] initWithURL:url];
@@ -53,7 +65,7 @@
 - (BOOL)URLAvailable:(NSURL *)url
 {
     NSString *urlString = [NSString stringWithFormat:@"%@://%@", [url scheme], [url host]];
-    return [[self.config allKeys] containsObject:urlString];
+    return [[[UMNavigationController config] allKeys] containsObject:urlString];
 }
 
 - (void)openURL:(NSURL *)url
@@ -73,13 +85,19 @@
 
 #pragma mark - config
 
-- (void)setViewControllerName:(NSString *)className forURL:(NSString *)url
++ (void)setViewControllerName:(NSString *)className forURL:(NSString *)url
 {
-    if (nil == self.config) {
-        self.config = [[NSMutableDictionary alloc] init];
+    [[UMNavigationController config] setValue:className forKey:url];
+}
+
++ (NSMutableDictionary *)config
+{
+    static NSMutableDictionary *config;
+    if (nil == config) {
+        config = [[NSMutableDictionary alloc] init];
     }
     
-    [self.config setValue:className forKey:url];
+    return config;
 }
 
 @end

@@ -18,20 +18,11 @@
 
 @property (strong, nonatomic) UIWindow                          *window;
 
-@property (strong, nonatomic) NSMutableDictionary               *config;
-
 @property (strong, nonatomic) SFSlideNavViewController          *navigator;
 
-@property (strong, nonatomic) SFQuestionListViewController      *newestVC;
 @property (strong, nonatomic) UMNavigationController            *newestNavigator;
-
-@property (strong, nonatomic) SFMainViewController              *hottestVC;
 @property (strong, nonatomic) UMNavigationController            *hottestNavigator;
-
-@property (strong, nonatomic) SFMainViewController              *followedQuestionsVC;
 @property (strong, nonatomic) UMNavigationController            *followedQuestionsNavigator;
-
-@property (strong, nonatomic) SFLoginViewController             *userSettingsVC;
 @property (strong, nonatomic) UMNavigationController            *userSettingsNavigator;
 
 @end
