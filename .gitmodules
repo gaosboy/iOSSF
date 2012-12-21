@@ -1,3 +1,6 @@
 [submodule "SegmentFault/Support/SlimeRefresh"]
 	path = SegmentFault/Support/SlimeRefresh
 	url = https://github.com/dbsGen/SlimeRefresh.git
+[submodule "SegmentFault/Support/AFNetworking"]
+	path = SegmentFault/Support/AFNetworking
+	url = https://github.com/AFNetworking/AFNetworking.git
