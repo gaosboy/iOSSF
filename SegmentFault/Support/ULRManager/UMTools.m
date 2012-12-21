@@ -235,7 +235,7 @@
 }
 
 - (void)removeAllSubviews {
-    for (UIView *subview in self.subviews) {
+    for (__weak UIView *subview in self.subviews) {
         [subview removeFromSuperview];
     }
 }

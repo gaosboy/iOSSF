@@ -16,13 +16,16 @@
 
 @interface UMSlideNavigationController ()
 
+// 可以滑动的View
 @property (strong, nonatomic) UIView            *contentView;
+
+// 标记ContentView的静止状态left
 @property (assign, nonatomic) CGFloat           left;
 
 - (void)moveContentViewTo:(CGPoint)toPoint WithPath:(UIBezierPath *)path inDuration:(CGFloat)duration;
 - (void)slideButtonClicked;
-- (void)addPanRecognizer;
 
+- (void)addPanRecognizer;
 - (void)slidePanAction:(UIPanGestureRecognizer *)recognizer;
 
 @end
@@ -187,7 +190,6 @@
                        WithPath:path
                      inDuration:ANIMATION_DURATION];
     }
-    self.left = self.contentView.left;
 }
 
 - (void)moveContentViewTo:(CGPoint)toPoint WithPath:(UIBezierPath *)path inDuration:(CGFloat)duration
@@ -200,6 +202,18 @@
     pathAnimation.calculationMode = kCAAnimationLinear;
     [self.contentView.layer addAnimation:pathAnimation forKey:[NSString stringWithFormat:@"%f", [NSDate timeIntervalSinceReferenceDate]]];
     self.left = toPoint.x;
+    
+    if (0 < toPoint.x) {
+        UIControl *backToNormal = [[UIControl alloc] initWithFrame:self.contentView.bounds];
+        backToNormal.backgroundColor = [UIColor clearColor];
+        backToNormal.tag = 1000002;
+        [backToNormal addTarget:self action:@selector(slideButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentView addSubview:backToNormal];
+    }
+    else {
+        __weak UIControl *backToNormal = (UIControl *)[self.contentView viewWithTag:1000002];
+        [backToNormal removeFromSuperview];
+    }
 }
 
 @end
