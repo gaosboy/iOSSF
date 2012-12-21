@@ -45,6 +45,8 @@ NS_INLINE CGPoint pointLineToArc(CGPoint center, CGPoint p2, float angle, CGFloa
         _skinColor = [UIColor colorWithWhite:0.8f alpha:0.9f];
         
         _missWhenApart = YES;
+        _lineWith = 2;
+        
     }
     return self;
 }
@@ -57,6 +59,12 @@ NS_INLINE CGPoint pointLineToArc(CGPoint center, CGPoint p2, float angle, CGFloa
 //                                         frame.size.height / 2);
 //    [self setNeedsDisplay];
 //}
+
+- (void)setLineWith:(CGFloat)lineWith
+{
+    _lineWith = lineWith;
+    [self setNeedsDisplay];
+}
 
 - (void)setStartPoint:(CGPoint)startPoint
 {
@@ -129,26 +137,20 @@ NS_INLINE CGPoint pointLineToArc(CGPoint center, CGPoint p2, float angle, CGFloa
             float percent = 1 - distansBetween(_startPoint , _toPoint) / _viscous;
             if (percent == 1) {
                 CGContextRef context = UIGraphicsGetCurrentContext();
-                [_bodyColor setFill];
-                [_skinColor setStroke];
-                CGContextSetLineWidth(context, 2);
-                CGContextAddArc(context, _startPoint.x,
-                                _startPoint.y, _radius,
-                                0, 2*M_PI, 1);
-                CGContextDrawPath(context, kCGPathFillStroke);
+                UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(_startPoint.x - _radius, _startPoint.y - _radius, 2*_radius, 2*_radius)
+                                                                cornerRadius:_radius];
+                
+
+                [self drawContext:context path:path];
             }else {
                 CGFloat startRadius = _radius * (kStartTo + (1-kStartTo)*percent);
-                [_bodyColor setFill];
-                [_skinColor setStroke];
                 CGContextRef context = UIGraphicsGetCurrentContext();
                 
                 CGFloat endRadius = _radius * (kEndTo + (1-kEndTo)*percent);
                 UIBezierPath *path = [self bodyPath:startRadius
                                                 end:endRadius
                                             percent:percent];
-                CGContextSetLineWidth(context, 2);
-                CGContextAddPath(context, path.CGPath);
-                CGContextDrawPath(context, kCGPathFillStroke);
+                [self drawContext:context path:path];
                 if (percent <= 0) {
                     _state = SRSlimeStateShortening;
                     
@@ -179,17 +181,13 @@ NS_INLINE CGPoint pointLineToArc(CGPoint center, CGPoint p2, float angle, CGFloa
             
             if (p > 0.01) {
                 CGFloat startRadius = r * (kStartTo + (1-kStartTo)*percent);
-                [_bodyColor setFill];
-                [_skinColor setStroke];
                 CGContextRef context = UIGraphicsGetCurrentContext();
                 
                 CGFloat endRadius = r * (kEndTo + (1-kEndTo)*percent) * (1+percent / 2);
                 UIBezierPath *path = [self bodyPath:startRadius
                                                 end:endRadius
                                             percent:percent];
-                CGContextSetLineWidth(context, 2);
-                CGContextAddPath(context, path.CGPath);
-                CGContextDrawPath(context, kCGPathFillStroke);
+                [self drawContext:context path:path];
             }else {
                 self.hidden = YES;
                 _state = SRSlimeStateMiss;
@@ -198,6 +196,39 @@ NS_INLINE CGPoint pointLineToArc(CGPoint center, CGPoint p2, float angle, CGFloa
             break;
         default:
             break;
+    }
+}
+
+- (void)drawContext:(CGContextRef)context path:(UIBezierPath *)path {
+    if (self.shadowColor) {
+        switch (self.shadowType) {
+            case SRSlimeBlurShadow:
+                CGContextSetShadowWithColor(context, CGSizeZero, self.shadowBlur, self.shadowColor.CGColor);
+                CGContextAddPath(context, path.CGPath);
+                if (self.skinColor) {
+                    CGContextDrawPath(context, kCGPathFill);
+                    CGContextSetShadowWithColor(context, CGSizeZero, 0, nil);
+                }
+                break;
+            case SRSlimeFillShadow:
+                CGContextAddPath(context, path.CGPath);
+                CGContextSetLineWidth(context, self.shadowBlur);
+                CGContextSetStrokeColorWithColor(context, self.shadowColor.CGColor);
+                CGContextDrawPath(context, kCGPathStroke);
+                break;
+                
+            default:
+                break;
+        }
+    }
+    CGContextSetFillColorWithColor(context, self.bodyColor.CGColor);
+    CGContextAddPath(context, path.CGPath);
+    if (self.skinColor) {
+        CGContextSetLineWidth(context, self.lineWith);
+        CGContextSetStrokeColorWithColor(context, self.skinColor.CGColor);
+        CGContextDrawPath(context, kCGPathFillStroke);
+    }else {
+        CGContextDrawPath(context, kCGPathFill);
     }
 }
 

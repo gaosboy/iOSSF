@@ -29,6 +29,7 @@
 @synthesize slime = _slime, refleshView = _refleshView;
 @synthesize block = _block, upInset = _upInset;
 @synthesize slimeMissWhenGoingBack = _slimeMissWhenGoingBack;
+@synthesize activityIndicationView = _activityIndicatorView;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -125,7 +126,8 @@
         _refleshView.hidden = YES;
         if (!_unmissSlime){
             _slime.state = SRSlimeStateMiss;
-            _unmissSlime = YES;
+        }else {
+            _unmissSlime = NO;
         }
     }else {
         
@@ -160,6 +162,7 @@
         rect.origin.y = rect.size.height?-rect.size.height:-32;
         rect.size.width = _scrollView.frame.size.width;
         self.frame = rect;
+        self.slime.toPoint = self.slime.startPoint;
         
         UIEdgeInsets inset = self.scrollView.contentInset;
         inset.top = _upInset;

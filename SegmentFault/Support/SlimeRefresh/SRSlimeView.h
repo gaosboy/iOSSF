@@ -18,6 +18,11 @@ typedef enum {
     SRSlimeStateMiss
 } SRSlimeState;
 
+typedef enum {
+    SRSlimeBlurShadow,
+    SRSlimeFillShadow
+} SRSlimeShadowType;
+
 @class SRSlimeView;
 
 @interface SRSlimeView : UIView
@@ -27,6 +32,11 @@ typedef enum {
 @property (nonatomic, assign)   CGFloat radius;     //default 13
 @property (nonatomic, retain)   UIColor *bodyColor,
                                         *skinColor;
+
+@property (nonatomic, assign)   SRSlimeShadowType   shadowType;
+@property (nonatomic, assign)   CGFloat lineWith;
+@property (nonatomic, assign)   CGFloat shadowBlur;
+@property (nonatomic, strong)   UIColor *shadowColor;
 
 @property (nonatomic, assign)   BOOL    missWhenApart;
 @property (nonatomic, assign)   SRSlimeState    state;
