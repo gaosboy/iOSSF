@@ -9,9 +9,14 @@
 #import "SFQuestionListViewController.h"
 #import "SFQuestionService.h"
 
+#import "SRRefreshView.h"
+
 @interface SFQuestionListViewController ()
+ <UITableViewDataSource, UITableViewDelegate, SRRefreshDelegate>
 
 @property (strong, nonatomic) UITableView           *tableView;
+@property (strong, nonatomic) SRRefreshView         *slimeView;
+
 @property (assign, nonatomic) BOOL                  hasMore;
 @property (assign, nonatomic) BOOL                  loading;
 @property (assign, nonatomic) NSInteger             page;
@@ -22,6 +27,11 @@
 
 @synthesize tableView           = _tableView;
 @synthesize questionList        = _questionList;
+@synthesize slimeView           = _slimeView;
+
+@synthesize hasMore             = _hasMore;
+@synthesize loading             = _loading;
+@synthesize page                = _page;
 
 #pragma mark - UITableViewDataSource
 
@@ -36,7 +46,6 @@
     }
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
     
     if (indexPath.row < [self.questionList count]) {
         if (cell == nil) {
@@ -118,7 +127,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.hasMore ? [self.questionList count] + 1 : [self.questionList count];
+    return self.hasMore && 0 < [self.questionList count] ? [self.questionList count] + 1 : [self.questionList count];
 }
 
 #pragma mark
@@ -143,9 +152,14 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    self.slimeView = [[SRRefreshView alloc] init];
+    self.slimeView.delegate = self;
+    self.slimeView.slimeMissWhenGoingBack = YES;
+    self.slimeView.slime.bodyColor = RGBCOLOR(0, 154, 103); // 换成SF绿
+    [self.tableView addSubview:_slimeView];
+    
     [self.view addSubview:self.tableView];
     
-    self.questionList = [NSMutableArray array];
     self.page = 1;
     [SFQuestionService getNewestQuestionListPage:self.page withBlock:^(NSArray *questions, NSError *error) {
         [self appendQuestions:questions];
@@ -154,6 +168,29 @@
     self.hasMore = YES;
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self.slimeView scrollViewDidScroll];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    [self.slimeView scrollViewDidEndDraging];
+}
+
+#pragma mark - slimeRefresh delegate
+
+- (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView
+{
+    self.page = 1;
+    [SFQuestionService getNewestQuestionListPage:self.page withBlock:^(NSArray *questions, NSError *error) {
+        [self.questionList removeAllObjects];
+        [self appendQuestions:questions];
+        [self.slimeView endRefresh];
+    }];
+}
+
+// 把问题接在后边
 - (void)appendQuestions:(NSArray *)questions
 {
     self.hasMore = YES;

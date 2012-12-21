@@ -8,7 +8,7 @@
 
 #import "SFRootViewController.h"
 
-@interface SFQuestionListViewController : SFRootViewController <UITableViewDataSource, UITableViewDelegate>
+@interface SFQuestionListViewController : SFRootViewController
 
 @property (strong, nonatomic) NSMutableArray            *questionList;
 
