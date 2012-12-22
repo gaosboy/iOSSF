@@ -7,3 +7,6 @@
 [submodule "SegmentFault/Support/URLManager"]
 	path = SegmentFault/Support/URLManager
 	url = https://github.com/gaosboy/urlmanager.git
+[submodule "SegmentFault/Support/Kache"]
+	path = SegmentFault/Support/Kache
+	url = https://github.com/gaosboy/kache.git
