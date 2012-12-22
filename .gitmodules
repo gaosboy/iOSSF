@@ -4,9 +4,3 @@
 [submodule "SegmentFault/Support/AFNetworking"]
 	path = SegmentFault/Support/AFNetworking
 	url = https://github.com/AFNetworking/AFNetworking.git
-[submodule "SegmentFault/Support/URLManager"]
-	path = SegmentFault/Support/URLManager
-	url = https://github.com/gaosboy/urlmanager.git
-[submodule "SegmentFault/Support/Kache"]
-	path = SegmentFault/Support/Kache
-	url = https://github.com/gaosboy/kache.git
