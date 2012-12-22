@@ -8,6 +8,6 @@
 
 #import "UMSlideNavigationController.h"
 
-@interface SFSlideNavViewController : UMSlideNavigationController <UITableViewDataSource, UITableViewDelegate>
+@interface SFSlideNavViewController : UMSlideNavigationController
 
 @end

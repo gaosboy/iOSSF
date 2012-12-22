@@ -4,3 +4,6 @@
 [submodule "SegmentFault/Support/AFNetworking"]
 	path = SegmentFault/Support/AFNetworking
 	url = https://github.com/AFNetworking/AFNetworking.git
+[submodule "SegmentFault/Support/URLManager"]
+	path = SegmentFault/Support/URLManager
+	url = https://github.com/gaosboy/urlmanager.git

@@ -35,6 +35,10 @@
 		D77CE22516611B8B00F1BC9E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D77CE22316611B8B00F1BC9E /* InfoPlist.strings */; };
 		D77CE22716611B8B00F1BC9E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D77CE22616611B8B00F1BC9E /* main.m */; };
 		D77CE22B16611B8B00F1BC9E /* SFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D77CE22A16611B8B00F1BC9E /* SFAppDelegate.m */; };
+		D78E55DD1685B935002D38FC /* UMNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E55D61685B935002D38FC /* UMNavigationController.m */; };
+		D78E55DE1685B935002D38FC /* UMSlideNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E55D81685B935002D38FC /* UMSlideNavigationController.m */; };
+		D78E55DF1685B935002D38FC /* UMTools.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E55DA1685B935002D38FC /* UMTools.m */; };
+		D78E55E01685B935002D38FC /* UMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D78E55DC1685B935002D38FC /* UMViewController.m */; };
 		D797EA001683729300D30894 /* slide_navigator_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = D797E9FE1683729300D30894 /* slide_navigator_shadow.png */; };
 		D797EA011683729300D30894 /* slide_navigator_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D797E9FF1683729300D30894 /* slide_navigator_shadow@2x.png */; };
 		D79826CC1663A33900054585 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D79826CB1663A33900054585 /* CFNetwork.framework */; };
@@ -42,7 +46,6 @@
 		D79826D01663A37C00054585 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D79826CF1663A37C00054585 /* MobileCoreServices.framework */; };
 		D79826D21663A38400054585 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D79826D11663A38400054585 /* QuartzCore.framework */; };
 		D79826D41663A3A500054585 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D79826D31663A3A500054585 /* libz.1.2.5.dylib */; };
-		D79826D71663A4B400054585 /* UMSlideNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D79826D61663A4B400054585 /* UMSlideNavigationController.m */; };
 		D79826DE1663AE5400054585 /* SFSlideNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D79826DD1663AE5400054585 /* SFSlideNavViewController.m */; };
 		D7A9868316845EE200AB9A61 /* qlist_cell_pop.png in Resources */ = {isa = PBXBuildFile; fileRef = D7A9867D16845EE200AB9A61 /* qlist_cell_pop.png */; };
 		D7A9868416845EE200AB9A61 /* qlist_cell_pop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7A9867E16845EE200AB9A61 /* qlist_cell_pop@2x.png */; };
@@ -60,9 +63,6 @@
 		D7C09C88166324AE0066EAF5 /* KPool.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C09C79166324AE0066EAF5 /* KPool.m */; };
 		D7C09C89166324AE0066EAF5 /* KQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C09C7B166324AE0066EAF5 /* KQueue.m */; };
 		D7C09C8A166324AE0066EAF5 /* KUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C09C7D166324AE0066EAF5 /* KUtil.m */; };
-		D7C09C8B166324AE0066EAF5 /* UMNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C09C80166324AE0066EAF5 /* UMNavigationController.m */; };
-		D7C09C8C166324AE0066EAF5 /* UMTools.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C09C82166324AE0066EAF5 /* UMTools.m */; };
-		D7C09C8D166324AE0066EAF5 /* UMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7C09C84166324AE0066EAF5 /* UMViewController.m */; };
 		D7D006091679DB2700F3E107 /* SFLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D006081679DB2700F3E107 /* SFLoginViewController.m */; };
 		D7D4F32516635B5B003B43EE /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D4F31E16635B5B003B43EE /* Icon-72.png */; };
 		D7D4F32616635B5B003B43EE /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D4F31F16635B5B003B43EE /* Icon-Small-50.png */; };
@@ -150,6 +150,14 @@
 		D77CE22816611B8B00F1BC9E /* SegmentFault-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SegmentFault-Prefix.pch"; sourceTree = "<group>"; };
 		D77CE22916611B8B00F1BC9E /* SFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFAppDelegate.h; sourceTree = "<group>"; };
 		D77CE22A16611B8B00F1BC9E /* SFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFAppDelegate.m; sourceTree = "<group>"; };
+		D78E55D51685B935002D38FC /* UMNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMNavigationController.h; sourceTree = "<group>"; };
+		D78E55D61685B935002D38FC /* UMNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMNavigationController.m; sourceTree = "<group>"; };
+		D78E55D71685B935002D38FC /* UMSlideNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSlideNavigationController.h; sourceTree = "<group>"; };
+		D78E55D81685B935002D38FC /* UMSlideNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMSlideNavigationController.m; sourceTree = "<group>"; };
+		D78E55D91685B935002D38FC /* UMTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMTools.h; sourceTree = "<group>"; };
+		D78E55DA1685B935002D38FC /* UMTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTools.m; sourceTree = "<group>"; };
+		D78E55DB1685B935002D38FC /* UMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMViewController.h; sourceTree = "<group>"; };
+		D78E55DC1685B935002D38FC /* UMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMViewController.m; sourceTree = "<group>"; };
 		D797E9FE1683729300D30894 /* slide_navigator_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slide_navigator_shadow.png; sourceTree = "<group>"; };
 		D797E9FF1683729300D30894 /* slide_navigator_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slide_navigator_shadow@2x.png"; sourceTree = "<group>"; };
 		D79826CB1663A33900054585 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -157,8 +165,6 @@
 		D79826CF1663A37C00054585 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		D79826D11663A38400054585 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D79826D31663A3A500054585 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
-		D79826D51663A4B400054585 /* UMSlideNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSlideNavigationController.h; sourceTree = "<group>"; };
-		D79826D61663A4B400054585 /* UMSlideNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMSlideNavigationController.m; sourceTree = "<group>"; };
 		D79826DC1663AE5300054585 /* SFSlideNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSlideNavViewController.h; sourceTree = "<group>"; };
 		D79826DD1663AE5400054585 /* SFSlideNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSlideNavViewController.m; sourceTree = "<group>"; };
 		D7A9867D16845EE200AB9A61 /* qlist_cell_pop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qlist_cell_pop.png; sourceTree = "<group>"; };
@@ -186,12 +192,6 @@
 		D7C09C7B166324AE0066EAF5 /* KQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KQueue.m; sourceTree = "<group>"; };
 		D7C09C7C166324AE0066EAF5 /* KUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KUtil.h; sourceTree = "<group>"; };
 		D7C09C7D166324AE0066EAF5 /* KUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KUtil.m; sourceTree = "<group>"; };
-		D7C09C7F166324AE0066EAF5 /* UMNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMNavigationController.h; sourceTree = "<group>"; };
-		D7C09C80166324AE0066EAF5 /* UMNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMNavigationController.m; sourceTree = "<group>"; };
-		D7C09C81166324AE0066EAF5 /* UMTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMTools.h; sourceTree = "<group>"; };
-		D7C09C82166324AE0066EAF5 /* UMTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTools.m; sourceTree = "<group>"; };
-		D7C09C83166324AE0066EAF5 /* UMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMViewController.h; sourceTree = "<group>"; };
-		D7C09C84166324AE0066EAF5 /* UMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMViewController.m; sourceTree = "<group>"; };
 		D7D006071679DB2700F3E107 /* SFLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFLoginViewController.h; sourceTree = "<group>"; };
 		D7D006081679DB2700F3E107 /* SFLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFLoginViewController.m; sourceTree = "<group>"; };
 		D7D4F31E16635B5B003B43EE /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -386,10 +386,10 @@
 		D77CE22116611B8B00F1BC9E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D78E55D41685B935002D38FC /* ULRManager */,
 				D7734D611684BE93000170FC /* AFNetworking */,
 				D7734D551684B7AB000170FC /* SlimeRefresh */,
 				D7C09C6F166324AE0066EAF5 /* Kache */,
-				D7C09C7E166324AE0066EAF5 /* ULRManager */,
 				D7C09C68166323090066EAF5 /* images */,
 				D77CE22216611B8B00F1BC9E /* SegmentFault-Info.plist */,
 				D77CE22316611B8B00F1BC9E /* InfoPlist.strings */,
@@ -397,6 +397,22 @@
 				D77CE22816611B8B00F1BC9E /* SegmentFault-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D78E55D41685B935002D38FC /* ULRManager */ = {
+			isa = PBXGroup;
+			children = (
+				D78E55D51685B935002D38FC /* UMNavigationController.h */,
+				D78E55D61685B935002D38FC /* UMNavigationController.m */,
+				D78E55D71685B935002D38FC /* UMSlideNavigationController.h */,
+				D78E55D81685B935002D38FC /* UMSlideNavigationController.m */,
+				D78E55D91685B935002D38FC /* UMTools.h */,
+				D78E55DA1685B935002D38FC /* UMTools.m */,
+				D78E55DB1685B935002D38FC /* UMViewController.h */,
+				D78E55DC1685B935002D38FC /* UMViewController.m */,
+			);
+			name = ULRManager;
+			path = Support/URLManager/ULRManager;
 			sourceTree = "<group>";
 		};
 		D7A9867C16845EE200AB9A61 /* questionlist */ = {
@@ -455,22 +471,6 @@
 			);
 			name = Kache;
 			path = Support/Kache;
-			sourceTree = "<group>";
-		};
-		D7C09C7E166324AE0066EAF5 /* ULRManager */ = {
-			isa = PBXGroup;
-			children = (
-				D7C09C7F166324AE0066EAF5 /* UMNavigationController.h */,
-				D7C09C80166324AE0066EAF5 /* UMNavigationController.m */,
-				D79826D51663A4B400054585 /* UMSlideNavigationController.h */,
-				D79826D61663A4B400054585 /* UMSlideNavigationController.m */,
-				D7C09C81166324AE0066EAF5 /* UMTools.h */,
-				D7C09C82166324AE0066EAF5 /* UMTools.m */,
-				D7C09C83166324AE0066EAF5 /* UMViewController.h */,
-				D7C09C84166324AE0066EAF5 /* UMViewController.m */,
-			);
-			name = ULRManager;
-			path = Support/ULRManager;
 			sourceTree = "<group>";
 		};
 		D7D4F31D16635B5B003B43EE /* icons */ = {
@@ -668,11 +668,7 @@
 				D7C09C88166324AE0066EAF5 /* KPool.m in Sources */,
 				D7C09C89166324AE0066EAF5 /* KQueue.m in Sources */,
 				D7C09C8A166324AE0066EAF5 /* KUtil.m in Sources */,
-				D7C09C8B166324AE0066EAF5 /* UMNavigationController.m in Sources */,
-				D7C09C8C166324AE0066EAF5 /* UMTools.m in Sources */,
-				D7C09C8D166324AE0066EAF5 /* UMViewController.m in Sources */,
 				D7D4F33A16637845003B43EE /* SFMainViewController.m in Sources */,
-				D79826D71663A4B400054585 /* UMSlideNavigationController.m in Sources */,
 				D79826DE1663AE5400054585 /* SFSlideNavViewController.m in Sources */,
 				D715857816660AD100889FA4 /* SFRootViewController.m in Sources */,
 				D7D75CED16673C7300479B3E /* SFQuestionListViewController.m in Sources */,
@@ -693,6 +689,10 @@
 				D7734D7B1684BE93000170FC /* AFURLConnectionOperation.m in Sources */,
 				D7734D7C1684BE93000170FC /* AFXMLRequestOperation.m in Sources */,
 				D7734D7D1684BE93000170FC /* UIImageView+AFNetworking.m in Sources */,
+				D78E55DD1685B935002D38FC /* UMNavigationController.m in Sources */,
+				D78E55DE1685B935002D38FC /* UMSlideNavigationController.m in Sources */,
+				D78E55DF1685B935002D38FC /* UMTools.m in Sources */,
+				D78E55E01685B935002D38FC /* UMViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

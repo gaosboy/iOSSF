@@ -12,6 +12,7 @@
 #define SECTION_HEADER_HEIGHT   31.0f
 
 @interface SFSlideNavViewController ()
+<UITableViewDataSource, UITableViewDelegate>
 
 @end
 
