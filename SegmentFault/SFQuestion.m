@@ -53,8 +53,9 @@
                                                                              nil]
                                          success:^(AFHTTPRequestOperation *operation, id JSON) {
                                              NSDictionary *data = [JSON valueForKeyPath:@"data"];
+                                             NSInteger status = [[JSON valueForKeyPath:@"status"] intValue];
                                              if (block) {
-                                                 block([data objectForKey:@"items"], nil);
+                                                 block([data objectForKey:@"items"], [NSError errorWithDomain:@".segmentfault.com" code:status userInfo:nil]);
                                              }
                                          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                              if (block) {

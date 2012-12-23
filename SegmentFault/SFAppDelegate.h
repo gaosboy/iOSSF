@@ -9,10 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class SFSlideNavViewController;
-@class SFMainViewController;
-@class SFQuestionListViewController;
 @class UMNavigationController;
-@class SFLoginViewController;
 
 @interface SFAppDelegate : UIResponder <UIApplicationDelegate>
 

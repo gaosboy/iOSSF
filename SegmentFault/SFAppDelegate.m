@@ -26,6 +26,7 @@
                                                                      @"SFQuestionDetailViewController", @"sf://questiondetail",
                                                                      @"SFWebViewController", @"http://segmentfault.com",
                                                                      @"SFWebViewController", @"sf://webview",
+                                                                     @"SFLoginViewController", @"sf://login",
                                                                      nil]];
 }
 
@@ -65,15 +66,16 @@
     [self.hottestNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_light_background.png"] forBarMetrics:UIBarMetricsDefault];
     self.hottestNavigator.title = @"热门问题";
 
-    self.followedQuestionsNavigator = [[UMNavigationController alloc] initWithRootViewControllerURL:[[NSURL URLWithString:@"sf://main"]
+    self.followedQuestionsNavigator = [[UMNavigationController alloc] initWithRootViewControllerURL:[[NSURL URLWithString:@"sf://questionlist"]
                                                                                            addParams:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                                                      @"关注的问题", @"title", nil]]];
+                                                                                                      @"关注的问题", @"title",
+                                                                                                      @"listbookmarked", @"list",
+                                                                                                      nil]]];
     UIButton *fQNavBtn = [[UIButton alloc] initWithFrame:NAVIGATION_BAR_BTN_RECT];
     [fQNavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button.png"] forState:UIControlStateNormal];
     [fQNavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button_pressed.png"] forState:UIControlStateHighlighted];
     [fQNavBtn addTarget:self.navigator action:@selector(slideButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *fQBtnItem = [[UIBarButtonItem alloc] initWithCustomView:fQNavBtn];
-
     self.followedQuestionsNavigator.rootViewController.navigationItem.leftBarButtonItem = fQBtnItem;
     [self.followedQuestionsNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_light_background.png"] forBarMetrics:UIBarMetricsDefault];
     self.followedQuestionsNavigator.title = @"关注的问题";

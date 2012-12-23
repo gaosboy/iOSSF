@@ -24,10 +24,6 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [self reloadToolBar];
-    [webView stringByEvaluatingJavaScriptFromString:
-     @"document.body.removeChild(document.getElementById('header'));document.body.removeChild(document.getElementById('footer'));"];
-    self.webView.alpha = 1.0f;
-    
     for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies])
     {
         if ([@".segmentfault.com" isEqualToString:[cookie domain]]
@@ -35,6 +31,17 @@
             [[NSUserDefaults standardUserDefaults] setValue:[cookie value] forKey:@"sfsess"];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
+    }
+    
+    NSString *pageSource = [webView stringByEvaluatingJavaScriptFromString: @"document.body.innerHTML"];
+    if ([pageSource containsString:@"<li><a href=\"http://segmentfault.com/user/logout\">退出</a></li>"]) {
+        [[self.navigator.viewControllers objectAtIndex:(self.navigator.viewControllers.count - 2)] viewDidLoad];
+        [self.navigator popViewControllerAnimated:YES];
+    }
+    else {
+        [webView stringByEvaluatingJavaScriptFromString:
+         @"document.body.removeChild(document.getElementById('header'));document.body.removeChild(document.getElementById('footer'));"];
+        self.webView.alpha = 1.0f;
     }
 }
 
@@ -60,6 +67,7 @@
 
 - (void)viewDidLoad
 {
+    self.url = [NSURL URLWithString:@"http://segmentfault.com/user/login"];
     [super viewDidLoad];
     
     self.webView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);

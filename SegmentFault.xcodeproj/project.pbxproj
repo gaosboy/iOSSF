@@ -58,6 +58,7 @@
 		D7D006091679DB2700F3E107 /* SFLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D006081679DB2700F3E107 /* SFLoginViewController.m */; };
 		D7D40868168710A000C5C256 /* UMWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D408661687102C00C5C256 /* UMWebViewController.m */; };
 		D7D408831687253D00C5C256 /* QuestionDetail.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = D7D408821687253D00C5C256 /* QuestionDetail.js.txt */; };
+		D7D408861687371D00C5C256 /* SFLoginService.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D408851687371D00C5C256 /* SFLoginService.m */; };
 		D7D4F32516635B5B003B43EE /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D4F31E16635B5B003B43EE /* Icon-72.png */; };
 		D7D4F32616635B5B003B43EE /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D4F31F16635B5B003B43EE /* Icon-Small-50.png */; };
 		D7D4F32716635B5B003B43EE /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D4F32016635B5B003B43EE /* Icon-Small.png */; };
@@ -187,6 +188,8 @@
 		D7D408651687102C00C5C256 /* UMWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMWebViewController.h; sourceTree = "<group>"; };
 		D7D408661687102C00C5C256 /* UMWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMWebViewController.m; sourceTree = "<group>"; };
 		D7D408821687253D00C5C256 /* QuestionDetail.js.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = QuestionDetail.js.txt; sourceTree = "<group>"; };
+		D7D408841687371D00C5C256 /* SFLoginService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFLoginService.h; sourceTree = "<group>"; };
+		D7D408851687371D00C5C256 /* SFLoginService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFLoginService.m; sourceTree = "<group>"; };
 		D7D4F31E16635B5B003B43EE /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		D7D4F31F16635B5B003B43EE /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		D7D4F32016635B5B003B43EE /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
@@ -256,6 +259,8 @@
 			children = (
 				D72E75D0167AEBD7007AECF6 /* SFQuestionService.h */,
 				D72E75D1167AEBD7007AECF6 /* SFQuestionService.m */,
+				D7D408841687371D00C5C256 /* SFLoginService.h */,
+				D7D408851687371D00C5C256 /* SFLoginService.m */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -695,6 +700,7 @@
 				D7D7BD671685DFD6003CC151 /* UMSlideNavigationController.m in Sources */,
 				D7D7BD681685DFD6003CC151 /* UMTools.m in Sources */,
 				D7D7BD691685DFD6003CC151 /* UMViewController.m in Sources */,
+				D7D408861687371D00C5C256 /* SFLoginService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

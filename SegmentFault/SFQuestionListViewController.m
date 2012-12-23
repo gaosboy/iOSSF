@@ -94,7 +94,11 @@
         if (! self.loading && self.hasMore) {
             self.page ++;
             [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
-                [self appendQuestions:questions];
+                if (5 == error.code) {
+                    [self.navigator openURL:[NSURL URLWithString:@"sf://login"]];
+                } else if (0 == error.code) {
+                    [self appendQuestions:questions];
+                }
             }];
             self.loading = YES;
         }
@@ -130,25 +134,31 @@
     [super viewDidLoad];
     
     self.list = [[self.params allKeys] containsObject:@"list"] ? [self.params objectForKey:@"list"] : @"listnewest";    
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.width, self.view.height - 44.0f)
-                                                  style:UITableViewStylePlain];
+    if (nil == self.tableView) {
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.width, self.view.height - 44.0f)
+                                                      style:UITableViewStylePlain];
+        
+        self.tableView.backgroundColor = [UIColor whiteColor];
+        self.tableView.separatorColor = [UIColor lightGrayColor];
+        self.tableView.dataSource = self;
+        self.tableView.delegate = self;
+        
+        self.slimeView = [[SRRefreshView alloc] init];
+        self.slimeView.delegate = self;
+        self.slimeView.slimeMissWhenGoingBack = YES;
+        self.slimeView.slime.bodyColor = RGBCOLOR(0, 154, 103); // 换成SF绿
+        [self.tableView addSubview:_slimeView];
+        
+        [self.view addSubview:self.tableView];
+    }
 
-    self.tableView.backgroundColor = [UIColor whiteColor];
-    self.tableView.separatorColor = [UIColor lightGrayColor];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    
-    self.slimeView = [[SRRefreshView alloc] init];
-    self.slimeView.delegate = self;
-    self.slimeView.slimeMissWhenGoingBack = YES;
-    self.slimeView.slime.bodyColor = RGBCOLOR(0, 154, 103); // 换成SF绿
-    [self.tableView addSubview:_slimeView];
-    
-    [self.view addSubview:self.tableView];
-    
     self.page = 1;
     [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
-        [self appendQuestions:questions];
+        if (5 == error.code) {
+            [self.navigator openURL:[NSURL URLWithString:@"sf://login"]];
+        } else if (0 == error.code) {
+            [self appendQuestions:questions];
+        }
     }];
     self.loading = YES;
     self.hasMore = YES;
@@ -171,7 +181,11 @@
     self.page = 1;
     [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
         [self.questionList removeAllObjects];
-        [self appendQuestions:questions];
+        if (5 == error.code) {
+            [self.navigator openURL:[NSURL URLWithString:@"sf://login"]];
+        } else if (0 == error.code) {
+            [self appendQuestions:questions];
+        }
         [self.slimeView endRefresh];
     }];
 }
