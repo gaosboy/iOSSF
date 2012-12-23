@@ -1,0 +1,7 @@
+document.body.removeChild(document.getElementById('header'));
+document.body.removeChild(document.getElementById('footer'));
+var children = document.getElementsByClassName('post-cell');
+while (0<children.length) {
+    children.item(0).parentNode.removeChild(children.item(0));
+    children = document.getElementsByClassName('post-cell');
+}

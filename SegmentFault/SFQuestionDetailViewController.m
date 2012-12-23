@@ -23,8 +23,9 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [self reloadToolBar];
-    [webView stringByEvaluatingJavaScriptFromString:
-     @"document.body.removeChild(document.getElementById('header'));document.body.removeChild(document.getElementById('footer'));"];
+    NSString*filePath=[[NSBundle mainBundle] pathForResource:@"QuestionDetail.js" ofType:@"txt"];
+    NSString *js = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    [webView stringByEvaluatingJavaScriptFromString:js];
     self.webView.alpha = 1.0f;
 
     for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies])

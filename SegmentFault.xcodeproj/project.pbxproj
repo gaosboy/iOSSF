@@ -57,6 +57,7 @@
 		D7C09C6E166323090066EAF5 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7C09C6B166323090066EAF5 /* Default@2x.png */; };
 		D7D006091679DB2700F3E107 /* SFLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D006081679DB2700F3E107 /* SFLoginViewController.m */; };
 		D7D40868168710A000C5C256 /* UMWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D408661687102C00C5C256 /* UMWebViewController.m */; };
+		D7D408831687253D00C5C256 /* QuestionDetail.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = D7D408821687253D00C5C256 /* QuestionDetail.js.txt */; };
 		D7D4F32516635B5B003B43EE /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D4F31E16635B5B003B43EE /* Icon-72.png */; };
 		D7D4F32616635B5B003B43EE /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D4F31F16635B5B003B43EE /* Icon-Small-50.png */; };
 		D7D4F32716635B5B003B43EE /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D4F32016635B5B003B43EE /* Icon-Small.png */; };
@@ -185,6 +186,7 @@
 		D7D408641687102C00C5C256 /* goForwardItem@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "goForwardItem@2x.png"; sourceTree = "<group>"; };
 		D7D408651687102C00C5C256 /* UMWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UMWebViewController.h; sourceTree = "<group>"; };
 		D7D408661687102C00C5C256 /* UMWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UMWebViewController.m; sourceTree = "<group>"; };
+		D7D408821687253D00C5C256 /* QuestionDetail.js.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = QuestionDetail.js.txt; sourceTree = "<group>"; };
 		D7D4F31E16635B5B003B43EE /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		D7D4F31F16635B5B003B43EE /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
 		D7D4F32016635B5B003B43EE /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 		D77CE22116611B8B00F1BC9E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D7D4087D168724D000C5C256 /* Resource */,
 				D7D7BD5D1685DFD6003CC151 /* URLManager */,
 				D7B217B11685CC3B001269EB /* Kache */,
 				D7734D611684BE93000170FC /* AFNetworking */,
@@ -442,6 +445,14 @@
 				D7DDB30E1675A050009DD198 /* nav */,
 			);
 			path = images;
+			sourceTree = "<group>";
+		};
+		D7D4087D168724D000C5C256 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				D7D408821687253D00C5C256 /* QuestionDetail.js.txt */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		D7D4F31D16635B5B003B43EE /* icons */ = {
@@ -639,6 +650,7 @@
 				D7A9868816845EE200AB9A61 /* qlist_cell_selected_background@2x.png in Resources */,
 				D7734D5D1684B7AB000170FC /* sr_refresh.png in Resources */,
 				D7734D5E1684B7AB000170FC /* sr_refresh@2X.png in Resources */,
+				D7D408831687253D00C5C256 /* QuestionDetail.js.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
