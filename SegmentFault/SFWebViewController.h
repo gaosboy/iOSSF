@@ -6,13 +6,8 @@
 //  Copyright (c) 2012 SegmentFault.com. All rights reserved.
 //
 
-#import "SFRootViewController.h"
+#import "UMWebViewController.h"
 
-@interface SFWebViewController : SFRootViewController <UIWebViewDelegate>
-
-@property (strong, nonatomic) UIWebView                 *webView;
-
-- (void)loadRequest;
-- (void)reloadToolBar;
+@interface SFWebViewController : UMWebViewController
 
 @end
