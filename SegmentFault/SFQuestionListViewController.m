@@ -25,14 +25,6 @@
 
 @implementation SFQuestionListViewController
 
-@synthesize tableView           = _tableView;
-@synthesize questionList        = _questionList;
-@synthesize slimeView           = _slimeView;
-
-@synthesize hasMore             = _hasMore;
-@synthesize loading             = _loading;
-@synthesize page                = _page;
-
 #pragma mark - UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

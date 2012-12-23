@@ -18,15 +18,6 @@
 
 @implementation SFAppDelegate
 
-@synthesize navigator                       = _navigator;
-
-@synthesize newestNavigator                 = _newestNavigator;
-@synthesize hottestNavigator                = _hottestNavigator;
-@synthesize followedQuestionsNavigator      = _followedQuestionsNavigator;
-@synthesize userSettingsNavigator           = _followedTagsNavigator;
-
-@synthesize window                          = _window;
-
 - (void)initURLMapping
 {
     [[UMNavigationController config] setValuesForKeysWithDictionary:[[NSDictionary alloc] initWithObjectsAndKeys:

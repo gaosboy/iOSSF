@@ -16,9 +16,6 @@
 
 @implementation SFWebViewController
 
-@synthesize toolBar                                     = _toolBar;
-@synthesize webView                                     = _webView;
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
