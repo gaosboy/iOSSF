@@ -33,14 +33,15 @@
 {
     self.navigator = [[SFSlideNavViewController alloc] initWithItems:@[@[self.newestNavigator, self.hottestNavigator],
                       @[self.followedQuestionsNavigator, self.userSettingsNavigator]]];
-    
 }
 
 - (void)initNavigators
 {
     self.newestNavigator = [[UMNavigationController alloc] initWithRootViewControllerURL:[[NSURL URLWithString:@"sf://questionlist"]
                                                                                           addParams:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                                                     @"最新问题", @"title", nil]]];
+                                                                                                     @"最新问题", @"title",
+                                                                                                     @"listnewest", @"list",
+                                                                                                     nil]]];
     UIButton *nNavBtn = [[UIButton alloc] initWithFrame:NAVIGATION_BAR_BTN_RECT];
     [nNavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button.png"] forState:UIControlStateNormal];
     [nNavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button_pressed.png"] forState:UIControlStateHighlighted];
@@ -50,9 +51,11 @@
     [self.newestNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_light_background.png"] forBarMetrics:UIBarMetricsDefault];
     self.newestNavigator.title = @"最新问题";
     
-    self.hottestNavigator = [[UMNavigationController alloc] initWithRootViewControllerURL:[[NSURL URLWithString:@"sf://main"]
+    self.hottestNavigator = [[UMNavigationController alloc] initWithRootViewControllerURL:[[NSURL URLWithString:@"sf://questionlist"]
                                                                                            addParams:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                                                      @"最新问题", @"title", nil]]];
+                                                                                                      @"热门问题", @"title",
+                                                                                                      @"listhottest", @"list",
+                                                                                                      nil]]];
     UIButton *hNavBtn = [[UIButton alloc] initWithFrame:NAVIGATION_BAR_BTN_RECT];
     [hNavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button.png"] forState:UIControlStateNormal];
     [hNavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button_pressed.png"] forState:UIControlStateHighlighted];

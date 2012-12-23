@@ -17,7 +17,7 @@
 
 @interface SFQuestion : NSObject
 
-+ (void)questionListByCondition:(NSString *)condition
++ (void)questionListByPath:(NSString *)path
                          onPage:(NSInteger)page size:(NSInteger)size
                       withBlock:(void (^)(NSArray *questions, NSError *error))block;
 

@@ -42,13 +42,12 @@
 
 @implementation SFQuestion
 
-+ (void)questionListByCondition:(NSString *)condition
++ (void)questionListByPath:(NSString *)path
                          onPage:(NSInteger)page size:(NSInteger)size
                       withBlock:(void (^)(NSArray *questions, NSError *error))block
 {
     // From Internet
-    [[SFQuestionHttpClient sharedClient] getPath:@"api/question" parameters:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                             [NSString stringWithFormat:@"list%@", condition], @"do",
+    [[SFQuestionHttpClient sharedClient] getPath:path parameters:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                              [NSString stringWithFormat:@"%d", page], @"page",
                                                                              [NSString stringWithFormat:@"%d", size], @"size",
                                                                              nil]

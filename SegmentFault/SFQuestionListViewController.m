@@ -20,6 +20,7 @@
 @property (assign, nonatomic) BOOL                  hasMore;
 @property (assign, nonatomic) BOOL                  loading;
 @property (assign, nonatomic) NSInteger             page;
+@property (strong, nonatomic) NSString              *list;
 
 @end
 
@@ -92,7 +93,7 @@
         
         if (! self.loading && self.hasMore) {
             self.page ++;
-            [SFQuestionService getNewestQuestionListPage:self.page withBlock:^(NSArray *questions, NSError *error) {
+            [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
                 [self appendQuestions:questions];
             }];
             self.loading = YES;
@@ -124,18 +125,11 @@
 
 #pragma mark
 
-- (id)initWithURL:(NSURL *)aUrl
-{
-    self = [super initWithURL:aUrl];
-    if (self) {
-        return self;
-    }
-    return nil;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.list = [[self.params allKeys] containsObject:@"list"] ? [self.params objectForKey:@"list"] : @"listnewest";    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.width, self.view.height - 44.0f)
                                                   style:UITableViewStylePlain];
 
@@ -153,7 +147,7 @@
     [self.view addSubview:self.tableView];
     
     self.page = 1;
-    [SFQuestionService getNewestQuestionListPage:self.page withBlock:^(NSArray *questions, NSError *error) {
+    [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
         [self appendQuestions:questions];
     }];
     self.loading = YES;
@@ -175,7 +169,7 @@
 - (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView
 {
     self.page = 1;
-    [SFQuestionService getNewestQuestionListPage:self.page withBlock:^(NSArray *questions, NSError *error) {
+    [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
         [self.questionList removeAllObjects];
         [self appendQuestions:questions];
         [self.slimeView endRefresh];

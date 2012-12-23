@@ -8,6 +8,6 @@
 
 @interface SFQuestionService : NSObject
 
-+ (void)getNewestQuestionListPage:(NSInteger)page withBlock:(void (^)(NSArray *questions, NSError *error))block;
++ (void)getQuestionList:(NSString *)list onPage:(NSInteger)page withBlock:(void (^)(NSArray *questions, NSError *error))block;
 
 @end

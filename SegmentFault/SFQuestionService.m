@@ -10,11 +10,13 @@
 
 @implementation SFQuestionService
 
-+ (void)getNewestQuestionListPage:(NSInteger)page
-                        withBlock:(void (^)(NSArray *questions, NSError *error))block
-
++ (void)getQuestionList:(NSString *)list onPage:(NSInteger)page
+              withBlock:(void (^)(NSArray *questions, NSError *error))block
 {
-    [SFQuestion questionListByCondition:@"newest" onPage:page size:30 withBlock:block];
+    [SFQuestion questionListByPath:[NSString stringWithFormat:@"api/question?do=%@", list]
+                            onPage:page
+                              size:30
+                         withBlock:block];
 }
 
 @end
