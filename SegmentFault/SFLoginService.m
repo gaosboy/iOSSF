@@ -47,6 +47,27 @@
 {
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"sfsess"];
     [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"sfuid"];
+    NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:
+                            [NSDictionary dictionaryWithObjectsAndKeys:
+                             @"sfsess", NSHTTPCookieName,
+                             @"", NSHTTPCookieValue,
+                             @".segmentfault.com", NSHTTPCookieDomain,
+                             @"segmentfault.com", NSHTTPCookieOriginURL,
+                             @"/", NSHTTPCookiePath,
+                             @"0", NSHTTPCookieVersion,
+                             nil]];
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+    NSHTTPCookie *uidCookie = [NSHTTPCookie cookieWithProperties:
+                               [NSDictionary dictionaryWithObjectsAndKeys:
+                                @"sfuid", NSHTTPCookieName,
+                                @"", NSHTTPCookieValue,
+                                @".segmentfault.com", NSHTTPCookieDomain,
+                                @"segmentfault.com", NSHTTPCookieOriginURL,
+                                @"/", NSHTTPCookiePath,
+                                @"0", NSHTTPCookieVersion,
+                                nil]];
+
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:uidCookie];
 }
 
 + (void)login:(UMViewController *)vc withCallback:(NSString *)callback

@@ -52,28 +52,6 @@
         self.url = [NSURL URLWithString:[self.params objectForKey:@"url"]];
     }
     NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL:self.url];
-    
-    NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:
-                            [NSDictionary dictionaryWithObjectsAndKeys:
-                             @"sfsess", NSHTTPCookieName,
-                             [[NSUserDefaults standardUserDefaults] valueForKey:@"sfsess"], NSHTTPCookieValue,
-                             @".segmentfault.com", NSHTTPCookieDomain,
-                             @"segmentfault.com", NSHTTPCookieOriginURL,
-                             @"/", NSHTTPCookiePath,
-                             @"0", NSHTTPCookieVersion,
-                             nil]];
-    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
-    NSHTTPCookie *uidCookie = [NSHTTPCookie cookieWithProperties:
-                               [NSDictionary dictionaryWithObjectsAndKeys:
-                                @"sfuid", NSHTTPCookieName,
-                                [[NSUserDefaults standardUserDefaults] valueForKey:@"sfuid"], NSHTTPCookieValue,
-                                @".segmentfault.com", NSHTTPCookieDomain,
-                                @"segmentfault.com", NSHTTPCookieOriginURL,
-                                @"/", NSHTTPCookiePath,
-                                @"0", NSHTTPCookieVersion,
-                                nil]];
-    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:uidCookie];
-    
     [self.webView loadRequest:requestObj];
 }
 

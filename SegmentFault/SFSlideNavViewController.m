@@ -20,7 +20,7 @@
 // 那些ViewController已经被载入过
 @property (nonatomic, strong) NSMutableSet  *loadedRootViewControllers;
 
-@property (nonatomic, strong) UIButton      *logouButton;
+@property (nonatomic, strong) UIButton      *logoutButton;
 
 @end
 
@@ -39,26 +39,32 @@
         self.loadedRootViewControllers = [[NSMutableSet alloc] initWithObjects:self.items[self.currentIndex.section][self.currentIndex.row], nil];
     }
     
-    if (nil == self.logouButton) {
-        self.logouButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        self.logouButton.backgroundColor = [UIColor grayColor];
-        self.logouButton.frame = CGRectMake(10.0f, self.slideView.bottom - 54.0f, 240.0f, 44.0f);
-        [self.logouButton addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
-        [self.slideView addSubview:self.logouButton];
+    if (nil == self.logoutButton) {
+        self.logoutButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, self.slideView.bottom - 54.0f, 240.0f, 44.0f)];
+        [self.logoutButton setBackgroundImage:[UIImage imageNamed:@"logout_btn.png"] forState:UIControlStateNormal];
+        [self.logoutButton setBackgroundImage:[UIImage imageNamed:@"logout_btn_press.png"] forState:UIControlStateHighlighted];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 220.0f, 24.0f)];
+        titleLabel.textColor = [UIColor whiteColor];
+        titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.font = [UIFont boldSystemFontOfSize:18.0f];
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        titleLabel.text = @"退    出    登    录";
+        [self.logoutButton addSubview:titleLabel];
+        [self.logoutButton addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
+        [self.slideView addSubview:self.logoutButton];
     }
-    self.logouButton.hidden = ! [SFLoginService isLogin];
+    self.logoutButton.hidden = ! [SFLoginService isLogin];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.logouButton.hidden = ! [SFLoginService isLogin];
+    self.logoutButton.hidden = ! [SFLoginService isLogin];
 }
 
 - (void)logout
 {
     [SFLoginService logout];
-    self.logouButton.hidden = YES;
     [self tableView:self.slideView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 }
 

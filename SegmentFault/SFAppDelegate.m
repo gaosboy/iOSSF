@@ -82,7 +82,10 @@
     self.followedQuestionsNavigator.title = @"关注的问题";
     
     self.userSettingsNavigator = [[UMNavigationController alloc] initWithRootViewControllerURL:[[NSURL URLWithString:@"http://segmentfault.com/user/settings"]
-                                                                                                addParams:[NSDictionary dictionaryWithObjectsAndKeys:@"个人资料", @"title", nil]]];
+                                                                                                addParams:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                                           @"个人资料", @"title",
+                                                                                                           @"1", @"login",
+                                                                                                           nil]]];
     UIButton *fTNavBtn = [[UIButton alloc] initWithFrame:NAVIGATION_BAR_BTN_RECT];
     [fTNavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button.png"] forState:UIControlStateNormal];
     [fTNavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button_pressed.png"] forState:UIControlStateHighlighted];
