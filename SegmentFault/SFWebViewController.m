@@ -55,4 +55,22 @@
     [self.webView loadRequest:requestObj];
 }
 
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [super webViewDidFinishLoad:webView];
+    [webView stringByEvaluatingJavaScriptFromString:
+     @"document.body.removeChild(document.getElementById('header'));document.body.removeChild(document.getElementById('footer'));"];
+    self.webView.alpha = 1.0f;
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    // 如果是退出请求 http://segmentfault.com/user/logout ，拦截
+    NSLog(@"URL %@ HOST %@ PATH %@", request.URL.absoluteString, [request.URL host], [request.URL path]);
+    if ([@"segmentfault.com" isEqualToString:[request.URL host]]
+        && [@"/user/logout" isEqualToString:[request.URL path]]) {
+        return NO;
+    }
+    return YES;
+}
+
 @end

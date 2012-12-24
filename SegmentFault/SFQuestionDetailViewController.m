@@ -22,11 +22,10 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    [self reloadToolBar];
     NSString*filePath=[[NSBundle mainBundle] pathForResource:@"QuestionDetail.js" ofType:@"txt"];
     NSString *js = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     [webView stringByEvaluatingJavaScriptFromString:js];
-    self.webView.alpha = 1.0f;
+    [super webViewDidFinishLoad:webView];
 }
 
 - (id)initWithURL:(NSURL *)aUrl

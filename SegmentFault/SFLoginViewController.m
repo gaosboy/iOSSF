@@ -24,8 +24,6 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    [self reloadToolBar];
-
     NSString *pageSource = [webView stringByEvaluatingJavaScriptFromString: @"document.body.getElementsByTagName('pre').item(0).innerHTML"];
     NSDictionary *loginInfo = (NSDictionary *)[pageSource objectFromJSONString];
     if (loginInfo && 0 == [[loginInfo objectForKey:@"status"] intValue]) {
@@ -44,11 +42,7 @@
             [self loadRequest];
         }
     }
-    else {
-        [webView stringByEvaluatingJavaScriptFromString:
-         @"document.body.removeChild(document.getElementById('header'));document.body.removeChild(document.getElementById('footer'));"];
-        self.webView.alpha = 1.0f;
-    }
+    [super webViewDidFinishLoad:webView];
 }
 
 - (void)viewDidLoad
