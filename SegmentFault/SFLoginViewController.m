@@ -33,7 +33,7 @@
             if (nil != [self.params objectForKey:@"callback"]) {
                 __weak UMViewController *lastViewController = [self.navigator.viewControllers objectAtIndex:(self.navigator.viewControllers.count - 2)];
                 __weak SEL callback = NSSelectorFromString([self.params objectForKey:@"callback"]);
-                if ([lastViewController respondsToSelector:callback]) {
+                if (lastViewController && callback && [lastViewController respondsToSelector:callback]) {
                     [lastViewController performSelector:callback];
                 }
             }

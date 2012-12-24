@@ -14,6 +14,9 @@
 @interface SFSlideNavViewController ()
 <UITableViewDataSource, UITableViewDelegate>
 
+// 那些ViewController已经被载入过
+@property (nonatomic, strong) NSMutableSet *loadedRootViewControllers;
+
 @end
 
 @implementation SFSlideNavViewController
@@ -26,6 +29,10 @@
     self.slideView.delegate = self;
     self.slideView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.slideView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"slide_navigator_dark_backgrond.png"]];
+    
+    if (nil == self.loadedRootViewControllers) {
+        self.loadedRootViewControllers = [[NSMutableSet alloc] initWithObjects:self.items[self.currentIndex.section][self.currentIndex.row], nil];
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -120,6 +127,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    // 每次切换，调用一次ViewDidLoad
+    if (indexPath.section != self.currentIndex.section
+        || indexPath.row != self.currentIndex.row) {
+        UIViewController *currentVC = (UIViewController *)self.items[indexPath.section][indexPath.row];
+        if ([self.loadedRootViewControllers containsObject:currentVC]) {
+            [currentVC viewDidLoad];
+        }
+        else { // 第一次不调用
+            [self.loadedRootViewControllers addObject:currentVC];
+        }
+    }
     [self showItemAtIndex:indexPath];
 }
 
