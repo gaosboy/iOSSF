@@ -8,7 +8,6 @@
 
 #import "SFQuestionListViewController.h"
 #import "SFQuestionService.h"
-#import "SFLoginService.h"
 #import "SRRefreshView.h"
 
 @interface SFQuestionListViewController ()
@@ -95,8 +94,7 @@
             self.page ++;
             [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
                 if (5 == error.code) {
-                    [self.navigator openURL:[[NSURL URLWithString:@"sf://login"] addParams:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                                            @"viewDidLoad", @"callback", nil]]];
+                    ;;
                 } else if (0 == error.code) {
                     [self appendQuestions:questions];
                 }
@@ -120,6 +118,7 @@
     [self.navigator openURL:[[NSURL URLWithString:@"sf://questiondetail"] addParams:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                                      [[self.questionList objectAtIndex:indexPath.row] objectForKey:@"id"], @"qid",
                                                                                      @"问题详情", @"title",
+                                                                                     @"1", @"login",
                                                                                      nil]]];
 }
 
@@ -133,42 +132,35 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if (1 == [[self.params objectForKey:@"login"] intValue] && ! [SFLoginService isLogin]) {
-        [self.navigator openURL:[[NSURL URLWithString:@"sf://login"] addParams:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                                @"viewDidLoad", @"callback", nil]]];
+    self.list = [[self.params allKeys] containsObject:@"list"] ? [self.params objectForKey:@"list"] : @"listnewest";    
+    if (nil == self.tableView) {
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.width, self.view.height - 44.0f)
+                                                      style:UITableViewStylePlain];
+        
+        self.tableView.backgroundColor = [UIColor whiteColor];
+        self.tableView.separatorColor = [UIColor lightGrayColor];
+        self.tableView.dataSource = self;
+        self.tableView.delegate = self;
+        
+        self.slimeView = [[SRRefreshView alloc] init];
+        self.slimeView.delegate = self;
+        self.slimeView.slimeMissWhenGoingBack = YES;
+        self.slimeView.slime.bodyColor = RGBCOLOR(0, 154, 103); // 换成SF绿
+        [self.tableView addSubview:_slimeView];
+        
+        [self.view addSubview:self.tableView];
     }
-    else {
-        self.list = [[self.params allKeys] containsObject:@"list"] ? [self.params objectForKey:@"list"] : @"listnewest";    
-        if (nil == self.tableView) {
-            self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.width, self.view.height - 44.0f)
-                                                          style:UITableViewStylePlain];
-            
-            self.tableView.backgroundColor = [UIColor whiteColor];
-            self.tableView.separatorColor = [UIColor lightGrayColor];
-            self.tableView.dataSource = self;
-            self.tableView.delegate = self;
-            
-            self.slimeView = [[SRRefreshView alloc] init];
-            self.slimeView.delegate = self;
-            self.slimeView.slimeMissWhenGoingBack = YES;
-            self.slimeView.slime.bodyColor = RGBCOLOR(0, 154, 103); // 换成SF绿
-            [self.tableView addSubview:_slimeView];
-            
-            [self.view addSubview:self.tableView];
-        }
 
-        self.page = 1;
-        [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
-            if (5 == error.code) {
-                [self.navigator openURL:[[NSURL URLWithString:@"sf://login"] addParams:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                                        @"viewDidLoad", @"callback", nil]]];
-            } else if (0 == error.code) {
-                [self appendQuestions:questions];
-            }
-        }];
-        self.loading = YES;
-        self.hasMore = YES;
-    }
+    self.page = 1;
+    [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
+        if (5 == error.code) {
+            ;;
+        } else if (0 == error.code) {
+            [self appendQuestions:questions];
+        }
+    }];
+    self.loading = YES;
+    self.hasMore = YES;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -189,8 +181,7 @@
     [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
         [self.questionList removeAllObjects];
         if (5 == error.code) {
-            [self.navigator openURL:[[NSURL URLWithString:@"sf://login"] addParams:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                                    @"viewDidLoad", @"callback", nil]]];
+            ;;
         } else if (0 == error.code) {
             [self appendQuestions:questions];
         }

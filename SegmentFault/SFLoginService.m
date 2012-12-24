@@ -7,13 +7,14 @@
 //
 
 #import "SFLoginService.h"
+#import "UMViewController.h"
 
 @implementation SFLoginService
 
 + (BOOL)isLogin
 {
-    if ([[NSUserDefaults standardUserDefaults] valueForKey:@"sfsess"]
-        && [[NSUserDefaults standardUserDefaults] valueForKey:@"sfuid"]) {
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"sfsess"] length]
+        && [[[NSUserDefaults standardUserDefaults] valueForKey:@"sfuid"] length]) {
         return YES;
     } else {
         [SFLoginService logout];
@@ -44,8 +45,16 @@
 
 + (void)logout
 {
-    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"sfsess"];
-    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:@"sfuid"];
+    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"sfsess"];
+    [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"sfuid"];
+}
+
++ (void)login:(UMViewController *)vc withCallback:(NSString *)callback
+{
+    [vc.navigator openURL:[[NSURL URLWithString:@"sf://login"] addParams:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                            @"登录", @"title",
+                                                                            callback, @"callback",
+                                                                            nil]]];
 }
 
 @end

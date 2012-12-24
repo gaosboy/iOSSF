@@ -10,4 +10,6 @@
 
 @interface SFRootViewController : UMViewController
 
+- (void)delayOpen;
+
 @end

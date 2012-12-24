@@ -7,6 +7,9 @@
 //
 
 #import "SFSlideNavViewController.h"
+#import "UMNavigationController.h"
+#import "UMViewController.h"
+#import "SFLoginService.h"
 
 #define CELL_HEIGHT             44.0f
 #define SECTION_HEADER_HEIGHT   31.0f
@@ -15,7 +18,9 @@
 <UITableViewDataSource, UITableViewDelegate>
 
 // 那些ViewController已经被载入过
-@property (nonatomic, strong) NSMutableSet *loadedRootViewControllers;
+@property (nonatomic, strong) NSMutableSet  *loadedRootViewControllers;
+
+@property (nonatomic, strong) UIButton      *logouButton;
 
 @end
 
@@ -33,6 +38,28 @@
     if (nil == self.loadedRootViewControllers) {
         self.loadedRootViewControllers = [[NSMutableSet alloc] initWithObjects:self.items[self.currentIndex.section][self.currentIndex.row], nil];
     }
+    
+    if (nil == self.logouButton) {
+        self.logouButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        self.logouButton.backgroundColor = [UIColor grayColor];
+        self.logouButton.frame = CGRectMake(10.0f, self.slideView.bottom - 54.0f, 240.0f, 44.0f);
+        [self.logouButton addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
+        [self.slideView addSubview:self.logouButton];
+    }
+    self.logouButton.hidden = ! [SFLoginService isLogin];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.logouButton.hidden = ! [SFLoginService isLogin];
+}
+
+- (void)logout
+{
+    [SFLoginService logout];
+    self.logouButton.hidden = YES;
+    [self tableView:self.slideView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 }
 
 #pragma mark - UITableViewDataSource
@@ -127,18 +154,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    // 每次切换，调用一次ViewDidLoad
-    if (indexPath.section != self.currentIndex.section
-        || indexPath.row != self.currentIndex.row) {
-        UIViewController *currentVC = (UIViewController *)self.items[indexPath.section][indexPath.row];
-        if ([self.loadedRootViewControllers containsObject:currentVC]) {
-            [currentVC viewDidLoad];
-        }
-        else { // 第一次不调用
-            [self.loadedRootViewControllers addObject:currentVC];
-        }
-    }
     [self showItemAtIndex:indexPath];
+    UMNavigationController *currentNav = (UMNavigationController *)self.items[indexPath.section][indexPath.row];
+    UMViewController *currentVC = (UMViewController *)[[currentNav viewControllers] lastObject];
+    if (1 == [[[[currentVC url] params] objectForKey:@"login"] intValue]
+        && ! [SFLoginService isLogin]) {
+        [SFLoginService login:currentVC withCallback:@"viewDidLoad"];
+    }
 }
 
 @end

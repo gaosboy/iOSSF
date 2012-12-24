@@ -7,8 +7,12 @@
 //
 
 #import "SFRootViewController.h"
+#import "SFLoginService.h"
 
 @interface SFRootViewController ()
+
+// 用来记录将要打开的URL
+@property (nonatomic, strong) NSURL *toOpen;
 
 @end
 
@@ -39,6 +43,24 @@
     [navBtn setBackgroundImage:[UIImage imageNamed:@"back_button_pressed_background.png"] forState:UIControlStateHighlighted];
     UIBarButtonItem *btnItem = [[UIBarButtonItem alloc] initWithCustomView:navBtn];
     self.navigationItem.leftBarButtonItem = btnItem;
+}
+
+- (BOOL)shouldOpenViewControllerWithURL:(NSURL *)aUrl
+{
+    if (! [@"login" isEqualToString:[aUrl host]]
+        && 1 == [[aUrl.params objectForKey:@"login"] intValue]
+        && ! [SFLoginService isLogin]) {
+        self.toOpen = aUrl;
+        [SFLoginService login:self withCallback:@"delayOpen"];
+        return NO;
+    }
+    return YES;
+}
+
+// 登陆回调方法
+- (void)delayOpen
+{
+    [self.navigator openURL:self.toOpen];
 }
 
 - (void)back
