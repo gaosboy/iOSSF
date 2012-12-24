@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D70DF7B7168805D300AD1207 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = D70DF7B4168805D300AD1207 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D715857816660AD100889FA4 /* SFRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D715857716660AD100889FA4 /* SFRootViewController.m */; };
 		D72E75D2167AEBD7007AECF6 /* SFQuestionService.m in Sources */ = {isa = PBXBuildFile; fileRef = D72E75D1167AEBD7007AECF6 /* SFQuestionService.m */; };
 		D72E75D5167AEC4E007AECF6 /* SFQuestion.m in Sources */ = {isa = PBXBuildFile; fileRef = D72E75D4167AEC4E007AECF6 /* SFQuestion.m */; };
@@ -99,6 +100,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D70DF7B3168805D300AD1207 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		D70DF7B4168805D300AD1207 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		D715857616660AD000889FA4 /* SFRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFRootViewController.h; sourceTree = "<group>"; };
 		D715857716660AD100889FA4 /* SFRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFRootViewController.m; sourceTree = "<group>"; };
 		D72E75D0167AEBD7007AECF6 /* SFQuestionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFQuestionService.h; sourceTree = "<group>"; };
@@ -254,6 +257,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D70DF7B1168805D300AD1207 /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				D70DF7B3168805D300AD1207 /* JSONKit.h */,
+				D70DF7B4168805D300AD1207 /* JSONKit.m */,
+			);
+			name = JSONKit;
+			path = Support/JSONKit;
+			sourceTree = "<group>";
+		};
 		D72E75CC167AEB94007AECF6 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -381,6 +394,7 @@
 		D77CE22116611B8B00F1BC9E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D70DF7B1168805D300AD1207 /* JSONKit */,
 				D7D4087D168724D000C5C256 /* Resource */,
 				D7D7BD5D1685DFD6003CC151 /* URLManager */,
 				D7B217B11685CC3B001269EB /* Kache */,
@@ -701,6 +715,7 @@
 				D7D7BD681685DFD6003CC151 /* UMTools.m in Sources */,
 				D7D7BD691685DFD6003CC151 /* UMViewController.m in Sources */,
 				D7D408861687371D00C5C256 /* SFLoginService.m in Sources */,
+				D70DF7B7168805D300AD1207 /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

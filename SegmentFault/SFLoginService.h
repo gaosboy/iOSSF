@@ -9,5 +9,7 @@
 @interface SFLoginService : NSObject
 
 + (BOOL)isLogin;
++ (BOOL)loginWithInfo:(NSDictionary *)info;
++ (void)logout;
 
 @end

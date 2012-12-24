@@ -7,6 +7,7 @@
 //
 
 #import "SFLoginViewController.h"
+#import "SFLoginService.h"
 
 @interface SFLoginViewController ()
 
@@ -24,19 +25,24 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [self reloadToolBar];
-    for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies])
-    {
-        if ([@".segmentfault.com" isEqualToString:[cookie domain]]
-            && [@"sfsess" isEqualToString:[cookie name]]) {
-            [[NSUserDefaults standardUserDefaults] setValue:[cookie value] forKey:@"sfsess"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+
+    NSString *pageSource = [webView stringByEvaluatingJavaScriptFromString: @"document.body.getElementsByTagName('pre').item(0).innerHTML"];
+    NSDictionary *loginInfo = (NSDictionary *)[pageSource objectFromJSONString];
+    if (loginInfo && 0 == [[loginInfo objectForKey:@"status"] intValue]) {
+        if ([SFLoginService loginWithInfo:[loginInfo objectForKey:@"data"]]) {
+            if (nil != [self.params objectForKey:@"callback"]) {
+                __weak UMViewController *lastViewController = [self.navigator.viewControllers objectAtIndex:(self.navigator.viewControllers.count - 2)];
+                __weak SEL callback = NSSelectorFromString([self.params objectForKey:@"callback"]);
+                if ([lastViewController respondsToSelector:callback]) {
+                    [lastViewController performSelector:callback];
+                }
+            }
+            [self.navigator popViewControllerAnimated:YES];
         }
-    }
-    
-    NSString *pageSource = [webView stringByEvaluatingJavaScriptFromString: @"document.body.innerHTML"];
-    if ([pageSource containsString:@"<li><a href=\"http://segmentfault.com/user/logout\">退出</a></li>"]) {
-        [[self.navigator.viewControllers objectAtIndex:(self.navigator.viewControllers.count - 2)] viewDidLoad];
-        [self.navigator popViewControllerAnimated:YES];
+        else {
+            [SFLoginService logout];
+            [self loadRequest];
+        }
     }
     else {
         [webView stringByEvaluatingJavaScriptFromString:
@@ -45,29 +51,9 @@
     }
 }
 
-- (void)loadRequest {
-    if (! [@"http" isEqualToString:[self.url protocol]]) {
-        self.url = [NSURL URLWithString:[self.params objectForKey:@"url"]];
-    }
-    NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL:self.url];
-    
-    NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:
-                            [NSDictionary dictionaryWithObjectsAndKeys:
-                             @"sfsess", NSHTTPCookieName,
-                             [[NSUserDefaults standardUserDefaults] valueForKey:@"sfsess"], NSHTTPCookieValue,
-                             @".segmentfault.com", NSHTTPCookieDomain,
-                             @"segmentfault.com", NSHTTPCookieOriginURL,
-                             @"/", NSHTTPCookiePath,
-                             @"0", NSHTTPCookieVersion,
-                             nil]];
-    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
-    
-    [self.webView loadRequest:requestObj];
-}
-
 - (void)viewDidLoad
 {
-    self.url = [NSURL URLWithString:@"http://segmentfault.com/user/login"];
+    self.url = [NSURL URLWithString:@"http://segmentfault.com/api/user?do=login"];
     [super viewDidLoad];
     
     self.webView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);

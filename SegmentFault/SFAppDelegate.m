@@ -70,6 +70,7 @@
                                                                                            addParams:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                                                       @"关注的问题", @"title",
                                                                                                       @"listbookmarked", @"list",
+                                                                                                      @"1", @"login",
                                                                                                       nil]]];
     UIButton *fQNavBtn = [[UIButton alloc] initWithFrame:NAVIGATION_BAR_BTN_RECT];
     [fQNavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button.png"] forState:UIControlStateNormal];

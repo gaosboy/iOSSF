@@ -8,7 +8,7 @@
 
 #import "SFQuestionListViewController.h"
 #import "SFQuestionService.h"
-
+#import "SFLoginService.h"
 #import "SRRefreshView.h"
 
 @interface SFQuestionListViewController ()
@@ -95,7 +95,8 @@
             self.page ++;
             [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
                 if (5 == error.code) {
-                    [self.navigator openURL:[NSURL URLWithString:@"sf://login"]];
+                    [self.navigator openURL:[[NSURL URLWithString:@"sf://login"] addParams:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                            @"viewDidLoad", @"callback", nil]]];
                 } else if (0 == error.code) {
                     [self appendQuestions:questions];
                 }
@@ -132,6 +133,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    if (1 == [[self.params objectForKey:@"login"] intValue] && ! [SFLoginService isLogin]) {
+        [self.navigator openURL:[[NSURL URLWithString:@"sf://login"] addParams:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                @"viewDidLoad", @"callback", nil]]];
+    }
     
     self.list = [[self.params allKeys] containsObject:@"list"] ? [self.params objectForKey:@"list"] : @"listnewest";    
     if (nil == self.tableView) {
@@ -155,7 +160,8 @@
     self.page = 1;
     [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
         if (5 == error.code) {
-            [self.navigator openURL:[NSURL URLWithString:@"sf://login"]];
+            [self.navigator openURL:[[NSURL URLWithString:@"sf://login"] addParams:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                    @"viewDidLoad", @"callback", nil]]];
         } else if (0 == error.code) {
             [self appendQuestions:questions];
         }
@@ -182,7 +188,8 @@
     [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
         [self.questionList removeAllObjects];
         if (5 == error.code) {
-            [self.navigator openURL:[NSURL URLWithString:@"sf://login"]];
+            [self.navigator openURL:[[NSURL URLWithString:@"sf://login"] addParams:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                    @"viewDidLoad", @"callback", nil]]];
         } else if (0 == error.code) {
             [self appendQuestions:questions];
         }

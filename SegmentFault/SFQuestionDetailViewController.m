@@ -27,35 +27,6 @@
     NSString *js = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     [webView stringByEvaluatingJavaScriptFromString:js];
     self.webView.alpha = 1.0f;
-
-    for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies])
-    {
-        if ([@".segmentfault.com" isEqualToString:[cookie domain]]
-            && [@"sfsess" isEqualToString:[cookie name]]) {
-            [[NSUserDefaults standardUserDefaults] setValue:[cookie value] forKey:@"sfsess"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        }
-    }
-}
-
-- (void)loadRequest {
-    if (! [@"http" isEqualToString:[self.url protocol]]) {
-        self.url = [NSURL URLWithString:[self.params objectForKey:@"url"]];
-    }
-    NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL:self.url];
-    
-    NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:
-                            [NSDictionary dictionaryWithObjectsAndKeys:
-                             @"sfsess", NSHTTPCookieName,
-                             [[NSUserDefaults standardUserDefaults] valueForKey:@"sfsess"], NSHTTPCookieValue,
-                             @".segmentfault.com", NSHTTPCookieDomain,
-                             @"segmentfault.com", NSHTTPCookieOriginURL,
-                             @"/", NSHTTPCookiePath,
-                             @"0", NSHTTPCookieVersion,
-                             nil]];
-    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
-
-    [self.webView loadRequest:requestObj];
 }
 
 - (id)initWithURL:(NSURL *)aUrl

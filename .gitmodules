@@ -10,3 +10,6 @@
 [submodule "SegmentFault/Support/URLManager"]
 	path = SegmentFault/Support/URLManager
 	url = https://github.com/gaosboy/urlmanager.git
+[submodule "SegmentFault/Support/JSONKit"]
+	path = SegmentFault/Support/JSONKit
+	url = https://github.com/johnezang/JSONKit.git
