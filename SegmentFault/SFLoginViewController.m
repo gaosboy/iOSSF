@@ -29,7 +29,7 @@
     if (loginInfo && 0 == [[loginInfo objectForKey:@"status"] intValue]) {
         if ([SFLoginService loginWithInfo:[loginInfo objectForKey:@"data"]]) {
             if (nil != [self.params objectForKey:@"callback"]) {
-                UMViewController *lastViewController = [self.navigator.viewControllers objectAtIndex:(self.navigator.viewControllers.count - 2)];
+                __weak UMViewController *lastViewController = [self.navigator.viewControllers objectAtIndex:(self.navigator.viewControllers.count - 2)];
                 SEL callback = NSSelectorFromString([self.params objectForKey:@"callback"]);
                 if (lastViewController && callback && [lastViewController respondsToSelector:callback]) {
                     [lastViewController performSelector:callback withObject:nil afterDelay:0.5f];

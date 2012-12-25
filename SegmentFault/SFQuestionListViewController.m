@@ -70,9 +70,7 @@
         
         __weak UILabel *answersLabel = (UILabel *)[cell.imageView viewWithTag:1000001];
         answersLabel.text = [[self.questionList objectAtIndex:indexPath.row] objectForKey:@"answersWord"];
-        
         cell.textLabel.text = [[self.questionList objectAtIndex:indexPath.row] objectForKey:@"title"];
-        
         cell.detailTextLabel.text = [[self.questionList objectAtIndex:indexPath.row] objectForKey:@"createdDate"];
     }
     else {
