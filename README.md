@@ -23,7 +23,7 @@ SF iOS App使用URLManager，通过URL Scheme的方式管理ViewController，做
 #####|__ [SlimeRefresh](https://github.com/dbsGen/SlimeRefresh)
 #####|__ [URLManager](https://github.com/gaosboy/urlmanager) （自主开发的NavigationViewController，用URL Scheme管理ViewControllers）
 
-建议你使用SourceTree来管理工程。使用SourceTree Clone一个工程会自动加载Submodule。
+建议你使用[SourceTree](http://itun.es/cn/rFBIy.m)来管理工程。使用SourceTree Clone一个工程会自动加载Submodule。
 
 如果你使用命令行Clone工程，请运行如下命令，加载Submodule
 
