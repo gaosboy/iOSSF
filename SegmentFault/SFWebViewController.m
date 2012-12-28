@@ -67,7 +67,6 @@
     [super webViewDidFinishLoad:webView];
     [webView stringByEvaluatingJavaScriptFromString:
      @"document.body.removeChild(document.getElementById('header'));document.body.removeChild(document.getElementById('footer'));"];
-    self.webView.alpha = 1.0f;
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {

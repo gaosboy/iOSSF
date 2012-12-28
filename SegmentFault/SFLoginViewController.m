@@ -40,7 +40,11 @@
         else {
             [SFLoginService logout];
             [self loadRequest];
+            self.webView.alpha = 1.0f;
         }
+    }
+    else {
+        self.webView.alpha = 1.0f;
     }
     [super webViewDidFinishLoad:webView];
 }
