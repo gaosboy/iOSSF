@@ -149,16 +149,18 @@
     }
 
     self.page = 1;
-    [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
-        if (5 == error.code) {
-            ;;
-        } else if (0 == error.code) {
-            [self.questionList removeAllObjects];
-            [self appendQuestions:questions];
-        }
-    }];
-    self.loading = YES;
-    self.hasMore = YES;
+    if (! self.loading) {
+        [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
+            if (5 == error.code) {
+                ;; // 没权限
+            } else if (0 == error.code) {
+                [self.questionList removeAllObjects];
+                [self appendQuestions:questions];
+            }
+        }];
+        self.loading = YES;
+        self.hasMore = YES;
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -176,15 +178,17 @@
 - (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView
 {
     self.page = 1;
-    [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
-        [self.questionList removeAllObjects];
-        if (5 == error.code) {
-            ;;
-        } else if (0 == error.code) {
-            [self appendQuestions:questions];
-        }
-        [self.slimeView endRefresh];
-    }];
+    if (! self.loading) {
+        [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
+            [self.questionList removeAllObjects];
+            if (5 == error.code) {
+                ;;
+            } else if (0 == error.code) {
+                [self appendQuestions:questions];
+            }
+            [self.slimeView endRefresh];
+        }];
+    }
 }
 
 // 把问题接在后边

@@ -26,6 +26,7 @@
     NSString *js = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     [webView stringByEvaluatingJavaScriptFromString:js];
     [super webViewDidFinishLoad:webView];
+    self.webView.alpha = 1.0f;
 }
 
 - (id)initWithURL:(NSURL *)aUrl
