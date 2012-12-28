@@ -210,7 +210,7 @@
     [self.tableView reloadData];
 }
 
-- (void)clean
+- (void)didLogout
 {
     [self.questionList removeAllObjects];
     [self.tableView reloadData];

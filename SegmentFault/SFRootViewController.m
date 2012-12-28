@@ -26,7 +26,7 @@
     if (! [@"login" isEqualToString:[self.url host]]
         && 1 == [[self.params objectForKey:@"login"] intValue]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:SFNotificationLogout object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clean) name:SFNotificationLogout object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLogout) name:SFNotificationLogout object:nil];
 
     }
 
@@ -70,7 +70,7 @@
     [self.navigator openURL:self.toOpen];
 }
 
-- (void)clean
+- (void)didLogout
 {    
 }
 
