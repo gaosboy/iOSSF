@@ -153,6 +153,7 @@
         if (5 == error.code) {
             ;;
         } else if (0 == error.code) {
+            [self.questionList removeAllObjects];
             [self appendQuestions:questions];
         }
     }];

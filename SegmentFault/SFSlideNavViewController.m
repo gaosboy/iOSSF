@@ -167,6 +167,9 @@
         && ! [SFLoginService isLogin]) {
         [SFLoginService login:currentVC withCallback:@"viewDidLoad"];
     }
+    if (indexPath.section == self.currentIndex.section && indexPath.row == self.currentIndex.row) {
+        [currentVC viewDidLoad];
+    }
 }
 
 @end
