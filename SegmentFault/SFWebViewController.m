@@ -18,6 +18,13 @@
 {
     [super viewDidLoad];
 
+    if (! [@"login" isEqualToString:[self.url host]]
+        && 1 == [[self.params objectForKey:@"login"] intValue]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:SFNotificationLogout object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadRequest) name:SFNotificationLogout object:nil];
+        
+    }
+
     self.view.backgroundColor = [UIColor whiteColor];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];

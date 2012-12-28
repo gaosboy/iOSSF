@@ -68,6 +68,8 @@
                                 nil]];
 
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:uidCookie];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:SFNotificationLogout object:nil];
 }
 
 + (void)login:(UMViewController *)vc withCallback:(NSString *)callback

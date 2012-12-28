@@ -206,4 +206,11 @@
     [self.tableView reloadData];
 }
 
+- (void)clean
+{
+    [self.questionList removeAllObjects];
+    [self.tableView reloadData];
+    [self.navigator popToRootViewControllerAnimated:NO];
+}
+
 @end
