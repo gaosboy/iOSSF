@@ -22,5 +22,6 @@
 #import "SFQuestion.h"
 #import "JSONKit.h"
 
-#define SFNotificationLogin       @"sf_notification_login" // 登陆成功
-#define SFNotificationLogout         @"sf_notification_logout" // 登出
+#define SFNotificationLogin             @"sf_notification_login" // 登陆成功
+#define SFNotificationLogout            @"sf_notification_logout" // 登出
+#define SFNotificationDismiss           @"sf_notification_dismiss" // 非 FirstResponder

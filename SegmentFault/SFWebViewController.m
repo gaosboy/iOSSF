@@ -22,8 +22,10 @@
         && 1 == [[self.params objectForKey:@"login"] intValue]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:SFNotificationLogout object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadRequest) name:SFNotificationLogout object:nil];
-        
     }
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UMNotificationWillShow object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissKeyboard) name:UMNotificationWillShow object:nil];
 
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -76,6 +78,11 @@
         return NO;
     }
     return YES;
+}
+
+- (void)dismissKeyboard
+{
+    [self.webView endEditing:YES];
 }
 
 @end
