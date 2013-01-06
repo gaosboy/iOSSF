@@ -143,24 +143,25 @@
         self.slimeView.delegate = self;
         self.slimeView.slimeMissWhenGoingBack = YES;
         self.slimeView.slime.bodyColor = RGBCOLOR(0, 154, 103); // 换成SF绿
+        self.slimeView.slime.skinColor = RGBCOLOR(0, 154, 103); // 换成SF绿
         [self.tableView addSubview:_slimeView];
         
         [self.view addSubview:self.tableView];
     }
 
     self.page = 1;
-    if (! self.loading) {
-        [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
-            if (5 == error.code) {
-                ;; // 没权限
-            } else if (0 == error.code) {
-                [self.questionList removeAllObjects];
-                [self appendQuestions:questions];
-            }
-        }];
-        self.loading = YES;
-        self.hasMore = YES;
-    }
+    [self.slimeView setLoadingWithexpansion];
+    [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
+        if (5 == error.code) {
+            ;; // 没权限
+        } else if (0 == error.code) {
+            [self.questionList removeAllObjects];
+            [self appendQuestions:questions];
+        }
+        [self.slimeView endRefresh];
+    }];
+    self.loading = YES;
+    self.hasMore = YES;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
