@@ -13,6 +13,7 @@
 #import "SFQuestionListViewController.h"
 #import "SFLoginViewController.h"
 #import "UMNavigationController.h"
+#import "AFNetworkActivityIndicatorManager.h"
 
 #define NAVIGATION_BAR_BTN_RECT         CGRectMake(0.0f, 0.0f, 32.0f, 32.0f)
 
@@ -100,6 +101,8 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 
     [self initURLMapping];
     [self initNavigators];
