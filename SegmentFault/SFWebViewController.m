@@ -10,6 +10,7 @@
 
 @interface SFWebViewController ()
 
+- (void)back;
 - (void)dismissKeyboard;
 
 @end
@@ -17,6 +18,11 @@
 @implementation SFWebViewController
 
 #pragma mark - private
+
+- (void)back
+{
+    [self.navigator popViewControllerAnimated:YES];
+}
 
 - (void)dismissKeyboard
 {

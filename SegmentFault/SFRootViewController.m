@@ -14,9 +14,18 @@
 // 用来记录将要打开的URL
 @property (nonatomic, strong) NSURL *toOpen;
 
+- (void)back;
+
 @end
 
 @implementation SFRootViewController
+
+#pragma mark - private
+
+- (void)back
+{
+    [self.navigator popViewControllerAnimated:YES];
+}
 
 #pragma mark - public
 
