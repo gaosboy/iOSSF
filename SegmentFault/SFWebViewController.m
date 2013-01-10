@@ -10,35 +10,27 @@
 
 @interface SFWebViewController ()
 
+- (void)dismissKeyboard;
+
 @end
 
 @implementation SFWebViewController
 
-- (void)viewDidLoad
+#pragma mark - private
+
+- (void)dismissKeyboard
 {
-    [super viewDidLoad];
+    [self.webView endEditing:YES];
+}
 
-    if (! [@"login" isEqualToString:[self.url host]]
-        && 1 == [[self.params objectForKey:@"login"] intValue]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:SFNotificationLogout object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadRequest) name:SFNotificationLogout object:nil];
+#pragma mark - parent
+
+- (void)loadRequest {
+    if (! [@"http" isEqualToString:[self.url protocol]]) {
+        self.url = [NSURL URLWithString:[self.params objectForKey:@"url"]];
     }
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UMNotificationWillShow object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissKeyboard) name:UMNotificationWillShow object:nil];
-
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont boldSystemFontOfSize:20.0];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = RGBCOLOR(92.0f, 92.0f, 92.0f);
-    self.navigationItem.titleView = label;
-    label.text = [self.params objectForKey:@"title"];
-    [label sizeToFit];
-    
-    self.navigationItem.titleView = label;
+    NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL:self.url];
+    [self.webView loadRequest:requestObj];
 }
 
 - (void)openedFromViewControllerWithURL:(NSURL *)aUrl
@@ -51,18 +43,7 @@
     self.navigationItem.leftBarButtonItem = btnItem;
 }
 
-- (void)back
-{
-    [self.navigator popViewControllerAnimated:YES];
-}
-
-- (void)loadRequest {
-    if (! [@"http" isEqualToString:[self.url protocol]]) {
-        self.url = [NSURL URLWithString:[self.params objectForKey:@"url"]];
-    }
-    NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL:self.url];
-    [self.webView loadRequest:requestObj];
-}
+#pragma mark - WebViewDelegate
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
@@ -80,9 +61,33 @@
     return YES;
 }
 
-- (void)dismissKeyboard
+#pragma mark
+
+- (void)viewDidLoad
 {
-    [self.webView endEditing:YES];
+    [super viewDidLoad];
+    
+    if (! [@"login" isEqualToString:[self.url host]]
+        && 1 == [[self.params objectForKey:@"login"] intValue]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:SFNotificationLogout object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadRequest) name:SFNotificationLogout object:nil];
+    }
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UMNotificationWillShow object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissKeyboard) name:UMNotificationWillShow object:nil];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:20.0];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = RGBCOLOR(92.0f, 92.0f, 92.0f);
+    self.navigationItem.titleView = label;
+    label.text = [self.params objectForKey:@"title"];
+    [label sizeToFit];
+    
+    self.navigationItem.titleView = label;
 }
 
 @end

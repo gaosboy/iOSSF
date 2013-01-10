@@ -12,15 +12,14 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
     #import <QuartzCore/QuartzCore.h>
+    #import "UMTools.h"
+    #import "SFTools.h"
+    #import "SFQuestion.h"
+    #import "JSONKit.h"
+
+    #define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
+    #define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
 #endif
-
-#define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
-#define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
-
-#import "UMTools.h"
-#import "SFTools.h"
-#import "SFQuestion.h"
-#import "JSONKit.h"
 
 #define SFNotificationLogin             @"sf_notification_login" // 登陆成功
 #define SFNotificationLogout            @"sf_notification_logout" // 登出

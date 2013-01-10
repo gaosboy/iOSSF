@@ -8,7 +8,6 @@
 
 #import "SFAppDelegate.h"
 
-#import "SFMainViewController.h"
 #import "SFSlideNavViewController.h"
 #import "SFQuestionListViewController.h"
 #import "SFLoginViewController.h"
@@ -22,7 +21,6 @@
 - (void)initURLMapping
 {
     [[UMNavigationController config] setValuesForKeysWithDictionary:[[NSDictionary alloc] initWithObjectsAndKeys:
-                                                                     @"SFMainViewController", @"sf://main",
                                                                      @"SFQuestionListViewController", @"sf://questionlist",
                                                                      @"SFQuestionDetailViewController", @"sf://questiondetail",
                                                                      @"SFWebViewController", @"http://segmentfault.com",

@@ -18,29 +18,19 @@
 
 @implementation SFRootViewController
 
-- (void)viewDidLoad
+#pragma mark - public
+
+// 登陆回调方法
+- (void)delayOpen
 {
-    [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    if (! [@"login" isEqualToString:[self.url host]]
-        && 1 == [[self.params objectForKey:@"login"] intValue]) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:SFNotificationLogout object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLogout) name:SFNotificationLogout object:nil];
-
-    }
-
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont boldSystemFontOfSize:20.0];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = RGBCOLOR(92.0f, 92.0f, 92.0f);
-    self.navigationItem.titleView = label;
-    label.text = [self.params objectForKey:@"title"];
-    [label sizeToFit];
-    
-    self.navigationItem.titleView = label;
+    [self.navigator openURL:self.toOpen];
 }
+
+- (void)didLogout
+{    
+}
+
+#pragma mark - parent
 
 - (void)openedFromViewControllerWithURL:(NSURL *)aUrl
 {
@@ -64,19 +54,30 @@
     return YES;
 }
 
-// 登陆回调方法
-- (void)delayOpen
-{
-    [self.navigator openURL:self.toOpen];
-}
+#pragma mark
 
-- (void)didLogout
-{    
-}
-
-- (void)back
+- (void)viewDidLoad
 {
-    [self.navigator popViewControllerAnimated:YES];
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    if (! [@"login" isEqualToString:[self.url host]]
+        && 1 == [[self.params objectForKey:@"login"] intValue]) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:SFNotificationLogout object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLogout) name:SFNotificationLogout object:nil];
+        
+    }
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:20.0];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = RGBCOLOR(92.0f, 92.0f, 92.0f);
+    self.navigationItem.titleView = label;
+    label.text = [self.params objectForKey:@"title"];
+    [label sizeToFit];
+    
+    self.navigationItem.titleView = label;
 }
 
 @end

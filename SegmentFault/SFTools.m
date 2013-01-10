@@ -10,13 +10,4 @@
 
 @implementation SFTools
 
-+ (UIImage *)convertViewToImage:(UIView *)aView {
-    UIGraphicsBeginImageContext(aView.bounds.size);
-    [aView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return img;
-}
-
 @end

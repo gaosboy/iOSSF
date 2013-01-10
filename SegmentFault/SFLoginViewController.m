@@ -15,6 +15,7 @@
 
 @implementation SFLoginViewController
 
+#pragma mark - UIWebViewDelegate
 
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
@@ -48,6 +49,8 @@
     }
     [super webViewDidFinishLoad:webView];
 }
+
+#pragma mark
 
 - (void)viewDidLoad
 {

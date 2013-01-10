@@ -13,6 +13,9 @@
 @interface SFQuestionListViewController ()
  <UITableViewDataSource, UITableViewDelegate, SRRefreshDelegate>
 
+- (void)appendQuestions:(NSArray *)questions;
+- (void)didLogout;
+
 @property (strong, nonatomic) UITableView           *tableView;
 @property (strong, nonatomic) SRRefreshView         *slimeView;
 
@@ -24,6 +27,34 @@
 @end
 
 @implementation SFQuestionListViewController
+
+#pragma mark - private
+
+// 把问题接在后边
+- (void)appendQuestions:(NSArray *)questions
+{
+    self.hasMore = YES;
+    if (nil != questions) {
+        if (30 > [questions count]) {
+            self.hasMore = NO;
+        }
+        if (nil == self.questionList) {
+            self.questionList = [[NSMutableArray alloc] initWithArray:questions];
+        }
+        else {
+            [self.questionList addObjectsFromArray:questions];
+        }
+    }
+    self.loading = NO;
+    [self.tableView reloadData];
+}
+
+- (void)didLogout
+{
+    [self.questionList removeAllObjects];
+    [self.tableView reloadData];
+    [self.navigator popToRootViewControllerAnimated:NO];
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -124,45 +155,7 @@
     return self.hasMore && 0 < [self.questionList count] ? [self.questionList count] + 1 : [self.questionList count];
 }
 
-#pragma mark
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.list = [[self.params allKeys] containsObject:@"list"] ? [self.params objectForKey:@"list"] : @"listnewest";    
-    if (nil == self.tableView) {
-        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.width, self.view.height - 44.0f)
-                                                      style:UITableViewStylePlain];
-        
-        self.tableView.backgroundColor = [UIColor whiteColor];
-        self.tableView.separatorColor = [UIColor lightGrayColor];
-        self.tableView.dataSource = self;
-        self.tableView.delegate = self;
-        
-        self.slimeView = [[SRRefreshView alloc] init];
-        self.slimeView.delegate = self;
-        self.slimeView.slimeMissWhenGoingBack = YES;
-        self.slimeView.slime.bodyColor = RGBCOLOR(0, 154, 103); // 换成SF绿
-        self.slimeView.slime.skinColor = RGBCOLOR(0, 154, 103); // 换成SF绿
-        [self.tableView addSubview:_slimeView];
-        
-        [self.view addSubview:self.tableView];
-    }
-
-    self.page = 1;
-    [self.slimeView setLoadingWithexpansion];
-    [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
-        if (5 == error.code) {
-            ;; // 没权限
-        } else if (0 == error.code) {
-            [self.questionList removeAllObjects];
-            [self appendQuestions:questions];
-        }
-        [self.slimeView endRefresh];
-    }];
-    self.loading = YES;
-    self.hasMore = YES;
-}
+#pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -192,30 +185,44 @@
     }
 }
 
-// 把问题接在后边
-- (void)appendQuestions:(NSArray *)questions
-{
-    self.hasMore = YES;
-    if (nil != questions) {
-        if (30 > [questions count]) {
-            self.hasMore = NO;
-        }
-        if (nil == self.questionList) {
-            self.questionList = [[NSMutableArray alloc] initWithArray:questions];
-        }
-        else {
-            [self.questionList addObjectsFromArray:questions];
-        }
-    }
-    self.loading = NO;
-    [self.tableView reloadData];
-}
+#pragma mark
 
-- (void)didLogout
+- (void)viewDidLoad
 {
-    [self.questionList removeAllObjects];
-    [self.tableView reloadData];
-    [self.navigator popToRootViewControllerAnimated:NO];
+    [super viewDidLoad];
+    self.list = [[self.params allKeys] containsObject:@"list"] ? [self.params objectForKey:@"list"] : @"listnewest";
+    if (nil == self.tableView) {
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.width, self.view.height - 44.0f)
+                                                      style:UITableViewStylePlain];
+        
+        self.tableView.backgroundColor = [UIColor whiteColor];
+        self.tableView.separatorColor = [UIColor lightGrayColor];
+        self.tableView.dataSource = self;
+        self.tableView.delegate = self;
+        
+        self.slimeView = [[SRRefreshView alloc] init];
+        self.slimeView.delegate = self;
+        self.slimeView.slimeMissWhenGoingBack = YES;
+        self.slimeView.slime.bodyColor = RGBCOLOR(0, 154, 103); // 换成SF绿
+        self.slimeView.slime.skinColor = RGBCOLOR(0, 154, 103); // 换成SF绿
+        [self.tableView addSubview:_slimeView];
+        
+        [self.view addSubview:self.tableView];
+    }
+    
+    self.page = 1;
+    [self.slimeView setLoadingWithexpansion];
+    [SFQuestionService getQuestionList:self.list onPage:self.page withBlock:^(NSArray *questions, NSError *error) {
+        if (5 == error.code) {
+            ;; // 没权限
+        } else if (0 == error.code) {
+            [self.questionList removeAllObjects];
+            [self appendQuestions:questions];
+        }
+        [self.slimeView endRefresh];
+    }];
+    self.loading = YES;
+    self.hasMore = YES;
 }
 
 @end

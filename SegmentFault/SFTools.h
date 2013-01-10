@@ -8,6 +8,4 @@
 
 @interface SFTools : NSObject
 
-+ (UIImage *)convertViewToImage:(UIView *)aView;
-
 @end

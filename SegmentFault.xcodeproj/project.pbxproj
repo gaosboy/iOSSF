@@ -79,7 +79,6 @@
 		D7D4F32916635B5B003B43EE /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D4F32216635B5B003B43EE /* Icon.png */; };
 		D7D4F32A16635B5B003B43EE /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D4F32316635B5B003B43EE /* Icon@2x.png */; };
 		D7D4F32B16635B5B003B43EE /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D4F32416635B5B003B43EE /* iTunesArtwork.png */; };
-		D7D4F33A16637845003B43EE /* SFMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D4F33916637845003B43EE /* SFMainViewController.m */; };
 		D7D75CED16673C7300479B3E /* SFQuestionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D75CEC16673C7300479B3E /* SFQuestionListViewController.m */; };
 		D7DDB3271675A050009DD198 /* back_button_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D7DDB30F1675A050009DD198 /* back_button_background.png */; };
 		D7DDB3281675A050009DD198 /* back_button_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7DDB3101675A050009DD198 /* back_button_background@2x.png */; };
@@ -220,8 +219,6 @@
 		D7D4F32216635B5B003B43EE /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		D7D4F32316635B5B003B43EE /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		D7D4F32416635B5B003B43EE /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
-		D7D4F33816637845003B43EE /* SFMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFMainViewController.h; sourceTree = "<group>"; };
-		D7D4F33916637845003B43EE /* SFMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFMainViewController.m; sourceTree = "<group>"; };
 		D7D75CEB16673C7300479B3E /* SFQuestionListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFQuestionListViewController.h; sourceTree = "<group>"; };
 		D7D75CEC16673C7300479B3E /* SFQuestionListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFQuestionListViewController.m; sourceTree = "<group>"; };
 		D7DDB30F1675A050009DD198 /* back_button_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_button_background.png; sourceTree = "<group>"; };
@@ -332,8 +329,6 @@
 				D73F5597167883DE00F15949 /* SFQuestionDetailViewController.m */,
 				D7D75CEB16673C7300479B3E /* SFQuestionListViewController.h */,
 				D7D75CEC16673C7300479B3E /* SFQuestionListViewController.m */,
-				D7D4F33816637845003B43EE /* SFMainViewController.h */,
-				D7D4F33916637845003B43EE /* SFMainViewController.m */,
 				D7DDB30616759C3C009DD198 /* Nav */,
 				D7DDB30916759C78009DD198 /* Base */,
 			);
@@ -439,8 +434,8 @@
 		D77CE22116611B8B00F1BC9E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D70DF7B1168805D300AD1207 /* JSONKit */,
 				D7D4087D168724D000C5C256 /* Resource */,
+				D70DF7B1168805D300AD1207 /* JSONKit */,
 				D70DF80916883CAA00AD1207 /* URLManager */,
 				D7B217B11685CC3B001269EB /* Kache */,
 				D7734D611684BE93000170FC /* AFNetworking */,
@@ -714,7 +709,6 @@
 			files = (
 				D77CE22716611B8B00F1BC9E /* main.m in Sources */,
 				D77CE22B16611B8B00F1BC9E /* SFAppDelegate.m in Sources */,
-				D7D4F33A16637845003B43EE /* SFMainViewController.m in Sources */,
 				D79826DE1663AE5400054585 /* SFSlideNavViewController.m in Sources */,
 				D715857816660AD100889FA4 /* SFRootViewController.m in Sources */,
 				D7D75CED16673C7300479B3E /* SFQuestionListViewController.m in Sources */,
