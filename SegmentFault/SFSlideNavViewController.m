@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 SegmentFault.com. All rights reserved.
 //
 
+#import "SFLoginService.h"
 #import "SFSlideNavViewController.h"
 #import "UMNavigationController.h"
 #import "UMViewController.h"
-#import "SFLoginService.h"
 
 #define CELL_HEIGHT             44.0f
 #define SECTION_HEADER_HEIGHT   31.0f

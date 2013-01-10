@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 SegmentFault.com. All rights reserved.
 //
 
-#import "SFLoginViewController.h"
 #import "SFLoginService.h"
+#import "SFLoginViewController.h"
 
 @interface SFLoginViewController ()
 

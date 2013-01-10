@@ -6,13 +6,12 @@
 //  Copyright (c) 2012 SegmentFault.com. All rights reserved.
 //
 
-#import "SFAppDelegate.h"
-
-#import "SFSlideNavViewController.h"
-#import "SFQuestionListViewController.h"
-#import "SFLoginViewController.h"
-#import "UMNavigationController.h"
 #import "AFNetworkActivityIndicatorManager.h"
+#import "SFAppDelegate.h"
+#import "SFLoginViewController.h"
+#import "SFQuestionListViewController.h"
+#import "SFSlideNavViewController.h"
+#import "UMNavigationController.h"
 
 #define NAVIGATION_BAR_BTN_RECT         CGRectMake(0.0f, 0.0f, 32.0f, 32.0f)
 

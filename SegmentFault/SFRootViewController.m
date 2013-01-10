@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 SegmentFault.com. All rights reserved.
 //
 
-#import "SFRootViewController.h"
 #import "SFLoginService.h"
+#import "SFRootViewController.h"
 
 @interface SFRootViewController ()
 
