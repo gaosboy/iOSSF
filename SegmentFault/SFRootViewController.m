@@ -12,7 +12,7 @@
 @interface SFRootViewController ()
 
 // 用来记录将要打开的URL
-@property (nonatomic, strong) NSURL *toOpen;
+@property (nonatomic, strong)   NSURL *toOpen;
 
 - (void)back;
 

@@ -11,12 +11,18 @@
 @implementation SFQuestionService
 
 + (void)getQuestionList:(NSString *)list onPage:(NSInteger)page
-              withBlock:(void (^)(NSArray *questions, NSError *error))block
+              withBlock:(SFQuestionListLoadedBlock)block
 {
     [SFQuestion questionListByPath:[NSString stringWithFormat:@"api/question?do=%@", list]
                             onPage:page
                               size:30
                          withBlock:block];
+}
+
++ (void)getQuestionDetailById:(NSString *)qid
+                    withBlock:(SFQuestionDetailLoadedBlock)block
+{
+    [SFQuestion questionDetailBy:qid withBlock:block];
 }
 
 @end

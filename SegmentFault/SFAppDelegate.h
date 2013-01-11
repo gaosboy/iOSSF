@@ -13,13 +13,13 @@
 
 @interface SFAppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow                          *window;
+@property (strong, nonatomic)   UIWindow                          *window;
 
-@property (strong, nonatomic) SFSlideNavViewController          *navigator;
+@property (strong, nonatomic)   SFSlideNavViewController          *navigator;
 
-@property (strong, nonatomic) UMNavigationController            *newestNavigator;
-@property (strong, nonatomic) UMNavigationController            *hottestNavigator;
-@property (strong, nonatomic) UMNavigationController            *followedQuestionsNavigator;
-@property (strong, nonatomic) UMNavigationController            *userSettingsNavigator;
+@property (strong, nonatomic)   UMNavigationController            *newestNavigator;
+@property (strong, nonatomic)   UMNavigationController            *hottestNavigator;
+@property (strong, nonatomic)   UMNavigationController            *followedQuestionsNavigator;
+@property (strong, nonatomic)   UMNavigationController            *userSettingsNavigator;
 
 @end

@@ -10,6 +10,6 @@
 
 @interface SFQuestionListViewController : SFRootViewController
 
-@property (strong, nonatomic) NSMutableArray            *questionList;
+@property (strong, nonatomic)   NSMutableArray            *questionList;
 
 @end

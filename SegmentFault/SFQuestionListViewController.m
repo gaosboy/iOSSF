@@ -16,13 +16,12 @@
 - (void)appendQuestions:(NSArray *)questions;
 - (void)didLogout;
 
-@property (strong, nonatomic) UITableView           *tableView;
-@property (strong, nonatomic) SRRefreshView         *slimeView;
-
-@property (assign, nonatomic) BOOL                  hasMore;
-@property (assign, nonatomic) BOOL                  loading;
-@property (assign, nonatomic) NSInteger             page;
-@property (strong, nonatomic) NSString              *list;
+@property (assign, nonatomic)   BOOL                  hasMore;
+@property (assign, nonatomic)   BOOL                  loading;
+@property (strong, nonatomic)   NSString              *list;
+@property (assign, nonatomic)   NSInteger             page;
+@property (strong, nonatomic)   UITableView           *tableView;
+@property (strong, nonatomic)   SRRefreshView         *slimeView;
 
 @end
 

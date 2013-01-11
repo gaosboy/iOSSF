@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "AFHTTPClient.h"
 
+typedef void (^SFQuestionDetailLoadedBlock)(NSDictionary *questionInfo, NSInteger answers, NSError *error);
+typedef void (^SFQuestionListLoadedBlock)(NSArray *questions, NSError *error);
+
 @interface SFQuestionHttpClient : AFHTTPClient
 
 + (SFQuestionHttpClient *)sharedClient;
@@ -17,8 +20,10 @@
 
 @interface SFQuestion : NSObject
 
++ (void)questionDetailBy:(NSString *)qid
+               withBlock:(SFQuestionDetailLoadedBlock)block;
 + (void)questionListByPath:(NSString *)path
                          onPage:(NSInteger)page size:(NSInteger)size
-                      withBlock:(void (^)(NSArray *questions, NSError *error))block;
+                      withBlock:(SFQuestionListLoadedBlock)block;
 
 @end

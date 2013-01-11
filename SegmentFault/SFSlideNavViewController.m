@@ -20,8 +20,8 @@
 - (void)logout;
 
 // 记录ViewController已经被载入过
-@property (nonatomic, strong) NSMutableSet  *loadedRootViewControllers;
-@property (nonatomic, strong) UIButton      *logoutButton;
+@property (nonatomic, strong)   NSMutableSet  *loadedRootViewControllers;
+@property (nonatomic, strong)   UIButton      *logoutButton;
 
 @end
 
