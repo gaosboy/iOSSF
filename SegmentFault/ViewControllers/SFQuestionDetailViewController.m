@@ -88,6 +88,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    // TODO SectionHeader做成吸附
 //    if (self.questionView.top < scrollView.contentOffset.y
 //        && self.questionView.bottom > scrollView.contentOffset.y) {
 //        self.questionHeader.top = scrollView.contentOffset.y;
