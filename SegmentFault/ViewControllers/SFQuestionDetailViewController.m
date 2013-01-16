@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic)   UIImageView             *answerHeader;
 @property (strong, nonatomic)   SFLocalWebView          *answerView;
+@property (strong, nonatomic)   UIActivityIndicatorView *indicator;
 @property (strong, nonatomic)   UIImageView             *questionHeader;
 @property (strong, nonatomic)   NSString                *questionId;
 @property (strong, nonatomic)   SFLocalWebView          *questionView;
@@ -81,7 +82,9 @@
     
     self.answerHeader.top = self.questionView.bottom;
     self.answerView.top = self.answerHeader.bottom;
-    self.scrollView.contentSize = CGSizeMake(320.0f, self.answerView.bottom + 5.0f);
+    self.scrollView.contentSize = (self.scrollView.height > self.answerView.bottom + 5.0f)
+    ? CGSizeMake(320.0f, self.scrollView.height + 1.0f)
+    : CGSizeMake(320.0f, self.answerView.bottom + 5.0f);
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -107,9 +110,18 @@
         self.scrollView.delegate = self;
     }
     
+    if (nil == self.indicator) {
+        self.indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        self.indicator.frame = CGRectMake(self.scrollView.width / 2 - 40.0f, self.scrollView.height / 2 - 40.0f, 40.0f, 40.0f);
+        [self.view addSubview:self.indicator];
+        [self.indicator startAnimating];
+    }
+    
     [SFQuestionService getQuestionDetailById:[self.params objectForKey:@"qid"] withBlock:^(NSDictionary *questionInfo, NSInteger answers, NSError *error){
         self.questionInfo = questionInfo;
         [self reloadData];
+        [self.indicator removeFromSuperview];
+        self.indicator = nil;
     }];
 
     [[NSNotificationCenter defaultCenter] removeObserver:self name:SFNotificationAnswerLoaded object:nil];
