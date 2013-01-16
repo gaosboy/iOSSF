@@ -1,0 +1,11 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="http://s.segmentfault.com/css/style.css" />
+<link rel="stylesheet" href="http://s.segmentfault.com/css/responsive.css" />
+</head>
+<body style="-webkit-touch-callout:none">
+<article class=\"q-post\">%@</article>
+</body>
+</html>

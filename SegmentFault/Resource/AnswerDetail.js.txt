@@ -1,7 +1,7 @@
-document.body.removeChild(document.getElementById('header'));
-document.body.removeChild(document.getElementById('footer'));
 var children = document.getElementsByClassName('post-cell');
 while (0<children.length) {
     children.item(0).parentNode.removeChild(children.item(0));
     children = document.getElementsByClassName('post-cell');
 }
+var a = document.getElementById('answer').childNodes[1];a.parentNode.removeChild(a);
+var b = document.getElementById('answer').childNodes[2];b.parentNode.removeChild(b);

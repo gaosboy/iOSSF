@@ -74,7 +74,6 @@
         && 1 == [[self.params objectForKey:@"login"] intValue]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:SFNotificationLogout object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLogout) name:SFNotificationLogout object:nil];
-        
     }
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];

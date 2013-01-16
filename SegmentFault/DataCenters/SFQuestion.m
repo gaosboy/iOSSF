@@ -60,7 +60,6 @@
 {
     [self.webView stopLoading];
     NSString *url = [NSString stringWithFormat:@"http://segmentfault.com/q/%@", self.questionId];
-    url = @"http://baidu.com";
     NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     [self.webView loadRequest:requestObj];
 }
@@ -69,20 +68,20 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-//    NSString *js = [NSString stringWithFormat:@"document.getElementById('q-%@')", self.questionId];
-    NSString *js = @"document.getElementById('lg')";
-    NSString *pageSource = [webView stringByEvaluatingJavaScriptFromString:js];
-    NSLog(@"pagesource:%@", pageSource);
-    NSDictionary *questionInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"22", @"11", nil];
-    NSInteger answers = 1;
-    if (self.detailLoadedBlock) {
-        self.detailLoadedBlock(questionInfo, answers, [NSError errorWithDomain:@".segmentfault.com" code:200 userInfo:nil]);
-    }
-}
+    NSString *questionJS = [NSString stringWithFormat:[SFTools contentForFile:@"GetQuestionDetail.js" ofType:@"txt"], self.questionId];
+    NSString *question = [webView stringByEvaluatingJavaScriptFromString:questionJS];
+    [webView stringByEvaluatingJavaScriptFromString:[SFTools contentForFile:@"AnswerDetail.js" ofType:@"txt"]];
+    NSString *answerJS = [SFTools contentForFile:@"GetQuestionAnswer.js" ofType:@"txt"];
+    NSString *answer = [webView stringByEvaluatingJavaScriptFromString:answerJS];
+    
+    NSDictionary *questionInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  question, @"question",
+                                  answer, @"answers",
+                                  nil];
 
-- (void)webViewDidStartLoad:(UIWebView *)webView
-{
-    NSLog(@"start load");
+    if (self.detailLoadedBlock) {
+        self.detailLoadedBlock(questionInfo, 0, [NSError errorWithDomain:@".segmentfault.com" code:200 userInfo:nil]);
+    }
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error

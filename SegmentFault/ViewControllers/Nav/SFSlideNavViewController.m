@@ -11,9 +11,6 @@
 #import "UMNavigationController.h"
 #import "UMViewController.h"
 
-#define CELL_HEIGHT             44.0f
-#define SECTION_HEADER_HEIGHT   31.0f
-
 @interface SFSlideNavViewController ()
 <UITableViewDataSource, UITableViewDelegate>
 
