@@ -47,6 +47,7 @@
 + (NSString *)messageForKey:(NSString *)key
 {
     NSString *message = [[SFMessager instance].messages valueForKey:key];
+    [[SFMessager instance].messages removeObjectForKey:key];
     return message;
 }
 
