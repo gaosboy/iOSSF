@@ -24,11 +24,21 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    NSString *pageSource = [webView stringByEvaluatingJavaScriptFromString: @"document.body.getElementsByTagName('pre').item(0).innerHTML"];
-    NSDictionary *loginInfo = (NSDictionary *)[pageSource objectFromJSONString];
+{    
+    NSMutableDictionary *loginInfo = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"400", @"status", nil];
+    NSHTTPCookie *cookie;
+    for (cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies]) {
+        if ([@"sfuid" isEqualToString:cookie.name] && 0 < cookie.value.length) {
+            [loginInfo setValue:cookie.value forKey:@"sfuid"];
+            [loginInfo setValue:@"0" forKey:@"status"];
+        }
+        else if ([@"sfsess" isEqualToString:cookie.name]) {
+            [loginInfo setValue:cookie.value forKey:@"sfsess"];
+        }
+    }
+    
     if (loginInfo && 0 == [[loginInfo objectForKey:@"status"] intValue]) {
-        if ([SFLoginService loginWithInfo:[loginInfo objectForKey:@"data"]]) {
+        if ([SFLoginService loginWithInfo:loginInfo]) {
             if (nil != [self.params objectForKey:@"callback"]) {
                 __weak UMViewController *lastViewController = [self.navigator.viewControllers objectAtIndex:(self.navigator.viewControllers.count - 2)];
                 SEL callback = NSSelectorFromString([self.params objectForKey:@"callback"]);
@@ -54,7 +64,7 @@
 
 - (void)viewDidLoad
 {
-    self.url = [NSURL URLWithString:@"http://segmentfault.com/api/user?do=login"];
+    self.url = [NSURL URLWithString:@"http://segmentfault.com/user/login"];
     [super viewDidLoad];
     
     self.webView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);

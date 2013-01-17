@@ -26,16 +26,12 @@
 {
     BOOL statusCookie = NO;
     BOOL statusUID = NO;
-    for (NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies])
-    {
-        if ([@".segmentfault.com" isEqualToString:[cookie domain]]
-            && [@"sfsess" isEqualToString:[cookie name]]) {
-            [[NSUserDefaults standardUserDefaults] setValue:[cookie value] forKey:@"sfsess"];
-            statusCookie = YES;
-        }
+    if (info && 0 < [[info objectForKey:@"sfsess"] length]) {
+        [[NSUserDefaults standardUserDefaults] setValue:[info objectForKey:@"sfsess"] forKey:@"sfsess"];
+        statusCookie = YES;
     }
-    if (info && 0 < [[info objectForKey:@"id"] length]) {
-        [[NSUserDefaults standardUserDefaults] setValue:[info objectForKey:@"id"] forKey:@"sfuid"];
+    if (info && 0 < [[info objectForKey:@"sfuid"] length]) {
+        [[NSUserDefaults standardUserDefaults] setValue:[info objectForKey:@"sfuid"] forKey:@"sfuid"];
         statusUID = YES;
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
