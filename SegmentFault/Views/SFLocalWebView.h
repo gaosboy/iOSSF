@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class UMNavigationController;
+
 @interface SFLocalWebView : UIWebView
 
-@property (assign, nonatomic)           SFQuestionCellType type;
+@property (assign, nonatomic)               SFQuestionCellType      type;
+@property (unsafe_unretained, nonatomic)    UMNavigationController  *navigator;
 
 @end

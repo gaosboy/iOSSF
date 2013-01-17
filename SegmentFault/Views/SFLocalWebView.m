@@ -7,6 +7,7 @@
 //
 
 #import "SFLocalWebView.h"
+#import "UMNavigationController.h"
 
 @interface SFLocalWebView ()
 <UIWebViewDelegate>
@@ -21,6 +22,10 @@
 {
     if ([request.URL.absoluteString containsString:@"http://"]
         || [request.URL.absoluteString containsString:@"https://"]) {
+        [self.navigator openURL:[[NSURL URLWithString:@"sf://webview"]
+                                 addParams:[NSDictionary dictionaryWithObjectsAndKeys:
+                                            request.URL.absoluteString, @"url",
+                                            nil]]];
         return NO;
     }
     return YES;

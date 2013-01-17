@@ -31,13 +31,15 @@
 - (void)reloadData
 {
     if (nil == self.questionView) {
-        self.questionView = [[SFLocalWebView alloc] initWithFrame:CGRectMake(10.0f, 5.0f, 300.0f, 44.0f)];
+        self.questionView = [[SFLocalWebView alloc] initWithFrame:CGRectMake(10.0f, 0.0f, 300.0f, 44.0f)];
+        self.questionView.navigator = self.navigator;
         NSString*filePath=[[NSBundle mainBundle] pathForResource:@"QuestionDetail.html" ofType:@"txt"];
         NSString *detailHTML = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
         [self.questionView loadHTMLString:[NSString stringWithFormat:detailHTML, [self.questionInfo objectForKey:@"question"]] baseURL:nil];
     }
     if (nil == self.answerView) {
         self.answerView = [[SFLocalWebView alloc] initWithFrame:CGRectMake(10.0f, 5.0f, 300.0f, 44.0f)];
+        self.answerView.navigator = self.navigator;
         NSString*filePath=[[NSBundle mainBundle] pathForResource:@"AnswerDetail.html" ofType:@"txt"];
         NSString *detailHTML = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
         [self.answerView loadHTMLString:[NSString stringWithFormat:detailHTML, [self.questionInfo objectForKey:@"answers"]] baseURL:nil];
