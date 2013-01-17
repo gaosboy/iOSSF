@@ -56,6 +56,17 @@
     [super webViewDidFinishLoad:webView];
     [webView stringByEvaluatingJavaScriptFromString:
      @"document.body.removeChild(document.getElementById('header'));document.body.removeChild(document.getElementById('footer'));"];
+    
+    if (! [[self.params allKeys] containsObject:@"title"] || 0 >= [[self.params objectForKey:@"title"] length]) {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+        label.backgroundColor = [UIColor clearColor];
+        label.font = [UIFont boldSystemFontOfSize:20.0];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = RGBCOLOR(92.0f, 92.0f, 92.0f);
+        label.text = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+        [label sizeToFit];
+        self.navigationItem.titleView = label;
+    }
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
@@ -89,10 +100,14 @@
     label.font = [UIFont boldSystemFontOfSize:20.0];
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = RGBCOLOR(92.0f, 92.0f, 92.0f);
-    self.navigationItem.titleView = label;
-    label.text = [self.params objectForKey:@"title"];
+
+    if ([[self.params allKeys] containsObject:@"title"] && 0 < [[self.params objectForKey:@"title"] length]) {
+        label.text = [self.params objectForKey:@"title"];
+    }
+    else {
+        label.text = @"Loading...";
+    }
     [label sizeToFit];
-    
     self.navigationItem.titleView = label;
 }
 
