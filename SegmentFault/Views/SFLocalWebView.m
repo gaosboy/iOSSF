@@ -7,7 +7,6 @@
 //
 
 #import "SFLocalWebView.h"
-#import "SFQuestionDetailCell.h"
 
 @interface SFLocalWebView ()
 <UIWebViewDelegate>

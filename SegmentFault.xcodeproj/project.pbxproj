@@ -58,7 +58,6 @@
 		D79D2E9416A2DF2B00BC74DC /* SFQuestionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D79D2E8216A2DF2B00BC74DC /* SFQuestionDetailViewController.m */; };
 		D79D2E9516A2DF2B00BC74DC /* SFQuestionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D79D2E8416A2DF2B00BC74DC /* SFQuestionListViewController.m */; };
 		D79D2E9716A2DF2B00BC74DC /* SFLocalWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = D79D2E8916A2DF2B00BC74DC /* SFLocalWebView.m */; };
-		D79D2E9816A2DF2B00BC74DC /* SFQuestionDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D79D2E8B16A2DF2B00BC74DC /* SFQuestionDetailCell.m */; };
 		D79D2E9C16A2E07800BC74DC /* SFSlideNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D79D2E9B16A2E07800BC74DC /* SFSlideNavViewController.m */; };
 		D79D2E9F16A2F78B00BC74DC /* SFMessager.m in Sources */ = {isa = PBXBuildFile; fileRef = D79D2E9E16A2F78B00BC74DC /* SFMessager.m */; };
 		D7A9868316845EE200AB9A61 /* qlist_cell_pop.png in Resources */ = {isa = PBXBuildFile; fileRef = D7A9867D16845EE200AB9A61 /* qlist_cell_pop.png */; };
@@ -111,7 +110,6 @@
 		D7E43B6416A66B44001B6FFA /* GetQuestionDetail.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = D7E43B6316A66B44001B6FFA /* GetQuestionDetail.js.txt */; };
 		D7E43B6716A66B57001B6FFA /* GetQuestionAnswer.js.txt in Resources */ = {isa = PBXBuildFile; fileRef = D7E43B6616A66B57001B6FFA /* GetQuestionAnswer.js.txt */; };
 		D7E43B6916A677B9001B6FFA /* AnswerDetail.html.txt in Resources */ = {isa = PBXBuildFile; fileRef = D7E43B6816A677B9001B6FFA /* AnswerDetail.html.txt */; };
-		D7E43B6D16A67983001B6FFA /* SFAnswerDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E43B6C16A67983001B6FFA /* SFAnswerDetailCell.m */; };
 		D7F0AB9716A408100014F39E /* question_detail_section_header_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D7F0AB9516A408100014F39E /* question_detail_section_header_background.png */; };
 		D7F0AB9816A408100014F39E /* question_detail_section_header_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7F0AB9616A408100014F39E /* question_detail_section_header_background@2x.png */; };
 /* End PBXBuildFile section */
@@ -201,8 +199,6 @@
 		D79D2E8416A2DF2B00BC74DC /* SFQuestionListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFQuestionListViewController.m; sourceTree = "<group>"; };
 		D79D2E8816A2DF2B00BC74DC /* SFLocalWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFLocalWebView.h; sourceTree = "<group>"; };
 		D79D2E8916A2DF2B00BC74DC /* SFLocalWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFLocalWebView.m; sourceTree = "<group>"; };
-		D79D2E8A16A2DF2B00BC74DC /* SFQuestionDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFQuestionDetailCell.h; sourceTree = "<group>"; };
-		D79D2E8B16A2DF2B00BC74DC /* SFQuestionDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFQuestionDetailCell.m; sourceTree = "<group>"; };
 		D79D2E9A16A2E07800BC74DC /* SFSlideNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFSlideNavViewController.h; sourceTree = "<group>"; };
 		D79D2E9B16A2E07800BC74DC /* SFSlideNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFSlideNavViewController.m; sourceTree = "<group>"; };
 		D79D2E9D16A2F78B00BC74DC /* SFMessager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFMessager.h; sourceTree = "<group>"; };
@@ -265,8 +261,6 @@
 		D7E43B6316A66B44001B6FFA /* GetQuestionDetail.js.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GetQuestionDetail.js.txt; sourceTree = "<group>"; };
 		D7E43B6616A66B57001B6FFA /* GetQuestionAnswer.js.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = GetQuestionAnswer.js.txt; sourceTree = "<group>"; };
 		D7E43B6816A677B9001B6FFA /* AnswerDetail.html.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AnswerDetail.html.txt; sourceTree = "<group>"; };
-		D7E43B6B16A67983001B6FFA /* SFAnswerDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFAnswerDetailCell.h; sourceTree = "<group>"; };
-		D7E43B6C16A67983001B6FFA /* SFAnswerDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFAnswerDetailCell.m; sourceTree = "<group>"; };
 		D7F0AB9516A408100014F39E /* question_detail_section_header_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = question_detail_section_header_background.png; sourceTree = "<group>"; };
 		D7F0AB9616A408100014F39E /* question_detail_section_header_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "question_detail_section_header_background@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -510,10 +504,6 @@
 			children = (
 				D79D2E8816A2DF2B00BC74DC /* SFLocalWebView.h */,
 				D79D2E8916A2DF2B00BC74DC /* SFLocalWebView.m */,
-				D79D2E8A16A2DF2B00BC74DC /* SFQuestionDetailCell.h */,
-				D79D2E8B16A2DF2B00BC74DC /* SFQuestionDetailCell.m */,
-				D7E43B6B16A67983001B6FFA /* SFAnswerDetailCell.h */,
-				D7E43B6C16A67983001B6FFA /* SFAnswerDetailCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -802,10 +792,8 @@
 				D79D2E9416A2DF2B00BC74DC /* SFQuestionDetailViewController.m in Sources */,
 				D79D2E9516A2DF2B00BC74DC /* SFQuestionListViewController.m in Sources */,
 				D79D2E9716A2DF2B00BC74DC /* SFLocalWebView.m in Sources */,
-				D79D2E9816A2DF2B00BC74DC /* SFQuestionDetailCell.m in Sources */,
 				D79D2E9C16A2E07800BC74DC /* SFSlideNavViewController.m in Sources */,
 				D79D2E9F16A2F78B00BC74DC /* SFMessager.m in Sources */,
-				D7E43B6D16A67983001B6FFA /* SFAnswerDetailCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

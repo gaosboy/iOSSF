@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class SFQuestionDetailCell;
-
 @interface SFLocalWebView : UIWebView
 
 @property (assign, nonatomic)           SFQuestionCellType type;

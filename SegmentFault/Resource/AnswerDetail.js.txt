@@ -1,7 +1,17 @@
-var children = document.getElementsByClassName('post-cell');
-while (0<children.length) {
-    children.item(0).parentNode.removeChild(children.item(0));
-    children = document.getElementsByClassName('post-cell');
+var pc = document.getElementsByClassName('post-cell');
+while (0<pc.length) {
+    pc.item(0).parentNode.removeChild(pc.item(0));
+    pc = document.getElementsByClassName('post-cell');
+}
+var pf = document.getElementsByClassName('hor-tabs post-action');
+while (0<pf.length) {
+    pf.item(0).parentNode.removeChild(pf.item(0));
+    pf = document.getElementsByClassName('hor-tabs post-action');
+}
+var cl = document.getElementsByClassName('comment-list');
+while (0<cl.length) {
+    cl.item(0).parentNode.removeChild(cl.item(0));
+    cl = document.getElementsByClassName('comment-list');
 }
 var a = document.getElementById('answer').childNodes[1];a.parentNode.removeChild(a);
 var b = document.getElementById('answer').childNodes[2];b.parentNode.removeChild(b);

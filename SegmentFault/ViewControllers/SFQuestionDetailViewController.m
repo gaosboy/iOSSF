@@ -12,15 +12,13 @@
 #import "SRRefreshView.h"
 
 @interface SFQuestionDetailViewController ()
-<UIScrollViewDelegate>
+<UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic)   UIImageView             *answerHeader;
-@property (strong, nonatomic)   SFLocalWebView          *answerView;
-@property (strong, nonatomic)   UIActivityIndicatorView *indicator;
-@property (strong, nonatomic)   UIImageView             *questionHeader;
-@property (strong, nonatomic)   NSString                *questionId;
-@property (strong, nonatomic)   SFLocalWebView          *questionView;
-@property (strong, nonatomic)   UIScrollView            *scrollView;
+@property (strong, nonatomic)   SFLocalWebView              *answerView;
+@property (strong, nonatomic)   UIActivityIndicatorView     *indicator;
+@property (strong, nonatomic)   NSString                    *questionId;
+@property (strong, nonatomic)   SFLocalWebView              *questionView;
+@property (strong, nonatomic)   UITableView                 *tableView;
 
 - (void)reloadData;
 
@@ -32,70 +30,97 @@
 
 - (void)reloadData
 {
-    if (nil == self.questionHeader) {
-        self.questionHeader = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"question_detail_section_header_background.png"]];
-        self.questionHeader.frame = CGRectMake(0.0f, 0.0f, 320.0f, SECTION_HEADER_HEIGHT);
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(6.0f, 3.0f, 320.0f, SECTION_HEADER_HEIGHT - 6.0f)];
-        label.backgroundColor = [UIColor clearColor];
-        label.textColor = RGBCOLOR(202.0f, 190.0f, 172.0f);
-        label.font = [UIFont boldSystemFontOfSize:16.0f];
-        label.text = @"问题";
-        label.shadowColor = [UIColor blackColor];
-        label.shadowOffset = CGSizeMake(0.0f, -1.0f);
-        [self.questionHeader addSubview:label];
-
-        [self.scrollView addSubview:self.questionHeader];
-    }
     if (nil == self.questionView) {
-        self.questionView = [[SFLocalWebView alloc] initWithFrame:CGRectMake(10.0f, self.questionHeader.bottom, 300.0f, 44.0f)];
+        self.questionView = [[SFLocalWebView alloc] initWithFrame:CGRectMake(10.0f, 5.0f, 300.0f, 44.0f)];
         NSString*filePath=[[NSBundle mainBundle] pathForResource:@"QuestionDetail.html" ofType:@"txt"];
         NSString *detailHTML = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
         [self.questionView loadHTMLString:[NSString stringWithFormat:detailHTML, [self.questionInfo objectForKey:@"question"]] baseURL:nil];
-
-        [self.scrollView addSubview:self.questionView];
-    }
-
-    if (nil == self.answerHeader) {
-        self.answerHeader = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"question_detail_section_header_background.png"]];
-        self.answerHeader.frame = CGRectMake(0.0f, self.questionView.bottom, 320.0f, SECTION_HEADER_HEIGHT);
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(6.0f, 3.0f, 320.0f, SECTION_HEADER_HEIGHT - 6.0f)];
-        label.backgroundColor = [UIColor clearColor];
-        label.textColor = RGBCOLOR(202.0f, 190.0f, 172.0f);
-        label.font = [UIFont boldSystemFontOfSize:16.0f];
-        label.text = [NSString stringWithFormat:@"答案（%@）", [self.params objectForKey:@"answers"]];
-        label.shadowColor = [UIColor blackColor];
-        label.shadowOffset = CGSizeMake(0.0f, -1.0f);
-        [self.answerHeader addSubview:label];
-        
-        [self.scrollView addSubview:self.answerHeader];
     }
     if (nil == self.answerView) {
-        self.answerView = [[SFLocalWebView alloc] initWithFrame:CGRectMake(10.0f, self.questionView.height + self.questionView.top + 5.0f, 300.0f, 44.0f)];
+        self.answerView = [[SFLocalWebView alloc] initWithFrame:CGRectMake(10.0f, 5.0f, 300.0f, 44.0f)];
         NSString*filePath=[[NSBundle mainBundle] pathForResource:@"AnswerDetail.html" ofType:@"txt"];
         NSString *detailHTML = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
         [self.answerView loadHTMLString:[NSString stringWithFormat:detailHTML, [self.questionInfo objectForKey:@"answers"]] baseURL:nil];
-        [self.scrollView addSubview:self.answerView];
     }
     
-    [self.scrollView bringSubviewToFront:self.questionHeader];
-    [self.scrollView bringSubviewToFront:self.answerHeader];
+    self.questionView.top = SECTION_HEADER_HEIGHT;
+    [self.tableView addSubview:self.questionView];
+    self.answerView.top = self.questionView.bottom + SECTION_HEADER_HEIGHT;
+    [self.tableView addSubview:self.answerView];
     
-    self.answerHeader.top = self.questionView.bottom;
-    self.answerView.top = self.answerHeader.bottom;
-    self.scrollView.contentSize = (self.scrollView.height > self.answerView.bottom + 5.0f)
-    ? CGSizeMake(320.0f, self.scrollView.height + 1.0f)
-    : CGSizeMake(320.0f, self.answerView.bottom + 5.0f);
+    [self.tableView reloadData];
 }
 
-#pragma mark - UIScrollViewDelegate
+#pragma mark - UITableViewDatasource
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // TODO SectionHeader做成吸附
-//    if (self.questionView.top < scrollView.contentOffset.y
-//        && self.questionView.bottom > scrollView.contentOffset.y) {
-//        self.questionHeader.top = scrollView.contentOffset.y;
-//    }
+    return 2;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = nil;
+    static NSString *cellIndentifier = @"SFQuestoinDetailCell";
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIndentifier];
+    if (nil == cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIndentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+
+    return cell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIImageView *bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"question_detail_section_header_background.png"]];
+    bg.frame = CGRectMake(0.0f, 0.0f, 320.0f, SECTION_HEADER_HEIGHT);
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 0.0f, 300.0f, SECTION_HEADER_HEIGHT)];
+    label.backgroundColor = [UIColor clearColor];
+    label.textColor = RGBCOLOR(202.0f, 190.0f, 172.0f);
+    if (0 == section) {
+        label.font = [UIFont boldSystemFontOfSize:12.0f];
+        label.numberOfLines = 0;
+        label.text = ([[self.params allKeys] containsObject:@"qtitle"] && 0 < [[self.params objectForKey:@"qtitle"] length])
+        ? [self.params objectForKey:@"qtitle"]
+        : @"问题";
+    }
+    else if (1 == section) {
+        label.font = [UIFont boldSystemFontOfSize:16.0f];
+        label.text = [NSString stringWithFormat:@"答案（%@）", [self.params objectForKey:@"answers"]];
+    }
+    label.shadowColor = [UIColor blackColor];
+    label.shadowOffset = CGSizeMake(0.0f, -1.0f);
+    [bg addSubview:label];
+    return (UIView *)bg;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return SECTION_HEADER_HEIGHT;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (0 == indexPath.section && 0 == indexPath.row) {
+        if (self.questionView && 0.0f < self.questionView.height) {
+            return self.questionView.height + 10.0f;
+        }
+    }
+    else if (1 == indexPath.section && 0 == indexPath.row) {
+        if (self.answerView && 0.0f < self.answerView.height) {
+            return self.answerView.height + 10.0f;
+        }
+    }
+    
+    return 54.0f;
 }
 
 #pragma mark
@@ -104,15 +129,18 @@
 {
     [super viewDidLoad];
     
-    if (nil == self.scrollView) {
-        self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-        [self.view addSubview:self.scrollView];
-        self.scrollView.delegate = self;
+    if (nil == self.tableView) {
+        self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        self.tableView.height -= 44.0f;
+        self.tableView.dataSource = self;
+        self.tableView.delegate = self;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self.view addSubview:self.tableView];
     }
     
     if (nil == self.indicator) {
         self.indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        self.indicator.frame = CGRectMake(self.scrollView.width / 2 - 40.0f, self.scrollView.height / 2 - 40.0f, 40.0f, 40.0f);
+        self.indicator.frame = CGRectMake(self.tableView.width / 2 - 20.0f, self.tableView.height / 2 - 60.0f, 40.0f, 40.0f);
         [self.view addSubview:self.indicator];
         [self.indicator startAnimating];
     }

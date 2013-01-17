@@ -146,6 +146,7 @@
     [self.navigator openURL:[[NSURL URLWithString:@"sf://questiondetail"] addParams:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                                      [[self.questionList objectAtIndex:indexPath.row] objectForKey:@"id"], @"qid",
                                                                                      @"问题详情", @"title",
+                                                                                     [[self.questionList objectAtIndex:indexPath.row] objectForKey:@"title"], @"qtitle",
                                                                                      [[self.questionList objectAtIndex:indexPath.row] objectForKey:@"answersWord"], @"answers",
                                                                                      nil]]];
 }
