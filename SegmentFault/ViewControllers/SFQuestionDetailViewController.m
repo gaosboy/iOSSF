@@ -46,9 +46,9 @@
     }
     
     self.questionView.top = SECTION_HEADER_HEIGHT;
-    [self.tableView addSubview:self.questionView];
+    [self.tableView insertSubview:self.questionView atIndex:2];
     self.answerView.top = self.questionView.bottom + SECTION_HEADER_HEIGHT;
-    [self.tableView addSubview:self.answerView];
+    [self.tableView insertSubview:self.answerView atIndex:3];
     
     [self.tableView reloadData];
 }
