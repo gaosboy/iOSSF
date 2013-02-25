@@ -885,14 +885,14 @@
 		D77CE23616611B8C00F1BC9E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jiajun Gao (SXQ4APL29D)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jiajun Gao (SXQ4APL29D)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiajun Gao";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jiajun Gao";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SegmentFault/SegmentFault-Prefix.pch";
 				INFOPLIST_FILE = "SegmentFault/SegmentFault-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "A6DC65D7-46B0-4651-854D-60BAC1E9D6E1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A6DC65D7-46B0-4651-854D-60BAC1E9D6E1";
+				PROVISIONING_PROFILE = "C4B24950-030E-48A7-AD9E-954C5E896DF2";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C4B24950-030E-48A7-AD9E-954C5E896DF2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
