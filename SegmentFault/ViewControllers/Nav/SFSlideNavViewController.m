@@ -30,7 +30,6 @@
 - (void)logout
 {
     [SFLoginService logout];
-    self.currentIndex = [NSIndexPath indexPathForRow:0 inSection:0];
     [self showItemAtIndex:[NSIndexPath indexPathForRow:0 inSection:0] withAnimation:YES];
 
     [self.items[0] removeObject:[SFTools applicationDelegate].userProfileNavigator];
@@ -44,9 +43,8 @@
 }
 
 - (void)login
-{
-    self.currentIndex = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self performSelector:@selector(slideButtonClicked) withObject:nil afterDelay:0.f];
+{    
+    [self performSelector:@selector(slideButtonClicked) withObject:nil afterDelay:0.3f];
     [self showItemAtIndex:[NSIndexPath indexPathForRow:0 inSection:0] withAnimation:NO];
 
     [self.items[0] removeObject:[SFTools applicationDelegate].userProfileNavigator];
@@ -56,9 +54,9 @@
 
     [self.items[0] addObject:[SFTools applicationDelegate].followedQuestionsNavigator];
     [self.items[0] addObject:[SFTools applicationDelegate].userProfileNavigator];
-    [self.items[0] addObject:[SFTools applicationDelegate].loginNavigator];
+    [self.items[0] addObject:[SFTools applicationDelegate].logoutNavigator];
 
-    [self.slideView performSelector:@selector(reloadData) withObject:nil afterDelay:2.f];
+    [self.slideView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
@@ -133,6 +131,9 @@
         && [self.items[indexPath.section][indexPath.row] isEqual:[SFTools applicationDelegate].logoutNavigator]) {
         [self logout];
     }
+//    else if ([self.items[indexPath.section][indexPath.row] isEqual:[SFTools applicationDelegate].loginNavigator]) {
+//        [self login];
+//    }
     else {
         [self showItemAtIndex:indexPath withAnimation:YES];
         UMNavigationController *currentNav = (UMNavigationController *)self.items[indexPath.section][indexPath.row];

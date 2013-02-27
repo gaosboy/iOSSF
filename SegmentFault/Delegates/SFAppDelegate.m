@@ -74,7 +74,7 @@
 
     self.followedQuestionsNavigator = [[UMNavigationController alloc] initWithRootViewControllerURL:[[NSURL URLWithString:@"sf://questionlist"]
                                                                                            addParams:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                                                      @"关注的问题", @"title",
+                                                                                                      @"标记的问题", @"title",
                                                                                                       @"listbookmarked", @"list",
                                                                                                       @"1", @"login",
                                                                                                       nil]]];
@@ -85,7 +85,7 @@
     UIBarButtonItem *fQBtnItem = [[UIBarButtonItem alloc] initWithCustomView:fQNavBtn];
     self.followedQuestionsNavigator.rootViewController.navigationItem.leftBarButtonItem = fQBtnItem;
     [self.followedQuestionsNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_light_background.png"] forBarMetrics:UIBarMetricsDefault];
-    self.followedQuestionsNavigator.title = @"关注的问题";
+    self.followedQuestionsNavigator.title = @"标记的问题";
     
     self.userProfileNavigator = [[UMNavigationController alloc] initWithRootViewControllerURL:[[NSURL URLWithString:@"http://segmentfault.com/user/settings"]
                                                                                                 addParams:[NSDictionary dictionaryWithObjectsAndKeys:
