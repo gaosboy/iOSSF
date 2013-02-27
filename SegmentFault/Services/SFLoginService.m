@@ -26,12 +26,12 @@
 {
     BOOL statusCookie = NO;
     BOOL statusUID = NO;
-    if (info && 0 < [[info objectForKey:@"sfsess"] length]) {
-        [[NSUserDefaults standardUserDefaults] setValue:[info objectForKey:@"sfsess"] forKey:@"sfsess"];
+    if (info && 0 < [info[@"sfsess"] length]) {
+        [[NSUserDefaults standardUserDefaults] setValue:info[@"sfsess"] forKey:@"sfsess"];
         statusCookie = YES;
     }
-    if (info && 0 < [[info objectForKey:@"sfuid"] length]) {
-        [[NSUserDefaults standardUserDefaults] setValue:[info objectForKey:@"sfuid"] forKey:@"sfuid"];
+    if (info && 0 < [info[@"sfuid"] length]) {
+        [[NSUserDefaults standardUserDefaults] setValue:info[@"sfuid"] forKey:@"sfuid"];
         statusUID = YES;
     }
     [[NSUserDefaults standardUserDefaults] synchronize];

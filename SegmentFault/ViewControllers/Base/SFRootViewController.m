@@ -54,7 +54,7 @@
 - (BOOL)shouldOpenViewControllerWithURL:(NSURL *)aUrl
 {
     if (! [@"login" isEqualToString:[aUrl host]]
-        && 1 == [[aUrl.params objectForKey:@"login"] intValue]
+        && 1 == [aUrl.params[@"login"] intValue]
         && ! [SFLoginService isLogin]) {
         self.toOpen = aUrl;
         [SFLoginService login:self withCallback:@"delayOpen"];
@@ -71,7 +71,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     if (! [@"login" isEqualToString:[self.url host]]
-        && 1 == [[self.params objectForKey:@"login"] intValue]) {
+        && 1 == [self.params[@"login"] intValue]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:SFNotificationLogout object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLogout) name:SFNotificationLogout object:nil];
     }
@@ -82,7 +82,7 @@
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = RGBCOLOR(92.0f, 92.0f, 92.0f);
     self.navigationItem.titleView = label;
-    label.text = [self.params objectForKey:@"title"];
+    label.text = self.params[@"title"];
     [label sizeToFit];
     
     self.navigationItem.titleView = label;

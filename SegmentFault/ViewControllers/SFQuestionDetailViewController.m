@@ -35,14 +35,14 @@
         self.questionView.navigator = self.navigator;
         NSString*filePath=[[NSBundle mainBundle] pathForResource:@"QuestionDetail.html" ofType:@"txt"];
         NSString *detailHTML = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-        [self.questionView loadHTMLString:[NSString stringWithFormat:detailHTML, [self.questionInfo objectForKey:@"question"]] baseURL:nil];
+        [self.questionView loadHTMLString:[NSString stringWithFormat:detailHTML, self.questionInfo[@"question"]] baseURL:nil];
     }
     if (nil == self.answerView) {
         self.answerView = [[SFLocalWebView alloc] initWithFrame:CGRectMake(10.0f, 5.0f, 300.0f, 44.0f)];
         self.answerView.navigator = self.navigator;
         NSString*filePath=[[NSBundle mainBundle] pathForResource:@"AnswerDetail.html" ofType:@"txt"];
         NSString *detailHTML = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-        [self.answerView loadHTMLString:[NSString stringWithFormat:detailHTML, [self.questionInfo objectForKey:@"answers"]] baseURL:nil];
+        [self.answerView loadHTMLString:[NSString stringWithFormat:detailHTML, self.questionInfo[@"answers"]] baseURL:nil];
     }
     
     self.questionView.top = SECTION_HEADER_HEIGHT;
@@ -88,13 +88,13 @@
     if (0 == section) {
         label.font = [UIFont boldSystemFontOfSize:12.0f];
         label.numberOfLines = 0;
-        label.text = ([[self.params allKeys] containsObject:@"qtitle"] && 0 < [[self.params objectForKey:@"qtitle"] length])
-        ? [self.params objectForKey:@"qtitle"]
+        label.text = ([[self.params allKeys] containsObject:@"qtitle"] && 0 < [self.params[@"qtitle"] length])
+        ? self.params[@"qtitle"]
         : @"问题";
     }
     else if (1 == section) {
         label.font = [UIFont boldSystemFontOfSize:16.0f];
-        label.text = [NSString stringWithFormat:@"答案（%@）", [self.params objectForKey:@"answers"]];
+        label.text = [NSString stringWithFormat:@"答案（%@）", self.params[@"answers"]];
     }
     label.shadowColor = [UIColor blackColor];
     label.shadowOffset = CGSizeMake(0.0f, -1.0f);
@@ -147,7 +147,7 @@
         [self.indicator startAnimating];
     }
     
-    [SFQuestionService getQuestionDetailById:[self.params objectForKey:@"qid"] withBlock:^(NSDictionary *questionInfo, NSInteger answers, NSError *error){
+    [SFQuestionService getQuestionDetailById:self.params[@"qid"] withBlock:^(NSDictionary *questionInfo, NSInteger answers, NSError *error){
         self.questionInfo = questionInfo;
         [self reloadData];
         [self.indicator removeFromSuperview];

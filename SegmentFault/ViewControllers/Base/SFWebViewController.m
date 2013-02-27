@@ -33,7 +33,7 @@
 
 - (void)loadRequest {
     if (! [@"http" isEqualToString:[self.url protocol]]) {
-        self.url = [NSURL URLWithString:[self.params objectForKey:@"url"]];
+        self.url = [NSURL URLWithString:self.params[@"url"]];
     }
     NSMutableURLRequest *requestObj = [NSMutableURLRequest requestWithURL:self.url];
     [self.webView loadRequest:requestObj];
@@ -57,7 +57,7 @@
     [webView stringByEvaluatingJavaScriptFromString:
      @"document.body.removeChild(document.getElementById('header'));document.body.removeChild(document.getElementById('footer'));"];
     
-    if (! [[self.params allKeys] containsObject:@"title"] || 0 >= [[self.params objectForKey:@"title"] length]) {
+    if (! [[self.params allKeys] containsObject:@"title"] || 0 >= [self.params[@"title"] length]) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
         label.backgroundColor = [UIColor clearColor];
         label.font = [UIFont boldSystemFontOfSize:20.0];
@@ -85,7 +85,7 @@
     [super viewDidLoad];
     
     if (! [@"login" isEqualToString:[self.url host]]
-        && 1 == [[self.params objectForKey:@"login"] intValue]) {
+        && 1 == [self.params[@"login"] intValue]) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:SFNotificationLogout object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadRequest) name:SFNotificationLogout object:nil];
     }
@@ -101,8 +101,8 @@
     label.textAlignment = NSTextAlignmentCenter;
     label.textColor = RGBCOLOR(92.0f, 92.0f, 92.0f);
 
-    if ([[self.params allKeys] containsObject:@"title"] && 0 < [[self.params objectForKey:@"title"] length]) {
-        label.text = [self.params objectForKey:@"title"];
+    if ([[self.params allKeys] containsObject:@"title"] && 0 < [self.params[@"title"] length]) {
+        label.text = self.params[@"title"];
     }
     else {
         label.text = @"Loading...";

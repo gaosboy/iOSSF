@@ -91,7 +91,7 @@
             [cell.imageView addSubview:answersLabel];
         }
 
-        if ([@"0" isEqualToString:[[self.questionList objectAtIndex:indexPath.row] objectForKey:@"answersWord"]]) {
+        if ([@"0" isEqualToString:self.questionList[indexPath.row][@"answersWord"]]) {
             cell.imageView.image = [UIImage imageNamed:@"qlist_cell_pop_unanswered.png"];
         }
         else {
@@ -99,9 +99,9 @@
         }
         
         __weak UILabel *answersLabel = (UILabel *)[cell.imageView viewWithTag:1000001];
-        answersLabel.text = [[self.questionList objectAtIndex:indexPath.row] objectForKey:@"answersWord"];
-        cell.textLabel.text = [[self.questionList objectAtIndex:indexPath.row] objectForKey:@"title"];
-        cell.detailTextLabel.text = [[self.questionList objectAtIndex:indexPath.row] objectForKey:@"createdDate"];
+        answersLabel.text = self.questionList[indexPath.row][@"answersWord"];
+        cell.textLabel.text = self.questionList[indexPath.row][@"title"];
+        cell.detailTextLabel.text = self.questionList[indexPath.row][@"createdDate"];
     }
     else {
         if (cell == nil) {
@@ -144,10 +144,10 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.navigator openURL:[[NSURL URLWithString:@"sf://questiondetail"] addParams:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                                                     [[self.questionList objectAtIndex:indexPath.row] objectForKey:@"id"], @"qid",
+                                                                                     self.questionList[indexPath.row][@"id"], @"qid",
                                                                                      @"问题详情", @"title",
-                                                                                     [[self.questionList objectAtIndex:indexPath.row] objectForKey:@"title"], @"qtitle",
-                                                                                     [[self.questionList objectAtIndex:indexPath.row] objectForKey:@"answersWord"], @"answers",
+                                                                                     self.questionList[indexPath.row][@"title"], @"qtitle",
+                                                                                     self.questionList[indexPath.row][@"answersWord"], @"answers",
                                                                                      nil]]];
 }
 
@@ -191,7 +191,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.list = [[self.params allKeys] containsObject:@"list"] ? [self.params objectForKey:@"list"] : @"listnewest";
+    self.list = [[self.params allKeys] containsObject:@"list"] ? self.params[@"list"] : @"listnewest";
     if (nil == self.tableView) {
         self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.width, self.view.height - 44.0f)
                                                       style:UITableViewStylePlain];

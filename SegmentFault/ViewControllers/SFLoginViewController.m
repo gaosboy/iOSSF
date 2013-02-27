@@ -49,13 +49,12 @@
         }
     }
     
-    if (loginInfo && 0 == [[loginInfo objectForKey:@"status"] intValue]) {
+    if (loginInfo && 0 == [loginInfo[@"status"] intValue]) {
         if ([SFLoginService loginWithInfo:loginInfo]) {
-            if (nil != [self.params objectForKey:@"callback"]) {
-                __weak UMViewController *lastViewController = [self.navigator.viewControllers objectAtIndex:
-                                                               (self.navigator.viewControllers.count > 1)
-                                                               ? (self.navigator.viewControllers.count - 2) : 0];
-                SEL callback = NSSelectorFromString([self.params objectForKey:@"callback"]);
+            if (nil != self.params[@"callback"]) {
+                __weak UMViewController *lastViewController = self.navigator.viewControllers [(self.navigator.viewControllers.count > 1)
+                                                                                              ? (self.navigator.viewControllers.count - 2) : 0];
+                SEL callback = NSSelectorFromString(self.params[@"callback"]);
                 if (lastViewController && callback && [lastViewController respondsToSelector:callback]) {
                     [lastViewController performSelector:callback withObject:nil afterDelay:0.5f];
                 }

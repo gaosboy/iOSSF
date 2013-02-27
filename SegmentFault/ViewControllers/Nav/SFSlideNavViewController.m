@@ -33,12 +33,12 @@
     self.currentIndex = [NSIndexPath indexPathForRow:0 inSection:0];
     [self showItemAtIndex:[NSIndexPath indexPathForRow:0 inSection:0] withAnimation:YES];
 
-    [[self.items objectAtIndex:0] removeObject:[SFTools applicationDelegate].userProfileNavigator];
-    [[self.items objectAtIndex:0] removeObject:[SFTools applicationDelegate].followedQuestionsNavigator];
-    [[self.items objectAtIndex:0] removeObject:[SFTools applicationDelegate].logoutNavigator];
-    [[self.items objectAtIndex:0] removeObject:[SFTools applicationDelegate].loginNavigator];
+    [self.items[0] removeObject:[SFTools applicationDelegate].userProfileNavigator];
+    [self.items[0] removeObject:[SFTools applicationDelegate].followedQuestionsNavigator];
+    [self.items[0] removeObject:[SFTools applicationDelegate].logoutNavigator];
+    [self.items[0] removeObject:[SFTools applicationDelegate].loginNavigator];
 
-    [[self.items objectAtIndex:0] addObject:[SFTools applicationDelegate].loginNavigator];
+    [self.items[0] addObject:[SFTools applicationDelegate].loginNavigator];
 
     [self.slideView reloadData];
 }
@@ -49,16 +49,16 @@
     [self performSelector:@selector(slideButtonClicked) withObject:nil afterDelay:0.f];
     [self showItemAtIndex:[NSIndexPath indexPathForRow:0 inSection:0] withAnimation:NO];
 
-    [[self.items objectAtIndex:0] removeObject:[SFTools applicationDelegate].userProfileNavigator];
-    [[self.items objectAtIndex:0] removeObject:[SFTools applicationDelegate].followedQuestionsNavigator];
-    [[self.items objectAtIndex:0] removeObject:[SFTools applicationDelegate].logoutNavigator];
-    [[self.items objectAtIndex:0] removeObject:[SFTools applicationDelegate].loginNavigator];
+    [self.items[0] removeObject:[SFTools applicationDelegate].userProfileNavigator];
+    [self.items[0] removeObject:[SFTools applicationDelegate].followedQuestionsNavigator];
+    [self.items[0] removeObject:[SFTools applicationDelegate].logoutNavigator];
+    [self.items[0] removeObject:[SFTools applicationDelegate].loginNavigator];
 
-    [[self.items objectAtIndex:0] addObject:[SFTools applicationDelegate].followedQuestionsNavigator];
-    [[self.items objectAtIndex:0] addObject:[SFTools applicationDelegate].userProfileNavigator];
-    [[self.items objectAtIndex:0] addObject:[SFTools applicationDelegate].loginNavigator];
+    [self.items[0] addObject:[SFTools applicationDelegate].followedQuestionsNavigator];
+    [self.items[0] addObject:[SFTools applicationDelegate].userProfileNavigator];
+    [self.items[0] addObject:[SFTools applicationDelegate].loginNavigator];
 
-    [self.slideView reloadData];
+    [self.slideView performSelector:@selector(reloadData) withObject:nil afterDelay:2.f];
 }
 
 #pragma mark - UITableViewDataSource
@@ -130,18 +130,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([SFLoginService isLogin]
-        && [[[self.items objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] isEqual:[SFTools applicationDelegate].logoutNavigator]) {
+        && [self.items[indexPath.section][indexPath.row] isEqual:[SFTools applicationDelegate].logoutNavigator]) {
         [self logout];
     }
     else {
         [self showItemAtIndex:indexPath withAnimation:YES];
         UMNavigationController *currentNav = (UMNavigationController *)self.items[indexPath.section][indexPath.row];
         UMViewController *currentVC = (UMViewController *)[[currentNav viewControllers] lastObject];
-        if (1 == [[[[currentVC url] params] objectForKey:@"login"] intValue]
-            && ! [SFLoginService isLogin]) {
-            [SFLoginService login:currentVC withCallback:@"login"];
-        }
-        if (indexPath.section == self.currentIndex.section && indexPath.row == self.currentIndex.row) {
+        if ([indexPath isEqual:self.currentIndex]) {
             [currentVC viewDidLoad];
         }
     }
