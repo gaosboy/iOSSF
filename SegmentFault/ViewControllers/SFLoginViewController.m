@@ -8,12 +8,23 @@
 
 #import "SFLoginService.h"
 #import "SFLoginViewController.h"
+#import "SFAppDelegate.h"
+#import "SFSlideNavViewController.h"
 
 @interface SFLoginViewController ()
+
+- (void)login;
 
 @end
 
 @implementation SFLoginViewController
+
+#pragma mark - private
+
+- (void)login
+{
+    [[SFTools applicationDelegate].navigator performSelector:@selector(login)];
+}
 
 #pragma mark - UIWebViewDelegate
 
@@ -40,11 +51,16 @@
     if (loginInfo && 0 == [[loginInfo objectForKey:@"status"] intValue]) {
         if ([SFLoginService loginWithInfo:loginInfo]) {
             if (nil != [self.params objectForKey:@"callback"]) {
-                __weak UMViewController *lastViewController = [self.navigator.viewControllers objectAtIndex:(self.navigator.viewControllers.count - 2)];
+                __weak UMViewController *lastViewController = [self.navigator.viewControllers objectAtIndex:
+                                                               (self.navigator.viewControllers.count > 1)
+                                                               ? (self.navigator.viewControllers.count - 2) : 0];
                 SEL callback = NSSelectorFromString([self.params objectForKey:@"callback"]);
                 if (lastViewController && callback && [lastViewController respondsToSelector:callback]) {
                     [lastViewController performSelector:callback withObject:nil afterDelay:0.5f];
                 }
+            }
+            else {
+                [self login];
             }
             [self.navigator popViewControllerAnimated:YES];
         }

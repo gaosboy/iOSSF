@@ -8,6 +8,7 @@
 
 #import "AFNetworkActivityIndicatorManager.h"
 #import "SFAppDelegate.h"
+#import "SFLoginService.h"
 #import "SFLoginViewController.h"
 #import "SFQuestionListViewController.h"
 #import "SFSlideNavViewController.h"
@@ -30,8 +31,15 @@
 
 - (void)initSlideNavigator
 {
-    self.navigator = [[SFSlideNavViewController alloc] initWithItems:@[@[self.newestNavigator, self.hottestNavigator],
-                      @[self.followedQuestionsNavigator, self.userSettingsNavigator]]];
+    self.navigator = nil;
+    if ([SFLoginService isLogin]) {
+        self.navigator = [[SFSlideNavViewController alloc] initWithItems:@[@[self.newestNavigator, self.hottestNavigator,
+                          self.followedQuestionsNavigator, self.userProfileNavigator, self.logoutNavigator]]];
+    }
+    else {
+        self.navigator = [[SFSlideNavViewController alloc] initWithItems:@[@[self.newestNavigator, self.hottestNavigator,
+                          self.loginNavigator]]];
+    }
 }
 
 - (void)initNavigators
@@ -79,7 +87,7 @@
     [self.followedQuestionsNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_light_background.png"] forBarMetrics:UIBarMetricsDefault];
     self.followedQuestionsNavigator.title = @"关注的问题";
     
-    self.userSettingsNavigator = [[UMNavigationController alloc] initWithRootViewControllerURL:[[NSURL URLWithString:@"http://segmentfault.com/user/settings"]
+    self.userProfileNavigator = [[UMNavigationController alloc] initWithRootViewControllerURL:[[NSURL URLWithString:@"http://segmentfault.com/user/settings"]
                                                                                                 addParams:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                                                            @"个人资料", @"title",
                                                                                                            @"1", @"login",
@@ -89,9 +97,36 @@
     [fTNavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button_pressed.png"] forState:UIControlStateHighlighted];
     [fTNavBtn addTarget:self.navigator action:@selector(slideButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *fTBtnItem = [[UIBarButtonItem alloc] initWithCustomView:fTNavBtn];
-    self.userSettingsNavigator.rootViewController.navigationItem.leftBarButtonItem = fTBtnItem;
-    [self.userSettingsNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_light_background.png"] forBarMetrics:UIBarMetricsDefault];
-    self.userSettingsNavigator.title = @"个人资料";
+    self.userProfileNavigator.rootViewController.navigationItem.leftBarButtonItem = fTBtnItem;
+    [self.userProfileNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_light_background.png"] forBarMetrics:UIBarMetricsDefault];
+    self.userProfileNavigator.title = @"个人资料";
+
+    self.logoutNavigator = [[UMNavigationController alloc] initWithRootViewControllerURL:[[NSURL URLWithString:@"sf://login"]
+                                                                                               addParams:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                                          @"退出登录", @"title",
+                                                                                                          @"1", @"login",
+                                                                                                          nil]]];
+    UIButton *lONavBtn = [[UIButton alloc] initWithFrame:NAVIGATION_BAR_BTN_RECT];
+    [lONavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button.png"] forState:UIControlStateNormal];
+    [lONavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button_pressed.png"] forState:UIControlStateHighlighted];
+    [lONavBtn addTarget:self.navigator action:@selector(slideButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *lOBtnItem = [[UIBarButtonItem alloc] initWithCustomView:lONavBtn];
+    self.logoutNavigator.rootViewController.navigationItem.leftBarButtonItem = lOBtnItem;
+    [self.logoutNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_light_background.png"] forBarMetrics:UIBarMetricsDefault];
+    self.logoutNavigator.title = @"退出登录";
+
+    self.loginNavigator = [[UMNavigationController alloc] initWithRootViewControllerURL:[[NSURL URLWithString:@"sf://login"]
+                                                                                                    addParams:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                                                               @"用户登录", @"title",
+                                                                                                               nil]]];
+    UIButton *lINavBtn = [[UIButton alloc] initWithFrame:NAVIGATION_BAR_BTN_RECT];
+    [lINavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button.png"] forState:UIControlStateNormal];
+    [lINavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button_pressed.png"] forState:UIControlStateHighlighted];
+    [lINavBtn addTarget:self.navigator action:@selector(slideButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *lIBtnItem = [[UIBarButtonItem alloc] initWithCustomView:lINavBtn];
+    self.loginNavigator.rootViewController.navigationItem.leftBarButtonItem = lIBtnItem;
+    [self.loginNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_light_background.png"] forBarMetrics:UIBarMetricsDefault];
+    self.loginNavigator.title = @"用户登录";
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

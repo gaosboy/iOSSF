@@ -10,15 +10,16 @@
 #import "SFSlideNavViewController.h"
 #import "UMNavigationController.h"
 #import "UMViewController.h"
+#import "SFAppDelegate.h"
 
 @interface SFSlideNavViewController ()
 <UITableViewDataSource, UITableViewDelegate>
 
+- (void)login;
 - (void)logout;
 
 // 记录ViewController已经被载入过
 @property (nonatomic, strong)   NSMutableSet  *loadedRootViewControllers;
-@property (nonatomic, strong)   UIButton      *logoutButton;
 
 @end
 
@@ -29,7 +30,35 @@
 - (void)logout
 {
     [SFLoginService logout];
-    [self tableView:self.slideView didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    self.currentIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self showItemAtIndex:[NSIndexPath indexPathForRow:0 inSection:0] withAnimation:YES];
+
+    [[self.items objectAtIndex:0] removeObject:[SFTools applicationDelegate].userProfileNavigator];
+    [[self.items objectAtIndex:0] removeObject:[SFTools applicationDelegate].followedQuestionsNavigator];
+    [[self.items objectAtIndex:0] removeObject:[SFTools applicationDelegate].logoutNavigator];
+    [[self.items objectAtIndex:0] removeObject:[SFTools applicationDelegate].loginNavigator];
+
+    [[self.items objectAtIndex:0] addObject:[SFTools applicationDelegate].loginNavigator];
+
+    [self.slideView reloadData];
+}
+
+- (void)login
+{
+    self.currentIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self performSelector:@selector(slideButtonClicked) withObject:nil afterDelay:0.f];
+    [self showItemAtIndex:[NSIndexPath indexPathForRow:0 inSection:0] withAnimation:NO];
+
+    [[self.items objectAtIndex:0] removeObject:[SFTools applicationDelegate].userProfileNavigator];
+    [[self.items objectAtIndex:0] removeObject:[SFTools applicationDelegate].followedQuestionsNavigator];
+    [[self.items objectAtIndex:0] removeObject:[SFTools applicationDelegate].logoutNavigator];
+    [[self.items objectAtIndex:0] removeObject:[SFTools applicationDelegate].loginNavigator];
+
+    [[self.items objectAtIndex:0] addObject:[SFTools applicationDelegate].followedQuestionsNavigator];
+    [[self.items objectAtIndex:0] addObject:[SFTools applicationDelegate].userProfileNavigator];
+    [[self.items objectAtIndex:0] addObject:[SFTools applicationDelegate].loginNavigator];
+
+    [self.slideView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
@@ -52,22 +81,22 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
 
-        UIImageView *bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"slide_navigator_cell_background.png"]];
+        UIImageView *bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-cell-bg.png"]];
+        UIImageView *chevron = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-cell-arrow.png"]];;
+
         bg.frame = CGRectMake(0.0f, 0.0f, 320.0f, CELL_HEIGHT);
-        UIImageView *chevron = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"slide_navigator_cell_chevron.png"]];
-        chevron.frame = CGRectMake(238.0f, 14.0f, 12.0f, 17.0f);
+        chevron.frame = CGRectMake(235.0f, 14.0f, 15.0f, 15.0f);
         chevron.layer.shadowColor = [UIColor blackColor].CGColor;
         chevron.layer.shadowOffset = CGSizeMake(0.0f, -1.0f);
         chevron.layer.shadowOpacity= 1.0f;
         chevron.layer.shadowRadius= 0.0f;
         [bg addSubview:chevron];
         cell.backgroundView = bg;
-
         
-        UIImageView *selectedBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"slide_navigator_cell_selected_background.png"]];
+        UIImageView *selectedBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-cell-bg-active.png"]];
         selectedBg.frame = CGRectMake(0.0f, 0.0f, 320.0f, CELL_HEIGHT);
-        UIImageView *selectedChevron = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"slide_navigator_cell_selected_chevron.png"]];
-        selectedChevron.frame = CGRectMake(238.0f, 14.0f, 12.0f, 17.0f);
+        UIImageView *selectedChevron = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-cell-arrow-active.png"]];
+        selectedChevron.frame = CGRectMake(235.0f, 14.0f, 15.0f, 15.0f);
         selectedChevron.layer.shadowColor = [UIColor blackColor].CGColor;
         selectedChevron.layer.shadowOffset = CGSizeMake(0.0f, -1.0f);
         selectedChevron.layer.shadowOpacity= 1.0f;
@@ -83,6 +112,10 @@
     }
     
     cell.textLabel.text = [(UIViewController *)self.items[indexPath.section][indexPath.row] title];
+    
+    if (NO == cell.selected) {
+        [tableView selectRowAtIndexPath:self.currentIndex animated:NO scrollPosition:UITableViewRowAnimationTop];
+    }
 
     return cell;
 }
@@ -94,45 +127,23 @@
     return CELL_HEIGHT;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if (1 == section) {
-        return SECTION_HEADER_HEIGHT;
-    }
-    return 0.0f;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    if (1 == section) {
-        UIImageView *bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"slide_navigator_section_header_background.png"]];
-        bg.frame = CGRectMake(0.0f, 0.0f, 320.0f, SECTION_HEADER_HEIGHT);
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(6.0f, 3.0f, 320.0f, SECTION_HEADER_HEIGHT - 6.0f)];
-        label.backgroundColor = [UIColor clearColor];
-        label.textColor = RGBCOLOR(202.0f, 190.0f, 172.0f);
-        label.font = [UIFont boldSystemFontOfSize:16.0f];
-        label.text = @"我的";
-        label.shadowColor = [UIColor blackColor];
-        label.shadowOffset = CGSizeMake(0.0f, -1.0f);
-        [bg addSubview:label];
-        return bg;
-    }
-
-    return nil;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    [self showItemAtIndex:indexPath];
-    UMNavigationController *currentNav = (UMNavigationController *)self.items[indexPath.section][indexPath.row];
-    UMViewController *currentVC = (UMViewController *)[[currentNav viewControllers] lastObject];
-    if (1 == [[[[currentVC url] params] objectForKey:@"login"] intValue]
-        && ! [SFLoginService isLogin]) {
-        [SFLoginService login:currentVC withCallback:@"viewDidLoad"];
+    if ([SFLoginService isLogin]
+        && [[[self.items objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] isEqual:[SFTools applicationDelegate].logoutNavigator]) {
+        [self logout];
     }
-    if (indexPath.section == self.currentIndex.section && indexPath.row == self.currentIndex.row) {
-        [currentVC viewDidLoad];
+    else {
+        [self showItemAtIndex:indexPath withAnimation:YES];
+        UMNavigationController *currentNav = (UMNavigationController *)self.items[indexPath.section][indexPath.row];
+        UMViewController *currentVC = (UMViewController *)[[currentNav viewControllers] lastObject];
+        if (1 == [[[[currentVC url] params] objectForKey:@"login"] intValue]
+            && ! [SFLoginService isLogin]) {
+            [SFLoginService login:currentVC withCallback:@"login"];
+        }
+        if (indexPath.section == self.currentIndex.section && indexPath.row == self.currentIndex.row) {
+            [currentVC viewDidLoad];
+        }
     }
 }
 
@@ -145,33 +156,33 @@
     self.slideView.dataSource = self;
     self.slideView.delegate = self;
     self.slideView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.slideView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"slide_navigator_dark_backgrond.png"]];
+    self.slideView.backgroundColor = RGBCOLOR(51, 51, 51);
+    
+    self.slideView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.slideView.width, 64.0f)];
+    UILabel *segment = [[UILabel alloc] initWithFrame:CGRectMake(15.0f, 15.0f, 230.0f, 30.0f)];
+    segment.backgroundColor = [UIColor clearColor];
+    segment.font = [UIFont boldSystemFontOfSize:28.0f];
+    segment.textColor = [UIColor whiteColor];
+    segment.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    segment.shadowColor = [UIColor blackColor];
+    segment.text = @"segment";
+    [segment sizeToFit];
+    [self.slideView.tableHeaderView addSubview:segment];
+    UILabel *fault = [[UILabel alloc] initWithFrame:CGRectMake(segment.right, segment.top, 230.0f, 34.0f)];
+    fault.backgroundColor = [UIColor clearColor];
+    fault.font = [UIFont boldSystemFontOfSize:28.0f];
+    fault.textColor = RGBCOLOR(0, 153, 101);
+    fault.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    fault.shadowColor = [UIColor blackColor];
+    fault.text = @"fault";
+    [fault sizeToFit];
+    [self.slideView.tableHeaderView addSubview:fault];
+
+    self.slideView.tableFooterView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-cell-bg.png"]];
     
     if (nil == self.loadedRootViewControllers) {
         self.loadedRootViewControllers = [[NSMutableSet alloc] initWithObjects:self.items[self.currentIndex.section][self.currentIndex.row], nil];
     }
-    
-    if (nil == self.logoutButton) {
-        self.logoutButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, self.slideView.bottom - 54.0f, 240.0f, 44.0f)];
-        [self.logoutButton setBackgroundImage:[UIImage imageNamed:@"logout_btn.png"] forState:UIControlStateNormal];
-        [self.logoutButton setBackgroundImage:[UIImage imageNamed:@"logout_btn_press.png"] forState:UIControlStateHighlighted];
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 220.0f, 24.0f)];
-        titleLabel.textColor = [UIColor whiteColor];
-        titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.font = [UIFont boldSystemFontOfSize:18.0f];
-        titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.text = @"退    出    登    录";
-        [self.logoutButton addSubview:titleLabel];
-        [self.logoutButton addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
-        [self.slideView addSubview:self.logoutButton];
-    }
-    self.logoutButton.hidden = ! [SFLoginService isLogin];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.logoutButton.hidden = ! [SFLoginService isLogin];
 }
 
 @end

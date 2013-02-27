@@ -7,6 +7,7 @@
 //
 
 #import "SFTools.h"
+#import "SFAppDelegate.h"
 
 @implementation SFTools
 
@@ -15,6 +16,11 @@
     NSString*filePath=[[NSBundle mainBundle] pathForResource:file ofType:type];
     NSString *content = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
     return content;
+}
+
++ (SFAppDelegate *)applicationDelegate
+{
+    return (SFAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
 @end
