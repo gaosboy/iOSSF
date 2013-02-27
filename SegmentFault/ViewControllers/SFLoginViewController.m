@@ -23,6 +23,7 @@
 
 - (void)login
 {
+    // 调用SlideNavigator，刷新导航栏目
     [[SFTools applicationDelegate].navigator performSelector:@selector(login)];
 }
 
