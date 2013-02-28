@@ -44,8 +44,9 @@
 {
     UIButton *navBtn = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 32.0f, 32.0f)];
     [navBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-    [navBtn setBackgroundImage:[UIImage imageNamed:@"back_button_background.png"] forState:UIControlStateNormal];
-    [navBtn setBackgroundImage:[UIImage imageNamed:@"back_button_pressed_background.png"] forState:UIControlStateHighlighted];
+    [navBtn setBackgroundImage:[UIImage imageNamed:@"nav_back.png"] forState:UIControlStateNormal];
+    [navBtn setBackgroundImage:[UIImage imageNamed:@"nav_back.png"] forState:UIControlStateHighlighted];
+    navBtn.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *btnItem = [[UIBarButtonItem alloc] initWithCustomView:navBtn];
     self.navigationItem.leftBarButtonItem = btnItem;
 }

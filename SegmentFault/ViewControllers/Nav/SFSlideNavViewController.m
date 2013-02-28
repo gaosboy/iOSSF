@@ -79,26 +79,18 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
 
-        UIImageView *bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-cell-bg.png"]];
-        UIImageView *chevron = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-cell-arrow.png"]];;
+        UIImageView *bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav_cell_bg.png"]];
+        UIImageView *chevron = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav_cell_arrow.png"]];;
 
         bg.frame = CGRectMake(0.0f, 0.0f, 320.0f, CELL_HEIGHT);
         chevron.frame = CGRectMake(235.0f, 14.0f, 15.0f, 15.0f);
-        chevron.layer.shadowColor = [UIColor blackColor].CGColor;
-        chevron.layer.shadowOffset = CGSizeMake(0.0f, -1.0f);
-        chevron.layer.shadowOpacity= 1.0f;
-        chevron.layer.shadowRadius= 0.0f;
         [bg addSubview:chevron];
         cell.backgroundView = bg;
         
-        UIImageView *selectedBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-cell-bg-active.png"]];
+        UIImageView *selectedBg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav_cell_bg_active.png"]];
         selectedBg.frame = CGRectMake(0.0f, 0.0f, 320.0f, CELL_HEIGHT);
-        UIImageView *selectedChevron = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-cell-arrow-active.png"]];
+        UIImageView *selectedChevron = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav_cell_arrow_active.png"]];
         selectedChevron.frame = CGRectMake(235.0f, 14.0f, 15.0f, 15.0f);
-        selectedChevron.layer.shadowColor = [UIColor blackColor].CGColor;
-        selectedChevron.layer.shadowOffset = CGSizeMake(0.0f, -1.0f);
-        selectedChevron.layer.shadowOpacity= 1.0f;
-        selectedChevron.layer.shadowRadius= 0.0f;
         [selectedBg addSubview:selectedChevron];
         cell.selectedBackgroundView = selectedBg;
         
@@ -175,7 +167,7 @@
     [fault sizeToFit];
     [self.slideView.tableHeaderView addSubview:fault];
 
-    self.slideView.tableFooterView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav-cell-bg.png"]];
+    self.slideView.tableFooterView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"nav_cell_bg.png"]];
     
     if (nil == self.loadedRootViewControllers) {
         self.loadedRootViewControllers = [[NSMutableSet alloc] initWithObjects:self.items[self.currentIndex.section][self.currentIndex.row], nil];

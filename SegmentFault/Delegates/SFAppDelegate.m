@@ -50,12 +50,13 @@
                                                                                                      @"listnewest", @"list",
                                                                                                      nil]]];
     UIButton *nNavBtn = [[UIButton alloc] initWithFrame:NAVIGATION_BAR_BTN_RECT];
-    [nNavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button.png"] forState:UIControlStateNormal];
-    [nNavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button_pressed.png"] forState:UIControlStateHighlighted];
+    [nNavBtn setBackgroundImage:[UIImage imageNamed:@"nav_menu.png"] forState:UIControlStateNormal];
+    [nNavBtn setBackgroundImage:[UIImage imageNamed:@"nav_menu.png"] forState:UIControlStateHighlighted];
     [nNavBtn addTarget:self.navigator action:@selector(slideButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    nNavBtn.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *nBtnItem = [[UIBarButtonItem alloc] initWithCustomView:nNavBtn];
     self.newestNavigator.rootViewController.navigationItem.leftBarButtonItem = nBtnItem;
-    [self.newestNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_light_background.png"] forBarMetrics:UIBarMetricsDefault];
+    [self.newestNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
     self.newestNavigator.title = @"最新问题";
     
     self.hottestNavigator = [[UMNavigationController alloc] initWithRootViewControllerURL:[[NSURL URLWithString:@"sf://questionlist"]
@@ -64,12 +65,13 @@
                                                                                                       @"listhottest", @"list",
                                                                                                       nil]]];
     UIButton *hNavBtn = [[UIButton alloc] initWithFrame:NAVIGATION_BAR_BTN_RECT];
-    [hNavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button.png"] forState:UIControlStateNormal];
-    [hNavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button_pressed.png"] forState:UIControlStateHighlighted];
+    [hNavBtn setBackgroundImage:[UIImage imageNamed:@"nav_menu.png"] forState:UIControlStateNormal];
+    [hNavBtn setBackgroundImage:[UIImage imageNamed:@"nav_menu.png"] forState:UIControlStateHighlighted];
+    hNavBtn.showsTouchWhenHighlighted = YES;
     [hNavBtn addTarget:self.navigator action:@selector(slideButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *hBtnItem = [[UIBarButtonItem alloc] initWithCustomView:hNavBtn];
     self.hottestNavigator.rootViewController.navigationItem.leftBarButtonItem = hBtnItem;
-    [self.hottestNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_light_background.png"] forBarMetrics:UIBarMetricsDefault];
+    [self.hottestNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
     self.hottestNavigator.title = @"热门问题";
 
     self.followedQuestionsNavigator = [[UMNavigationController alloc] initWithRootViewControllerURL:[[NSURL URLWithString:@"sf://questionlist"]
@@ -79,12 +81,13 @@
                                                                                                       @"1", @"login",
                                                                                                       nil]]];
     UIButton *fQNavBtn = [[UIButton alloc] initWithFrame:NAVIGATION_BAR_BTN_RECT];
-    [fQNavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button.png"] forState:UIControlStateNormal];
-    [fQNavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button_pressed.png"] forState:UIControlStateHighlighted];
+    [fQNavBtn setBackgroundImage:[UIImage imageNamed:@"nav_menu.png"] forState:UIControlStateNormal];
+    [fQNavBtn setBackgroundImage:[UIImage imageNamed:@"nav_menu.png"] forState:UIControlStateHighlighted];
+    fQNavBtn.showsTouchWhenHighlighted = YES;
     [fQNavBtn addTarget:self.navigator action:@selector(slideButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *fQBtnItem = [[UIBarButtonItem alloc] initWithCustomView:fQNavBtn];
     self.followedQuestionsNavigator.rootViewController.navigationItem.leftBarButtonItem = fQBtnItem;
-    [self.followedQuestionsNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_light_background.png"] forBarMetrics:UIBarMetricsDefault];
+    [self.followedQuestionsNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
     self.followedQuestionsNavigator.title = @"标记的问题";
     
     self.userProfileNavigator = [[UMNavigationController alloc] initWithRootViewControllerURL:[[NSURL URLWithString:@"http://segmentfault.com/user/settings"]
@@ -93,12 +96,13 @@
                                                                                                            @"1", @"login",
                                                                                                            nil]]];
     UIButton *fTNavBtn = [[UIButton alloc] initWithFrame:NAVIGATION_BAR_BTN_RECT];
-    [fTNavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button.png"] forState:UIControlStateNormal];
-    [fTNavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button_pressed.png"] forState:UIControlStateHighlighted];
+    [fTNavBtn setBackgroundImage:[UIImage imageNamed:@"nav_menu.png"] forState:UIControlStateNormal];
+    [fTNavBtn setBackgroundImage:[UIImage imageNamed:@"nav_menu.png"] forState:UIControlStateHighlighted];
     [fTNavBtn addTarget:self.navigator action:@selector(slideButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    fTNavBtn.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *fTBtnItem = [[UIBarButtonItem alloc] initWithCustomView:fTNavBtn];
     self.userProfileNavigator.rootViewController.navigationItem.leftBarButtonItem = fTBtnItem;
-    [self.userProfileNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_light_background.png"] forBarMetrics:UIBarMetricsDefault];
+    [self.userProfileNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
     self.userProfileNavigator.title = @"个人资料";
 
     self.logoutNavigator = [[UMNavigationController alloc] initWithRootViewControllerURL:[[NSURL URLWithString:@"sf://login"]
@@ -107,12 +111,13 @@
                                                                                                           @"1", @"login",
                                                                                                           nil]]];
     UIButton *lONavBtn = [[UIButton alloc] initWithFrame:NAVIGATION_BAR_BTN_RECT];
-    [lONavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button.png"] forState:UIControlStateNormal];
-    [lONavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button_pressed.png"] forState:UIControlStateHighlighted];
+    [lONavBtn setBackgroundImage:[UIImage imageNamed:@"nav_menu.png"] forState:UIControlStateNormal];
+    [lONavBtn setBackgroundImage:[UIImage imageNamed:@"nav_menu.png"] forState:UIControlStateHighlighted];
+    lONavBtn.showsTouchWhenHighlighted = YES;
     [lONavBtn addTarget:self.navigator action:@selector(slideButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *lOBtnItem = [[UIBarButtonItem alloc] initWithCustomView:lONavBtn];
     self.logoutNavigator.rootViewController.navigationItem.leftBarButtonItem = lOBtnItem;
-    [self.logoutNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_light_background.png"] forBarMetrics:UIBarMetricsDefault];
+    [self.logoutNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
     self.logoutNavigator.title = @"退出登录";
 
     self.loginNavigator = [[UMNavigationController alloc] initWithRootViewControllerURL:[[NSURL URLWithString:@"sf://login"]
@@ -120,12 +125,13 @@
                                                                                                                @"用户登录", @"title",
                                                                                                                nil]]];
     UIButton *lINavBtn = [[UIButton alloc] initWithFrame:NAVIGATION_BAR_BTN_RECT];
-    [lINavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button.png"] forState:UIControlStateNormal];
-    [lINavBtn setBackgroundImage:[UIImage imageNamed:@"slide_navigator_button_pressed.png"] forState:UIControlStateHighlighted];
+    [lINavBtn setBackgroundImage:[UIImage imageNamed:@"nav_menu.png"] forState:UIControlStateNormal];
+    [lINavBtn setBackgroundImage:[UIImage imageNamed:@"nav_menu.png"] forState:UIControlStateHighlighted];
+    lINavBtn.showsTouchWhenHighlighted = YES;
     [lINavBtn addTarget:self.navigator action:@selector(slideButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *lIBtnItem = [[UIBarButtonItem alloc] initWithCustomView:lINavBtn];
     self.loginNavigator.rootViewController.navigationItem.leftBarButtonItem = lIBtnItem;
-    [self.loginNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"navigationbar_light_background.png"] forBarMetrics:UIBarMetricsDefault];
+    [self.loginNavigator.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
     self.loginNavigator.title = @"用户登录";
 }
 

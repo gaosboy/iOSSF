@@ -45,8 +45,9 @@
 {
     UIButton *navBtn = [[UIButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 32.0f, 32.0f)];
     [navBtn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-    [navBtn setBackgroundImage:[UIImage imageNamed:@"back_button_background.png"] forState:UIControlStateNormal];
-    [navBtn setBackgroundImage:[UIImage imageNamed:@"back_button_pressed_background.png"] forState:UIControlStateHighlighted];
+    [navBtn setBackgroundImage:[UIImage imageNamed:@"nav_back.png"] forState:UIControlStateNormal];
+    [navBtn setBackgroundImage:[UIImage imageNamed:@"nav_back.png"] forState:UIControlStateHighlighted];
+    navBtn.showsTouchWhenHighlighted = YES;
     UIBarButtonItem *btnItem = [[UIBarButtonItem alloc] initWithCustomView:navBtn];
     self.navigationItem.leftBarButtonItem = btnItem;
 }
@@ -80,7 +81,9 @@
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont boldSystemFontOfSize:20.0];
     label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = RGBCOLOR(92.0f, 92.0f, 92.0f);
+    label.textColor = RGBCOLOR(33.0f, 33.0f, 33.0f);
+    label.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    label.shadowColor = [UIColor whiteColor];
     self.navigationItem.titleView = label;
     label.text = self.params[@"title"];
     [label sizeToFit];
