@@ -97,6 +97,7 @@
 		D7D5D96D16DF988F00C25B65 /* nav_bar_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D5D96B16DF988F00C25B65 /* nav_bar_bg@2x.png */; };
 		D7D5D97016DF9B9100C25B65 /* slide_navigator_shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D5D96E16DF9B9100C25B65 /* slide_navigator_shadow.png */; };
 		D7D5D97116DF9B9100C25B65 /* slide_navigator_shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7D5D96F16DF9B9100C25B65 /* slide_navigator_shadow@2x.png */; };
+		D7D5D97816DFA09400C25B65 /* SFQuestionListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D5D97716DFA09400C25B65 /* SFQuestionListCell.m */; };
 		D7DDB3271675A050009DD198 /* back_button_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D7DDB30F1675A050009DD198 /* back_button_background.png */; };
 		D7DDB3281675A050009DD198 /* back_button_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7DDB3101675A050009DD198 /* back_button_background@2x.png */; };
 		D7DDB3291675A050009DD198 /* back_button_pressed_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D7DDB3111675A050009DD198 /* back_button_pressed_background.png */; };
@@ -262,6 +263,8 @@
 		D7D5D96B16DF988F00C25B65 /* nav_bar_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_bar_bg@2x.png"; sourceTree = "<group>"; };
 		D7D5D96E16DF9B9100C25B65 /* slide_navigator_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = slide_navigator_shadow.png; sourceTree = "<group>"; };
 		D7D5D96F16DF9B9100C25B65 /* slide_navigator_shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "slide_navigator_shadow@2x.png"; sourceTree = "<group>"; };
+		D7D5D97616DFA09400C25B65 /* SFQuestionListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFQuestionListCell.h; sourceTree = "<group>"; };
+		D7D5D97716DFA09400C25B65 /* SFQuestionListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFQuestionListCell.m; sourceTree = "<group>"; };
 		D7DDB30F1675A050009DD198 /* back_button_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_button_background.png; sourceTree = "<group>"; };
 		D7DDB3101675A050009DD198 /* back_button_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_button_background@2x.png"; sourceTree = "<group>"; };
 		D7DDB3111675A050009DD198 /* back_button_pressed_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_button_pressed_background.png; sourceTree = "<group>"; };
@@ -562,6 +565,7 @@
 		D79D2E8716A2DF2B00BC74DC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D7D5D97516DFA07900C25B65 /* Cells */,
 				D79D2E8816A2DF2B00BC74DC /* SFLocalWebView.h */,
 				D79D2E8916A2DF2B00BC74DC /* SFLocalWebView.m */,
 			);
@@ -651,6 +655,15 @@
 				D7D4F32416635B5B003B43EE /* iTunesArtwork.png */,
 			);
 			path = icons;
+			sourceTree = "<group>";
+		};
+		D7D5D97516DFA07900C25B65 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D7D5D97616DFA09400C25B65 /* SFQuestionListCell.h */,
+				D7D5D97716DFA09400C25B65 /* SFQuestionListCell.m */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		D7DDB30E1675A050009DD198 /* nav */ = {
@@ -866,6 +879,7 @@
 				D79D2E9716A2DF2B00BC74DC /* SFLocalWebView.m in Sources */,
 				D79D2E9C16A2E07800BC74DC /* SFSlideNavViewController.m in Sources */,
 				D79D2E9F16A2F78B00BC74DC /* SFMessager.m in Sources */,
+				D7D5D97816DFA09400C25B65 /* SFQuestionListCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
