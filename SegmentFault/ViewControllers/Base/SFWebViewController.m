@@ -7,6 +7,7 @@
 //
 
 #import "SFWebViewController.h"
+#import "UMSlideNavigationController.h"
 
 @interface SFWebViewController ()
 
