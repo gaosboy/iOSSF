@@ -7,6 +7,7 @@
 //
 
 #import "SFQuestionListCell.h"
+#import "SFLabel.h"
 
 @implementation UITableView (SFQuestionListTableView)
 
@@ -17,23 +18,32 @@
     
     if (cell == nil) {
         cell = [[SFQuestionListCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        
-        cell.backgroundColor = [UIColor whiteColor];
+        cell.backgroundColor = RGBCOLOR(244, 244, 244);
         
         cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"qlist_cell_selected_background.png"]];
         
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        
-        cell.textLabel.numberOfLines = 2;
+        cell.textLabel.numberOfLines = 0;
         cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+
+        cell.detailTextLabel.numberOfLines = 1;
+        cell.detailTextLabel.font = [UIFont systemFontOfSize:24.0f];
+        cell.detailTextLabel.text = @"　　　　　　　　　　　　　　　　　";
+        cell.detailTextLabel.textColor = [UIColor clearColor];
         
-        UILabel *answersLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 4.0f, 30.0f, 14.0f)];
+        SFLabel *answersLabel = [[SFLabel alloc] initWithFrame:CGRectMake(0.0f, 4.0f, 40.0f, 17.0f)
+                                                     andInsets:UIEdgeInsetsMake(1.0f, 4.0f, 1.0f, 4.0f)];
         answersLabel.tag = 1000001;
-        answersLabel.backgroundColor = [UIColor clearColor];
+        answersLabel.backgroundColor = RGBCOLOR(0, 154, 103);
         answersLabel.textAlignment = NSTextAlignmentCenter;
         answersLabel.textColor = [UIColor whiteColor];
-        answersLabel.font = [UIFont boldSystemFontOfSize:16.0f];
-        [cell.imageView addSubview:answersLabel];
+        answersLabel.font = [UIFont systemFontOfSize:12.0f];
+        answersLabel.layer.cornerRadius = 2.0f;
+        [cell.detailTextLabel addSubview:answersLabel];
+        
+        UIView *tagsContainer = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 4.0f, 200.0f, 17.0f)];
+        tagsContainer.tag = 1000002;
+        tagsContainer.backgroundColor = RGBCOLOR(244, 244, 244);
+        [cell.detailTextLabel addSubview:tagsContainer];
     }
         
     return cell;
@@ -45,7 +55,7 @@
     SFQuestionListCell *cell = (SFQuestionListCell *)[self dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[SFQuestionListCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        cell.backgroundColor = [UIColor whiteColor];
+        cell.backgroundColor = RGBCOLOR(244, 244, 244);
         
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.textLabel.text = @"Loading ...";
@@ -60,21 +70,81 @@
 
 @end
 
+@interface SFQuestionListCell ()
+
+@property (nonatomic, strong) NSMutableSet          *labelPool;
+
+@end
+
 @implementation SFQuestionListCell
 
 - (void)updateQuestionInfo:(NSDictionary *)info
 {
+    __weak SFLabel *answersLabel = (SFLabel *)[self.detailTextLabel viewWithTag:1000001];
+    
     if ([@"0" isEqualToString:info[@"answersWord"]]) {
-        self.imageView.image = [UIImage imageNamed:@"qlist_cell_pop_unanswered.png"];
+        answersLabel.backgroundColor = RGBCOLOR(159, 66, 69);
     }
     else {
-        self.imageView.image = [UIImage imageNamed:@"qlist_cell_pop.png"];
+        answersLabel.backgroundColor = RGBCOLOR(0, 154, 103);
+    }
+    if ([@"0" isEqualToString:info[@"answersWord"]] || [@"1" isEqualToString:info[@"answersWord"]]) {
+        answersLabel.text = [NSString stringWithFormat:@"%@ answer", info[@"answersWord"]];
+    }
+    else {
+        answersLabel.text = [NSString stringWithFormat:@"%@ answers", info[@"answersWord"]];
+    }
+    [answersLabel sizeToFit];
+
+    __weak UIView *tagsContainer = [self.detailTextLabel viewWithTag:1000002];
+    tagsContainer.left = answersLabel.right + 2.0f;
+    tagsContainer.width = 200.0f - tagsContainer.left;
+    tagsContainer.backgroundColor = RGBCOLOR(244, 244, 244);
+    for (UIView *tagLabel in tagsContainer.subviews) {
+        [self.labelPool addObject:tagLabel];
+        [tagLabel removeFromSuperview];
     }
     
-    __weak UILabel *answersLabel = (UILabel *)[self.imageView viewWithTag:1000001];
-    answersLabel.text = info[@"answersWord"];
+    for (NSString *tag in (NSArray *)info[@"tags"]) {
+        // 先到Pool里取，没有再新建
+        SFLabel *label = (SFLabel *)[self.labelPool anyObject];
+        if (nil == label) {
+            label = [[SFLabel alloc] initWithInsets:UIEdgeInsetsMake(1.0f, 4.0f, 1.0f, 4.0f)];
+            label.backgroundColor = RGBCOLOR(187, 187, 187);
+            label.textAlignment = NSTextAlignmentCenter;
+            label.textColor = [UIColor whiteColor];
+            label.font = [UIFont systemFontOfSize:12.0f];
+            label.layer.cornerRadius = 2.0f;
+        }
+        else {
+            [self.labelPool removeObject:label];
+        }
+        label.text = tag;
+        [label sizeToFit];
+
+        if (0 < [tagsContainer.subviews count]) {
+            label.left = [(UIView *)tagsContainer.subviews.lastObject right] + 2.0f;
+        }
+        else {
+            label.left = 0.0f;
+        }
+        // Label太长就跳过
+        if (tagsContainer.right < label.right) {
+            continue;
+        }
+        [tagsContainer addSubview:label];
+    }
     self.textLabel.text = info[@"title"];
-    self.detailTextLabel.text = info[@"createdDate"];
+}
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        self.labelPool = [[NSMutableSet alloc] init];
+        return self;
+    }
+    return nil;
 }
 
 @end

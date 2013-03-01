@@ -23,4 +23,14 @@
     return (SFAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
++ (float)heightOfString:(NSString *)string withWidth:(float)width font:(UIFont *)font
+{
+    if ([NSNull null] == (id)string) {
+        string = @"暂时没有数据";
+    }
+    CGSize constraintSize = CGSizeMake(width, MAXFLOAT);
+    CGSize labelSize = [string sizeWithFont:font constrainedToSize:constraintSize lineBreakMode:UILineBreakModeWordWrap];
+    return labelSize.height;
+}
+
 @end

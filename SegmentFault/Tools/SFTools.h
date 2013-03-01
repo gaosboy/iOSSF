@@ -13,5 +13,6 @@
 + (NSString *)contentForFile:(NSString *)file ofType:(NSString *)type;
 + (SFAppDelegate *)applicationDelegate;
 
++ (float)heightOfString:(NSString *)string withWidth:(float)width font:(UIFont *)font;
 
 @end

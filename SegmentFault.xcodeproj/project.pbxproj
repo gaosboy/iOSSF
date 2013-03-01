@@ -40,6 +40,7 @@
 		D77CE21F16611B8B00F1BC9E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D77CE21E16611B8B00F1BC9E /* CoreGraphics.framework */; };
 		D77CE22516611B8B00F1BC9E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D77CE22316611B8B00F1BC9E /* InfoPlist.strings */; };
 		D77CE22716611B8B00F1BC9E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D77CE22616611B8B00F1BC9E /* main.m */; };
+		D78452BB16E0698100FFBAB9 /* SFLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D78452BA16E0698100FFBAB9 /* SFLabel.m */; };
 		D79826CC1663A33900054585 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D79826CB1663A33900054585 /* CFNetwork.framework */; };
 		D79826CE1663A37400054585 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D79826CD1663A37400054585 /* SystemConfiguration.framework */; };
 		D79826D01663A37C00054585 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D79826CF1663A37C00054585 /* MobileCoreServices.framework */; };
@@ -185,6 +186,8 @@
 		D77CE22416611B8B00F1BC9E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D77CE22616611B8B00F1BC9E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D77CE22816611B8B00F1BC9E /* SegmentFault-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SegmentFault-Prefix.pch"; sourceTree = "<group>"; };
+		D78452B916E0698100FFBAB9 /* SFLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFLabel.h; sourceTree = "<group>"; };
+		D78452BA16E0698100FFBAB9 /* SFLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFLabel.m; sourceTree = "<group>"; };
 		D79826CB1663A33900054585 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D79826CD1663A37400054585 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D79826CF1663A37C00054585 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -568,6 +571,8 @@
 				D7D5D97516DFA07900C25B65 /* Cells */,
 				D79D2E8816A2DF2B00BC74DC /* SFLocalWebView.h */,
 				D79D2E8916A2DF2B00BC74DC /* SFLocalWebView.m */,
+				D78452B916E0698100FFBAB9 /* SFLabel.h */,
+				D78452BA16E0698100FFBAB9 /* SFLabel.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -880,6 +885,7 @@
 				D79D2E9C16A2E07800BC74DC /* SFSlideNavViewController.m in Sources */,
 				D79D2E9F16A2F78B00BC74DC /* SFMessager.m in Sources */,
 				D7D5D97816DFA09400C25B65 /* SFQuestionListCell.m in Sources */,
+				D78452BB16E0698100FFBAB9 /* SFLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

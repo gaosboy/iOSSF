@@ -88,7 +88,15 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 78.0f;
+    if (indexPath.row < [self.questionList count]) {
+        CGFloat height = [SFTools heightOfString:self.questionList[indexPath.row][@"title"]
+                                       withWidth:300.0f
+                                            font:[UIFont boldSystemFontOfSize:16.0f]];
+        return height + 38.0f;
+    }
+    else {
+        return 58.0f;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -147,7 +155,7 @@
         self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.width, self.view.height - 44.0f)
                                                       style:UITableViewStylePlain];
         
-        self.tableView.backgroundColor = [UIColor whiteColor];
+        self.tableView.backgroundColor = RGBCOLOR(244, 244, 244);
         self.tableView.separatorColor = [UIColor lightGrayColor];
         self.tableView.dataSource = self;
         self.tableView.delegate = self;
