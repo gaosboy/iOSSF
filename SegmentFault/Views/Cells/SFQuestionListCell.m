@@ -23,25 +23,25 @@
         cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"qlist_cell_selected_background.png"]];
         
         cell.textLabel.numberOfLines = 0;
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:15.0f];
 
         cell.detailTextLabel.numberOfLines = 1;
         cell.detailTextLabel.font = [UIFont systemFontOfSize:24.0f];
-        cell.detailTextLabel.text = @"　　　　　　　　　　　　　　　　　";
+        cell.detailTextLabel.text = @"　　　　　　　　　　　　";
         cell.detailTextLabel.textColor = [UIColor clearColor];
         
         SFLabel *answersLabel = [[SFLabel alloc] initWithFrame:CGRectMake(0.0f, 4.0f, 40.0f, 17.0f)
                                                      andInsets:UIEdgeInsetsMake(1.0f, 4.0f, 1.0f, 4.0f)];
-        answersLabel.tag = 1000001;
+        answersLabel.tag = QUESTION_LIST_CELL_ANSWER_LABEL;
         answersLabel.backgroundColor = RGBCOLOR(0, 154, 103);
         answersLabel.textAlignment = NSTextAlignmentCenter;
         answersLabel.textColor = [UIColor whiteColor];
-        answersLabel.font = [UIFont systemFontOfSize:12.0f];
+        answersLabel.font = [UIFont systemFontOfSize:11.0f];
         answersLabel.layer.cornerRadius = 2.0f;
         [cell.detailTextLabel addSubview:answersLabel];
         
         UIView *tagsContainer = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 4.0f, 200.0f, 17.0f)];
-        tagsContainer.tag = 1000002;
+        tagsContainer.tag = QUESTION_LIST_CELL_TAG_CONTAINER;
         tagsContainer.backgroundColor = RGBCOLOR(244, 244, 244);
         [cell.detailTextLabel addSubview:tagsContainer];
     }
@@ -80,7 +80,7 @@
 
 - (void)updateQuestionInfo:(NSDictionary *)info
 {
-    __weak SFLabel *answersLabel = (SFLabel *)[self.detailTextLabel viewWithTag:1000001];
+    __weak SFLabel *answersLabel = (SFLabel *)[self.detailTextLabel viewWithTag:QUESTION_LIST_CELL_ANSWER_LABEL];
     
     if ([@"0" isEqualToString:info[@"answersWord"]]) {
         answersLabel.backgroundColor = RGBCOLOR(159, 66, 69);
@@ -96,7 +96,7 @@
     }
     [answersLabel sizeToFit];
 
-    __weak UIView *tagsContainer = [self.detailTextLabel viewWithTag:1000002];
+    __weak UIView *tagsContainer = [self.detailTextLabel viewWithTag:QUESTION_LIST_CELL_TAG_CONTAINER];
     tagsContainer.left = answersLabel.right + 2.0f;
     tagsContainer.width = 200.0f - tagsContainer.left;
     tagsContainer.backgroundColor = RGBCOLOR(244, 244, 244);
@@ -113,7 +113,7 @@
             label.backgroundColor = RGBCOLOR(187, 187, 187);
             label.textAlignment = NSTextAlignmentCenter;
             label.textColor = [UIColor whiteColor];
-            label.font = [UIFont systemFontOfSize:12.0f];
+            label.font = [UIFont systemFontOfSize:11.0f];
             label.layer.cornerRadius = 2.0f;
         }
         else {
