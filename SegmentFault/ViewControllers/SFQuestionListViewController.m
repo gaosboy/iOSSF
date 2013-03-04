@@ -91,11 +91,11 @@
     if (indexPath.row < [self.questionList count]) {
         CGFloat height = [SFTools heightOfString:self.questionList[indexPath.row][@"title"]
                                        withWidth:300.0f
-                                            font:[UIFont boldSystemFontOfSize:16.0f]];
-        return height + 33.0f;
+                                            font:[UIFont boldSystemFontOfSize:15.0f]];
+        return height + 40.0f;
     }
     else {
-        return 53.0f;
+        return 60.0f;
     }
 }
 

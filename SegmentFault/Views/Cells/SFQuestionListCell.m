@@ -28,6 +28,7 @@
         cell.detailTextLabel.numberOfLines = 1;
         cell.detailTextLabel.font = [UIFont systemFontOfSize:24.0f];
         cell.detailTextLabel.text = @"　　　　　　　　　　　　";
+        cell.detailTextLabel.width = 300.0f;
         cell.detailTextLabel.textColor = [UIColor clearColor];
         
         SFLabel *answersLabel = [[SFLabel alloc] initWithFrame:CGRectMake(0.0f, 4.0f, 40.0f, 17.0f)
@@ -44,6 +45,19 @@
         tagsContainer.tag = QUESTION_LIST_CELL_TAG_CONTAINER;
         tagsContainer.backgroundColor = RGBCOLOR(244, 244, 244);
         [cell.detailTextLabel addSubview:tagsContainer];
+        
+        UIImageView *voteIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"question_list_vote.png"]];
+        voteIcon.tag = QUESTION_LIST_CELL_LIKE_ICON;
+        voteIcon.left = 250.0f;
+        voteIcon.top = answersLabel.top + 2.0f;
+        [cell.detailTextLabel addSubview:voteIcon];
+        
+        SFLabel *voteNumber = [[SFLabel alloc] initWithFrame:CGRectMake(voteIcon.right + 5.0f, voteIcon.top, 2.0f, 2.0f)];
+        voteNumber.tag = QUESTION_LIST_CELL_LIKE_NUMBER;
+        voteNumber.backgroundColor = RGBCOLOR(244, 244, 244);
+        voteNumber.textColor = RGBCOLOR(153.0f, 153.0f, 153.0f);
+        voteNumber.font = [UIFont systemFontOfSize:14.0f];
+        [cell.detailTextLabel addSubview:voteNumber];
     }
         
     return cell;
@@ -98,7 +112,7 @@
 
     __weak UIView *tagsContainer = [self.detailTextLabel viewWithTag:QUESTION_LIST_CELL_TAG_CONTAINER];
     tagsContainer.left = answersLabel.right + 2.0f;
-    tagsContainer.width = 200.0f - tagsContainer.left;
+    tagsContainer.width = 240.0f - tagsContainer.left;
     tagsContainer.backgroundColor = RGBCOLOR(244, 244, 244);
     for (UIView *tagLabel in tagsContainer.subviews) {
         [self.labelPool addObject:tagLabel];
@@ -129,12 +143,19 @@
             label.left = 0.0f;
         }
         // Label太长就跳过
-        if (tagsContainer.right < label.right) {
+        if (tagsContainer.width < label.right) {
             continue;
         }
         [tagsContainer addSubview:label];
     }
     self.textLabel.text = info[@"title"];
+    
+    __weak UIView *voteIcon = [self.detailTextLabel viewWithTag:QUESTION_LIST_CELL_LIKE_ICON];
+    
+    __weak SFLabel *voteNumber = (SFLabel *)[self.detailTextLabel viewWithTag:QUESTION_LIST_CELL_LIKE_NUMBER];
+    voteNumber.text = info[@"votes"];
+    [voteNumber sizeToFit];
+    voteNumber.top = voteIcon.top - 2.0f;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
