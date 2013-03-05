@@ -27,7 +27,7 @@
     self.titleLabel.text = info[@"title"];
     self.titleLabel.height = [SFTools heightOfString:self.titleLabel.text
                                            withWidth:292.0f
-                                                font:[UIFont boldSystemFontOfSize:15.0f]];
+                                                font:[UIFont boldSystemFontOfSize:16.0f]];
 
     if ([@"0" isEqualToString:info[@"answersWord"]]) {
         self.answersLabel.backgroundColor = RGBCOLOR(159, 66, 69);
@@ -108,7 +108,7 @@
 
         cell.titleLabel = [[SFLabel alloc] initWithFrame:CGRectMake(14.0f, 5.0f, 292.0f, 15.0f)];
         cell.titleLabel.numberOfLines = 0;
-        cell.titleLabel.font = [UIFont boldSystemFontOfSize:15.0f];
+        cell.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
         cell.titleLabel.backgroundColor = RGBCOLOR(244, 244, 244);
         [cell.contentView addSubview:cell.titleLabel];
         

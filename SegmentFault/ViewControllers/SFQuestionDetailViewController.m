@@ -187,11 +187,11 @@
     if (nil == self.titleLabel) {
         self.titleLabel = [[SFLabel alloc] initWithFrame:CGRectMake(10.0f, self.tagsContainer.bottom + 14.0f, 300.0f, 17.0f)];
         self.titleLabel.numberOfLines = 0;
-        self.titleLabel.font = [UIFont boldSystemFontOfSize:15.0f];
+        self.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
         self.titleLabel.text = self.params[@"qtitle"];
         self.titleLabel.height = [SFTools heightOfString:self.titleLabel.text
                                                withWidth:292.0f
-                                                    font:[UIFont boldSystemFontOfSize:15.0f]];
+                                                    font:[UIFont boldSystemFontOfSize:16.0f]];
         [self.tableView addSubview:self.titleLabel];
     }
     
