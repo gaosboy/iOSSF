@@ -27,7 +27,7 @@
     self.titleLabel.text = info[@"title"];
     self.titleLabel.height = [SFTools heightOfString:self.titleLabel.text
                                            withWidth:292.0f
-                                                font:[UIFont boldSystemFontOfSize:16.0f]];
+                                                font:QUESTION_TITLE_LABEL_FONT];
 
     if ([@"0" isEqualToString:info[@"answersWord"]]) {
         self.answersLabel.backgroundColor = RGBCOLOR(159, 66, 69);
@@ -60,7 +60,7 @@
             label.backgroundColor = RGBCOLOR(187, 187, 187);
             label.textAlignment = NSTextAlignmentCenter;
             label.textColor = [UIColor whiteColor];
-            label.font = [UIFont systemFontOfSize:11.0f];
+            label.font = TAG_LABEL_FONT;
             label.layer.cornerRadius = 2.0f;
         }
         else {
@@ -108,7 +108,7 @@
 
         cell.titleLabel = [[SFLabel alloc] initWithFrame:CGRectMake(14.0f, 5.0f, 292.0f, 15.0f)];
         cell.titleLabel.numberOfLines = 0;
-        cell.titleLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+        cell.titleLabel.font = QUESTION_TITLE_LABEL_FONT;
         cell.titleLabel.backgroundColor = RGBCOLOR(244, 244, 244);
         [cell.contentView addSubview:cell.titleLabel];
         
@@ -117,7 +117,7 @@
         cell.answersLabel.backgroundColor = RGBCOLOR(0, 154, 103);
         cell.answersLabel.textAlignment = NSTextAlignmentCenter;
         cell.answersLabel.textColor = [UIColor whiteColor];
-        cell.answersLabel.font = [UIFont systemFontOfSize:11.0f];
+        cell.answersLabel.font = TAG_LABEL_FONT;
         cell.answersLabel.layer.cornerRadius = 2.0f;
         [cell.contentView addSubview:cell.answersLabel];
 
@@ -151,7 +151,7 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.textLabel.text = @"Loading ...";
         cell.textLabel.numberOfLines = 1;
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0f];
+        cell.textLabel.font = QUESTION_TITLE_LABEL_FONT;
     }
     return cell;
 }

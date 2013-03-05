@@ -95,16 +95,19 @@
         cell.selectedBackgroundView = selectedBg;
         
         cell.textLabel.font = [UIFont boldSystemFontOfSize:18.0f];
-        cell.textLabel.textColor = [UIColor whiteColor];
         cell.textLabel.backgroundColor = [UIColor clearColor];
         cell.textLabel.shadowColor = [UIColor blackColor];
         cell.textLabel.shadowOffset = CGSizeMake(0.0f, -1.0f);
     }
     
     cell.textLabel.text = [(UIViewController *)self.items[indexPath.section][indexPath.row] title];
-    
-    if (NO == cell.selected) {
-        [tableView selectRowAtIndexPath:self.currentIndex animated:NO scrollPosition:UITableViewRowAnimationTop];
+
+    [tableView selectRowAtIndexPath:self.currentIndex animated:NO scrollPosition:UITableViewRowAnimationTop];
+    if ([indexPath isEqual:self.currentIndex]) {
+        cell.textLabel.textColor = [UIColor whiteColor];
+    }
+    else {
+        cell.textLabel.textColor = RGBCOLOR(187, 187, 187);
     }
 
     return cell;
@@ -131,6 +134,14 @@
             [currentVC viewDidLoad];
         }
     }
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.textLabel.textColor = [UIColor whiteColor];
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.textLabel.textColor = RGBCOLOR(187, 187, 187);
 }
 
 #pragma mark
