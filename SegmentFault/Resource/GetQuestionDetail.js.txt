@@ -1,1 +1,1 @@
-document.getElementById('q-%@').childNodes[3].innerHTML
+document.getElementById('q-%@').childNodes[3].innerHTML+"<div class=\"post-foot\"><table class=\"post-parter\">"+document.getElementsByClassName('post-parter')[0].innerHTML+"</table></div>"

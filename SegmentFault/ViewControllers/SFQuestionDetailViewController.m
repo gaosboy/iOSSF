@@ -130,7 +130,7 @@
         }
     }
     
-    return 54.0f;
+    return self.titleLabel.bottom + 10.0f;
 }
 
 #pragma mark
