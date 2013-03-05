@@ -123,9 +123,6 @@
         && [self.items[indexPath.section][indexPath.row] isEqual:[SFTools applicationDelegate].logoutNavigator]) {
         [self logout];
     }
-//    else if ([self.items[indexPath.section][indexPath.row] isEqual:[SFTools applicationDelegate].loginNavigator]) {
-//        [self login];
-//    }
     else {
         [self showItemAtIndex:indexPath withAnimation:YES];
         UMNavigationController *currentNav = (UMNavigationController *)self.items[indexPath.section][indexPath.row];
