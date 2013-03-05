@@ -107,7 +107,8 @@
                                                                                      @"问题详情", @"title",
                                                                                      self.questionList[indexPath.row][@"title"], @"qtitle",
                                                                                      self.questionList[indexPath.row][@"answersWord"], @"answers",
-                                                                                     nil]]];
+                                                                                     nil]]
+     withQuery:[NSDictionary dictionaryWithObjectsAndKeys:self.questionList[indexPath.row][@"tags"], @"tags" ,nil]];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

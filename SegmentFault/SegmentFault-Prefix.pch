@@ -41,4 +41,4 @@
 #define ANSWER_DETAIL_HEIGHT            @"answer_detail_height"
 
 #define CELL_HEIGHT             44.0f
-#define SECTION_HEADER_HEIGHT   31.0f
+#define SECTION_HEADER_HEIGHT   29.0f

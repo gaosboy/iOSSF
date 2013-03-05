@@ -11,10 +11,10 @@
 
 @interface SFQuestionListCell ()
 
-@property (nonatomic, strong) NSMutableSet          *labelPool;
-@property (nonatomic, strong) SFLabel               *titleLabel;
 @property (nonatomic, strong) SFLabel               *answersLabel;
+@property (nonatomic, strong) NSMutableSet          *labelPool;
 @property (nonatomic, strong) UIView                *tagsContainer;
+@property (nonatomic, strong) SFLabel               *titleLabel;
 @property (nonatomic, strong) UIImageView           *voteIcon;
 @property (nonatomic, strong) SFLabel               *voteNumber;
 
@@ -28,7 +28,6 @@
     self.titleLabel.height = [SFTools heightOfString:self.titleLabel.text
                                            withWidth:292.0f
                                                 font:[UIFont boldSystemFontOfSize:15.0f]];
-//    [self.titleLabel sizeToFit];
 
     if ([@"0" isEqualToString:info[@"answersWord"]]) {
         self.answersLabel.backgroundColor = RGBCOLOR(159, 66, 69);
