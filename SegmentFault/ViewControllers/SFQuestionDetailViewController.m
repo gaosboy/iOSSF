@@ -90,16 +90,10 @@
         label.textColor = RGBCOLOR(44.0f, 44.0f, 44.0f);
         if (1 == section) {
             label.font = [UIFont boldSystemFontOfSize:15.0f];
-            if ([@"1" isEqualToString:self.params[@"answers"]]
-                || [@"0" isEqualToString:self.params[@"answers"]]) {
-                label.text = [NSString stringWithFormat:@"%@ Answer", self.params[@"answers"]];
-            }
-            else {
-                label.text = [NSString stringWithFormat:@"%@ Answers", self.params[@"answers"]];
-            }
+            label.text = [NSString stringWithFormat:@"%@ 答案", self.params[@"answers"]];
         }
         label.shadowColor = [UIColor whiteColor];
-        label.shadowOffset = CGSizeMake(0.0f, -1.0f);
+        label.shadowOffset = CGSizeMake(0.0f, 1.0f);
 
         [bg addSubview:label];
         return (UIView *)bg;
@@ -121,7 +115,7 @@
 {
     if (0 == indexPath.section && 0 == indexPath.row) {
         if (self.questionView && 0.0f < self.questionView.height) {
-            return self.questionView.height + 10.0f + self.titleLabel.bottom;
+            return self.questionView.height + 20.0f + self.titleLabel.bottom;
         }
     }
     else if (1 == indexPath.section && 0 == indexPath.row) {

@@ -12,6 +12,7 @@
 @interface SFQuestionListCell ()
 
 @property (nonatomic, strong) SFLabel               *answersLabel;
+@property (nonatomic, strong) UIImageView           *cellSeparator;
 @property (nonatomic, strong) NSMutableSet          *labelPool;
 @property (nonatomic, strong) UIView                *tagsContainer;
 @property (nonatomic, strong) SFLabel               *titleLabel;
@@ -35,14 +36,9 @@
     else {
         self.answersLabel.backgroundColor = RGBCOLOR(0, 154, 103);
     }
-    if ([@"0" isEqualToString:info[@"answersWord"]] || [@"1" isEqualToString:info[@"answersWord"]]) {
-        self.answersLabel.text = [NSString stringWithFormat:@"%@ answer", info[@"answersWord"]];
-    }
-    else {
-        self.answersLabel.text = [NSString stringWithFormat:@"%@ answers", info[@"answersWord"]];
-    }
+    self.answersLabel.text = [NSString stringWithFormat:@"%@ answer", info[@"answersWord"]];
     [self.answersLabel sizeToFit];
-    self.answersLabel.top = self.titleLabel.bottom + 10.0f;
+    self.answersLabel.top = self.titleLabel.bottom + 5.0f;
     
     self.tagsContainer.top = self.answersLabel.top;
     self.tagsContainer.left = self.answersLabel.right + 2.0f;
@@ -87,6 +83,8 @@
     self.voteNumber.text = info[@"votes"];
     [self.voteNumber sizeToFit];
     self.voteNumber.top = self.voteIcon.top - 2.0f;
+    
+    self.cellSeparator.top = self.tagsContainer.bottom + 10.0f;
 }
 
 @end
@@ -106,7 +104,7 @@
 
         cell.labelPool = [[NSMutableSet alloc] init];
 
-        cell.titleLabel = [[SFLabel alloc] initWithFrame:CGRectMake(14.0f, 5.0f, 292.0f, 15.0f)];
+        cell.titleLabel = [[SFLabel alloc] initWithFrame:CGRectMake(14.0f, 12.0f, 292.0f, 15.0f)];
         cell.titleLabel.numberOfLines = 0;
         cell.titleLabel.font = QUESTION_TITLE_LABEL_FONT;
         cell.titleLabel.backgroundColor = RGBCOLOR(244, 244, 244);
@@ -135,6 +133,9 @@
         cell.voteNumber.textColor = RGBCOLOR(153.0f, 153.0f, 153.0f);
         cell.voteNumber.font = [UIFont systemFontOfSize:14.0f];
         [cell.contentView addSubview:cell.voteNumber];
+        
+        cell.cellSeparator = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"question_list_cell_sep.png"]];
+        [cell.contentView addSubview:cell.cellSeparator];
     }
         
     return cell;

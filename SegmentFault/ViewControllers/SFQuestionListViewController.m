@@ -92,7 +92,7 @@
         CGFloat height = [SFTools heightOfString:self.questionList[indexPath.row][@"title"]
                                        withWidth:292.0f
                                             font:QUESTION_TITLE_LABEL_FONT];
-        return height + 40.0f;
+        return height + 47.0f;
     }
     else {
         return 60.0f;
@@ -157,7 +157,7 @@
                                                       style:UITableViewStylePlain];
         
         self.tableView.backgroundColor = RGBCOLOR(244, 244, 244);
-        self.tableView.separatorColor = [UIColor lightGrayColor];
+        self.tableView.separatorColor = [UIColor clearColor];
         self.tableView.dataSource = self;
         self.tableView.delegate = self;
         
