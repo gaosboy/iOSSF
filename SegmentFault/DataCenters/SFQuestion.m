@@ -6,8 +6,9 @@
 //  Copyright (c) 2012 SegmentFault.com. All rights reserved.
 //
 
-#import "SFQuestion.h"
 #import "AFJSONRequestOperation.h"
+#import "KCH.h"
+#import "SFQuestion.h"
 
 @interface SFQuestionHttpClient ()
 
@@ -78,6 +79,10 @@
                                   question, @"question",
                                   answer, @"answers",
                                   nil];
+    
+    [Kache setValue:questionInfo
+             forKey:SFQuestionDetailCacheKey(self.questionId)
+       expiredAfter:5];
 
     if (self.detailLoadedBlock) {
         self.detailLoadedBlock(questionInfo, 0, [NSError errorWithDomain:@".segmentfault.com" code:200 userInfo:nil]);
@@ -110,13 +115,19 @@
 + (void)questionDetailBy:(NSString *)qid
                withBlock:(SFQuestionDetailLoadedBlock)block
 {
-    static SFQuestion *obj = nil;
-    if (nil == obj) {
-        obj = [[SFQuestion alloc] init];
+    NSDictionary *questionInfo = [Kache valueForKey:SFQuestionDetailCacheKey(qid)];
+    if (questionInfo) {
+        block(questionInfo, 0, [NSError errorWithDomain:@".segmentfault.com" code:200 userInfo:nil]);
     }
-    obj.questionId = qid;
-    obj.detailLoadedBlock = block;
-    [obj load];
+    else {
+        static SFQuestion *obj = nil;
+        if (nil == obj) {
+            obj = [[SFQuestion alloc] init];
+        }
+        obj.questionId = qid;
+        obj.detailLoadedBlock = block;
+        [obj load];
+    }
 }
 
 + (void)questionListByPath:(NSString *)path
