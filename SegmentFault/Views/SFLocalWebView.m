@@ -58,6 +58,8 @@
         [(UIScrollView *)self.subviews[0] setShowsHorizontalScrollIndicator:NO];
         [(UIScrollView *)self.subviews[0] setShowsVerticalScrollIndicator:NO];
         [(UIScrollView *)self.subviews[0] setBounces:NO];
+        self.opaque = NO;
+        self.backgroundColor = [UIColor clearColor];
         self.delegate = self;
         [self.scrollView addObserver:self forKeyPath:@"contentSize" options:NSKeyValueObservingOptionNew context:nil];
     }
