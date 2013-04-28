@@ -9,6 +9,7 @@
 #import "AFJSONRequestOperation.h"
 #import "KCH.h"
 #import "SFQuestion.h"
+#import "GTMNSString+HTML.h"
 
 @interface SFQuestionHttpClient ()
 
@@ -130,6 +131,30 @@
     }
 }
 
++ (NSDictionary *)parseItem:(NSDictionary *)item {
+    NSMutableDictionary * parsedItem = [item mutableCopy];
+    NSString * originTitle = parsedItem[@"title"];
+    NSLog(@"title = %@", originTitle);
+    if ([originTitle isKindOfClass:[NSString class]]) {
+        parsedItem[@"title"] = [originTitle gtm_stringByUnescapingFromHTML];
+        return parsedItem;
+    } else {
+        return item;
+    }
+}
+
++ (NSDictionary *)parseData:(NSDictionary *)data {
+    NSMutableDictionary * parsedData = [data mutableCopy];
+    NSMutableArray * items = [parsedData[@"items"] mutableCopy];
+    for (int i = 0; i < items.count; ++i) {
+        NSDictionary * item = items[i];
+        items[i] = [self parseItem:item];
+    }
+    parsedData[@"items"] = items;
+    return parsedData;
+    
+}
+
 + (void)questionListByPath:(NSString *)path
                          onPage:(NSInteger)page size:(NSInteger)size
                       withBlock:(SFQuestionListLoadedBlock)block
@@ -141,6 +166,7 @@
                                                                              nil]
                                          success:^(AFHTTPRequestOperation *operation, id JSON) {
                                              NSDictionary *data = [JSON valueForKeyPath:@"data"];
+                                             data = [self parseData:data];
                                              NSInteger status = [[JSON valueForKeyPath:@"status"] intValue];
                                              if (block) {
                                                  block(data[@"items"], [NSError errorWithDomain:@".segmentfault.com" code:status userInfo:nil]);
