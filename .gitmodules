@@ -13,3 +13,6 @@
 [submodule "SegmentFault/Support/JSONKit"]
 	path = SegmentFault/Support/JSONKit
 	url = https://github.com/johnezang/JSONKit.git
+[submodule "SegmentFault/Support/GTM"]
+	path = SegmentFault/Support/GTM
+	url = git://github.com/innerfence/google-toolbox-for-mac.git

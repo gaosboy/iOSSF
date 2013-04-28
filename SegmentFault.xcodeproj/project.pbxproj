@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		453D55A9172CFAF9000C5533 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 453D55A8172CFAF9000C5533 /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D70DF7B7168805D300AD1207 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = D70DF7B4168805D300AD1207 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D70DF7CC1688389C00AD1207 /* logout_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = D70DF7C81688389C00AD1207 /* logout_btn.png */; };
 		D70DF7CD1688389C00AD1207 /* logout_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D70DF7C91688389C00AD1207 /* logout_btn@2x.png */; };
@@ -137,6 +138,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		453D55A4172CFAD7000C5533 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		453D55A7172CFAF9000C5533 /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "GTMNSString+HTML.h"; path = "Foundation/GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		453D55A8172CFAF9000C5533 /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "GTMNSString+HTML.m"; path = "Foundation/GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		D70DF7B3168805D300AD1207 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		D70DF7B4168805D300AD1207 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		D70DF7C81688389C00AD1207 /* logout_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logout_btn.png; sourceTree = "<group>"; };
@@ -330,6 +334,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		453D55A3172CF88A000C5533 /* GTM */ = {
+			isa = PBXGroup;
+			children = (
+				453D55A7172CFAF9000C5533 /* GTMNSString+HTML.h */,
+				453D55A8172CFAF9000C5533 /* GTMNSString+HTML.m */,
+				453D55A4172CFAD7000C5533 /* GTMDefines.h */,
+			);
+			name = GTM;
+			path = Support/GTM;
+			sourceTree = "<group>";
+		};
 		D70DF7B1168805D300AD1207 /* JSONKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -522,6 +537,7 @@
 				D70DF80916883CAA00AD1207 /* URLManager */,
 				D7B217B11685CC3B001269EB /* Kache */,
 				D7734D611684BE93000170FC /* AFNetworking */,
+				453D55A3172CF88A000C5533 /* GTM */,
 				D7734D551684B7AB000170FC /* SlimeRefresh */,
 				D72DF09416DCB8D30001EBF7 /* imagesV2 */,
 				D7C09C68166323090066EAF5 /* images */,
@@ -926,6 +942,7 @@
 				D79D2E9F16A2F78B00BC74DC /* SFMessager.m in Sources */,
 				D7D5D97816DFA09400C25B65 /* SFQuestionListCell.m in Sources */,
 				D78452BB16E0698100FFBAB9 /* SFLabel.m in Sources */,
+				453D55A9172CFAF9000C5533 /* GTMNSString+HTML.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
